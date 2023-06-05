@@ -1,0 +1,14 @@
+C:\github\QuanLyGarage\QuanLyGarage\BUS\obj\Debug\BUS.csproj.AssemblyReference.cache
+C:\github\QuanLyGarage\QuanLyGarage\BUS\obj\Debug\BUS.csproj.SuggestedBindingRedirects.cache
+C:\github\QuanLyGarage\QuanLyGarage\BUS\obj\Debug\BUS.Properties.Resources.resources
+C:\github\QuanLyGarage\QuanLyGarage\BUS\obj\Debug\BUS.csproj.GenerateResource.cache
+C:\github\QuanLyGarage\QuanLyGarage\BUS\obj\Debug\BUS.csproj.CoreCompileInputs.cache
+C:\github\QuanLyGarage\QuanLyGarage\BUS\bin\Debug\BUS.exe.config
+C:\github\QuanLyGarage\QuanLyGarage\BUS\bin\Debug\BUS.exe
+C:\github\QuanLyGarage\QuanLyGarage\BUS\bin\Debug\BUS.pdb
+C:\github\QuanLyGarage\QuanLyGarage\BUS\bin\Debug\DAO.exe
+C:\github\QuanLyGarage\QuanLyGarage\BUS\bin\Debug\DAO.pdb
+C:\github\QuanLyGarage\QuanLyGarage\BUS\bin\Debug\DAO.exe.config
+C:\github\QuanLyGarage\QuanLyGarage\BUS\obj\Debug\BUS.csproj.CopyComplete
+C:\github\QuanLyGarage\QuanLyGarage\BUS\obj\Debug\BUS.exe
+C:\github\QuanLyGarage\QuanLyGarage\BUS\obj\Debug\BUS.pdb

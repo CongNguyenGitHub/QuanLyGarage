@@ -1,0 +1,50 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "GUI/1.0.0": {
+        "dependencies": {
+          "BUS": "1.0.0",
+          "DAO": "1.0.0"
+        },
+        "runtime": {
+          "GUI.dll": {}
+        }
+      },
+      "BUS/1.0.0": {
+        "dependencies": {
+          "DAO": "1.0.0"
+        },
+        "runtime": {
+          "BUS.exe": {}
+        }
+      },
+      "DAO/1.0.0": {
+        "runtime": {
+          "DAO.exe": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "GUI/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "BUS/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DAO/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

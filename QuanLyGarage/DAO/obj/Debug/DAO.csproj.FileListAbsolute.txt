@@ -1,0 +1,10 @@
+C:\github\QuanLyGarage\QuanLyGarage\DAO\obj\Debug\DAO.csproj.AssemblyReference.cache
+C:\github\QuanLyGarage\QuanLyGarage\DAO\obj\Debug\DAO.csproj.SuggestedBindingRedirects.cache
+C:\github\QuanLyGarage\QuanLyGarage\DAO\obj\Debug\DAO.Properties.Resources.resources
+C:\github\QuanLyGarage\QuanLyGarage\DAO\obj\Debug\DAO.csproj.GenerateResource.cache
+C:\github\QuanLyGarage\QuanLyGarage\DAO\obj\Debug\DAO.csproj.CoreCompileInputs.cache
+C:\github\QuanLyGarage\QuanLyGarage\DAO\bin\Debug\DAO.exe.config
+C:\github\QuanLyGarage\QuanLyGarage\DAO\bin\Debug\DAO.exe
+C:\github\QuanLyGarage\QuanLyGarage\DAO\bin\Debug\DAO.pdb
+C:\github\QuanLyGarage\QuanLyGarage\DAO\obj\Debug\DAO.exe
+C:\github\QuanLyGarage\QuanLyGarage\DAO\obj\Debug\DAO.pdb

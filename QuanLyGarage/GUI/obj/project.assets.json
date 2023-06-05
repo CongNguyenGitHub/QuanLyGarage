@@ -1,0 +1,114 @@
+{
+  "version": 3,
+  "targets": {
+    "net6.0-windows7.0": {
+      "BUS/1.0.0": {
+        "type": "project",
+        "dependencies": {
+          "DAO": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/BUS.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BUS.dll": {}
+        }
+      },
+      "DAO/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/DAO.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DAO.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "BUS/1.0.0": {
+      "type": "project",
+      "path": "../BUS/BUS.csproj",
+      "msbuildProject": "../BUS/BUS.csproj"
+    },
+    "DAO/1.0.0": {
+      "type": "project",
+      "path": "../DAO/DAO.csproj",
+      "msbuildProject": "../DAO/DAO.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net6.0-windows7.0": [
+      "BUS >= 1.0.0",
+      "DAO >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\MSI_FPT\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\github\\QuanLyGarage\\QuanLyGarage\\GUI\\GUI.csproj",
+      "projectName": "GUI",
+      "projectPath": "C:\\github\\QuanLyGarage\\QuanLyGarage\\GUI\\GUI.csproj",
+      "packagesPath": "C:\\Users\\MSI_FPT\\.nuget\\packages\\",
+      "outputPath": "C:\\github\\QuanLyGarage\\QuanLyGarage\\GUI\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\MSI_FPT\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net6.0-windows"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net6.0-windows7.0": {
+          "targetAlias": "net6.0-windows",
+          "projectReferences": {
+            "C:\\github\\QuanLyGarage\\QuanLyGarage\\BUS\\BUS.csproj": {
+              "projectPath": "C:\\github\\QuanLyGarage\\QuanLyGarage\\BUS\\BUS.csproj"
+            },
+            "C:\\github\\QuanLyGarage\\QuanLyGarage\\DAO\\DAO.csproj": {
+              "projectPath": "C:\\github\\QuanLyGarage\\QuanLyGarage\\DAO\\DAO.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net6.0-windows7.0": {
+        "targetAlias": "net6.0-windows",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          },
+          "Microsoft.WindowsDesktop.App.WindowsForms": {
+            "privateAssets": "none"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
