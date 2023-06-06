@@ -16,44 +16,6 @@ namespace GUI
         {
             InitializeComponent();
         }
-
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            tabControl1.SelectedIndex = 0;
-        }
-
-        private void toolStripMenuItem3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStripMenuItem3_Click_1(object sender, EventArgs e)
-        {
-            tabControl1.SelectedIndex = 10;
-        }
-
-        private void toolStripMenuItem4_Click(object sender, EventArgs e)
-        {
-            tabControl1.SelectedIndex = 11;
-        }
-
-        private void toolStripMenuItem5_Click(object sender, EventArgs e)
-        {
-            tabControl1.SelectedIndex = 12;
-        }
-
-        private void toolStripMenuItem6_Click(object sender, EventArgs e)
-        {
-            DialogResult result = MessageBox.Show("Bạn có muốn đăng xuất không", "Đăng xuất", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2
-                , MessageBoxOptions.ServiceNotification);
-            if (result == DialogResult.OK) { this.Close(); }
-        }
-
         private void FormMain_Load(object sender, EventArgs e)
         {
 
@@ -134,6 +96,9 @@ namespace GUI
             if (e.Node == null) return;
             switch (e.Node.Text)
             {
+                case "Trang chủ":
+                    tabControl1.SelectedIndex = 0;
+                    break;
                 case "Tiếp nhận xe":
                     tabControl1.SelectedIndex = 1;
                     break;
@@ -161,9 +126,25 @@ namespace GUI
                 case "Tồn kho":
                     tabControl1.SelectedIndex = 9;
                     break;
+                case "Thông tin cá nhân":
+                    tabControl1.SelectedIndex = 10;
+                    break;
+                case "Thay đổi mật khẩu":
+                    tabControl1.SelectedIndex = 11;
+                    break;
+                case "Thêm tài khoản":
+                    tabControl1.SelectedIndex = 12;
+                    break;
+                case "Đăng xuất":
+                    DialogResult result = MessageBox.Show("Bạn có muốn đăng xuất không", "Đăng xuất", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2
+                    , MessageBoxOptions.ServiceNotification);
+                    if (result == DialogResult.OK)
+                    {
+                        this.Close();
 
+                    }
+                    break;
             }
-
         }
     }
 }
