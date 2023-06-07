@@ -503,19 +503,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\DELL\\.nuget\\packages\\": {}
+    "C:\\Users\\MSI_FPT\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DELL\\Documents\\SE104\\QuanLyGarage\\QuanLyGarage\\GUI\\GUI.csproj",
+      "projectUniqueName": "C:\\github\\QuanLyGarage\\QuanLyGarage\\GUI\\GUI.csproj",
       "projectName": "GUI",
-      "projectPath": "C:\\Users\\DELL\\Documents\\SE104\\QuanLyGarage\\QuanLyGarage\\GUI\\GUI.csproj",
-      "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\DELL\\Documents\\SE104\\QuanLyGarage\\QuanLyGarage\\GUI\\obj\\",
+      "projectPath": "C:\\github\\QuanLyGarage\\QuanLyGarage\\GUI\\GUI.csproj",
+      "packagesPath": "C:\\Users\\MSI_FPT\\.nuget\\packages\\",
+      "outputPath": "C:\\github\\QuanLyGarage\\QuanLyGarage\\GUI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\MSI_FPT\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -529,11 +529,11 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "projectReferences": {
-            "C:\\Users\\DELL\\Documents\\SE104\\QuanLyGarage\\QuanLyGarage\\BUS\\BUS.csproj": {
-              "projectPath": "C:\\Users\\DELL\\Documents\\SE104\\QuanLyGarage\\QuanLyGarage\\BUS\\BUS.csproj"
+            "C:\\github\\QuanLyGarage\\QuanLyGarage\\BUS\\BUS.csproj": {
+              "projectPath": "C:\\github\\QuanLyGarage\\QuanLyGarage\\BUS\\BUS.csproj"
             },
-            "C:\\Users\\DELL\\Documents\\SE104\\QuanLyGarage\\QuanLyGarage\\DAO\\DAO.csproj": {
-              "projectPath": "C:\\Users\\DELL\\Documents\\SE104\\QuanLyGarage\\QuanLyGarage\\DAO\\DAO.csproj"
+            "C:\\github\\QuanLyGarage\\QuanLyGarage\\DAO\\DAO.csproj": {
+              "projectPath": "C:\\github\\QuanLyGarage\\QuanLyGarage\\DAO\\DAO.csproj"
             }
           }
         }
@@ -572,7 +572,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

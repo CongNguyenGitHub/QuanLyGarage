@@ -21,3 +21,6 @@ C:\Users\NguyenNguyen\garatruong\QuanLyGarage\DAO\obj\Debug\DAO.csproj.CoreCompi
 C:\Users\NguyenNguyen\garatruong\QuanLyGarage\DAO\obj\Debug\DAO.csproj.CopyComplete
 C:\Users\NguyenNguyen\garatruong\QuanLyGarage\DAO\obj\Debug\DAO.exe
 C:\Users\NguyenNguyen\garatruong\QuanLyGarage\DAO\obj\Debug\DAO.pdb
+C:\github\QuanLyGarage\QuanLyGarage\DAO\bin\Debug\System.Data.SqlClient.dll
+C:\github\QuanLyGarage\QuanLyGarage\DAO\bin\Debug\System.Data.SqlClient.xml
+C:\github\QuanLyGarage\QuanLyGarage\DAO\obj\Debug\DAO.csproj.CopyComplete

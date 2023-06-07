@@ -28,3 +28,5 @@ C:\Users\NguyenNguyen\garatruong\QuanLyGarage\BUS\obj\Debug\BUS.csproj.CoreCompi
 C:\Users\NguyenNguyen\garatruong\QuanLyGarage\BUS\obj\Debug\BUS.csproj.CopyComplete
 C:\Users\NguyenNguyen\garatruong\QuanLyGarage\BUS\obj\Debug\BUS.exe
 C:\Users\NguyenNguyen\garatruong\QuanLyGarage\BUS\obj\Debug\BUS.pdb
+C:\github\QuanLyGarage\QuanLyGarage\BUS\bin\Debug\System.Data.SqlClient.dll
+C:\github\QuanLyGarage\QuanLyGarage\BUS\bin\Debug\System.Data.SqlClient.xml

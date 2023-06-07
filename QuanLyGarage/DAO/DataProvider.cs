@@ -13,7 +13,8 @@ namespace DAO
         //Design patern Singleton để chỉ duy nhất 1 dataprovider tồn tại trong chương trình, tránh việc khởi tạo lại nhiều dataprovider
         private static DataProvider instance;//tạo 1 đối tượng static tên instance kiểu dataprovider 
         private DataProvider() { }
-        private string connectionSTR = @"Data Source =LAPTOP-4CPH3R26;Initial Catalog = QuanLyGarage; Integrated Security = True"; // cái này đợi tùng làm xong mới có 
+        private string connectionSTR = @"Data Source = MSI\HDT;Initial Catalog = QuanLyGarage; Integrated Security = True";
+        //private string connectionSTR = @"Data Source =LAPTOP-4CPH3R26;Initial Catalog = QuanLyGarage; Integrated Security = True"; // cái này đợi tùng làm xong mới có 
         //private string connectionSTR = @"Data Source=MAHLAP\MAHLAP;Initial Catalog=QuanLyGarage;Integrated Security=True";
         public static DataProvider Instance
         {
