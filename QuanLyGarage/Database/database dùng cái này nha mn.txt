@@ -87,40 +87,18 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[QUYDINH]
+CREATE TABLE [dbo].[THAMSO]
 (
-	[MaQD] [int] IDENTITY(1,1),
-	[NoiDung] [varchar](5) NOT NULL,
+	[MaThamSo] [int] IDENTITY(1,1),
+	[TenThamSo] [varchar](5) NOT NULL,
 	[GiaTri] [int] NOT NULL,
 	PRIMARY KEY CLUSTERED
 	(
-		[MaQD] ASC
+		[MaThamSo] ASC
 	)
 	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-
-/****** Object: Table [dbo].[NGUOIDUNG]		Scripyt Date: 5/31/2023 4:4:4 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE TABLE [dbo].[NGUOIDUNG]
-(
-	[MaND] [int] IDENTITY(1,1),
-	[HoTen] [varchar](50) NOT NULL,
-	[NgaySinh] [date] NULL,
-	[GioiTinh] [bit] NULL,
-	[SODT] [varchar](15) NULL,
-	[DiaChi] [varchar](100) NULL,
-	PRIMARY KEY  CLUSTERED
-	(
-		[MaND] ASC
-	)
-	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]	
-) ON [PRIMARY]
-GO	
 
 /****** Object: Table [dbo].[KHACHHANG]		Scripyt Date: 5/31/2023 24:4:4 PM ******/
 SET ANSI_NULLS ON
@@ -130,12 +108,10 @@ GO
 CREATE TABLE [dbo].[KHACHHANG]
 (
 	[MaKH] [int] IDENTITY(1,1),
-	[HoTen] [varchar](50) NOT NULL,
-	[GioiTinh] [bit] NULL,
-	[SoDT] [varchar](50) NOT NULL,
-	[Email] [varchar](30) NULL,
+	[TenKH] [varchar](50) NOT NULL,
+	[DienThoai] [varchar](50) NOT NULL,
 	[DiaChi] [varchar](100) NOT NULL,
-	[SoTienNo] [money] NOT NULL DEFAULT 0,
+	[TienNo] [money] NOT NULL DEFAULT 0,
 	PRIMARY KEY  CLUSTERED
 	(
 		[MaKH] ASC
@@ -151,30 +127,13 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[TAIKHOAN]
 (
-	[MaND] [int] IDENTITY(1,1),
-	[TenDN] [varchar](20) NOT NULL,
+	[MaTK] [int] IDENTITY(1,1),
+	[TenDangNhap] [varchar](20) NOT NULL,
 	[MatKhau] [varchar](20) NOT NULL,
 	[QuyenHan] [bit] NOT NULL,
 	PRIMARY KEY  CLUSTERED
 	(
-		[TENDN] ASC
-	)
-	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]	
-) ON [PRIMARY]
-GO
-
-/****** Object: Table [dbo].[HIEUXE]		Scripyt Date: 5/31/2023 34:4:4 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[HIEUXE]
-(
-	[MaHX] [int] IDENTITY(1,1),
-	[TenHX] [varchar](50) NOT NULL,
-	PRIMARY KEY CLUSTERED
-	(
-		[MaHX] ASC
+		[MaTK] ASC
 	)
 	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]	
 ) ON [PRIMARY]
@@ -187,10 +146,11 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[XE]
 (
+	[BienSo] [varchar](10) NOT NULL,
 	[MaKH] [int] NOT NULL,
-	[BienSo] [varchar](10) NOT NULL,
-	[HieuXe] [int] NOT NULL,
-	[NgayTiepNhan] [date] NULL,
+	[HieuXe] [varchar](50) NOT NULL,
+	[NgayTiepNhan] [datetime] NULL,
+	[TrangThai] [int] DEFAULT 1,  ---- 1 là xe vẫn còn trong garage, còn lại là không còn
 	PRIMARY KEY CLUSTERED
 	(
 		[BienSo] ASC
@@ -199,37 +159,20 @@ CREATE TABLE [dbo].[XE]
 ) ON [PRIMARY]
 GO
 
-/****** Object: Table [dbo].[CT_TIEPNHANXE]		Scripyt Date: 5/31/2023 34:4:4 PM ******/
+/****** Object: Table [dbo].[KHO]		Scripyt Date: 5/31/2023 34:4:4 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[CT_TIEPNHANXE]
+CREATE TABLE [dbo].[KHO]
 (
-	[BienSo] [varchar](10) NOT NULL,
-	[NgayTiepNhan] [date] NOT NULL,
-	PRIMARY KEY CLUSTERED
-	(
-		[BienSo] ASC
-	)
-	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]	
-) ON [PRIMARY]
-GO
-
-/****** Object: Table [dbo].[KHOVATTU]		Scripyt Date: 5/31/2023 34:4:4 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[KHOVATTU]
-(
-	[MaVT] [int] IDENTITY(1,1),
-	[TenVT] [varchar](50) NOT NULL,
-	[DonVi] [varchar](20) NULL,
+	[MaPhuTung] [int] IDENTITY(1,1),
+	[TenVatTuPhuTung] [varchar](50) NOT NULL,
+	[SoLuong] [int] NOT NULL,
 	[DonGia] [money] NOT NULL,
 	PRIMARY KEY CLUSTERED 
 	(
-		[MaVT] ASC
+		[MaPhuTung] ASC
 	)
 	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]	
 ) ON [PRIMARY]
@@ -243,7 +186,7 @@ GO
 CREATE TABLE [dbo].[TIENCONG]
 (
 	[MaTC] [int] IDENTITY(1,1),
-	[TenTC] [varchar](50) NOT NULL,
+	[TenTienCong] [varchar](50) NOT NULL,
 	[ChiPhi] [money] NOT NULL,
 	PRIMARY KEY CLUSTERED 
 	(
@@ -260,13 +203,15 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[PHIEUSUACHUA]
 (
-	[MaPSC] [int] IDENTITY(1,1),
-	[NguoiPhuTrach] [int] NOT NULL,
+	[MaPhieuSuaChua] [int] IDENTITY(1,1),
 	[BienSo] [varchar](10) NOT NULL,
+	[MaKH] [int] NOT NULL,
+	[TienCong] [int]  NOT NULL,
+	[TienPhuTung] [int] NOT NULL,
 	[TongTien] [money] NOT NULL
 	PRIMARY KEY CLUSTERED
 	(
-		[MaPSC] ASC
+		[MaPhieuSuaChua] ASC
 	)
 	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]	
 ) ON [PRIMARY]
@@ -279,17 +224,14 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[CT_PHIEUSUACHUA]
 (
-	[MaPSC] [int] IDENTITY(1,1),
-	[MaVT] [int] NOT NULL,
+	[MaPhieuSuaChua] [int] IDENTITY(1,1),
 	[MaTC] [int] NOT NULL,
-	[SoLuong] [int] NOT NULL,
-	[ThanhTien] [money] NOT NULL,
-	[NoiDung] [varchar](50) NULL, 
+	[MaPhuTung] [int] NOT NULL,
 	CONSTRAINT [PK_CTPSC] PRIMARY KEY CLUSTERED
 	(
-		[MaPSC] ASC,
-		[MaVT] ASC,
-		[MaTC] ASC
+		[MaPhieuSuaChua] ASC,
+		[MaTC] ASC,
+		[MaPhuTung] ASC
 	)
 	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]	
 ) ON [PRIMARY]
@@ -302,76 +244,32 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[PHIEUTHUTIEN]
 (
-	[MaPTT] [int] IDENTITY(1,1),
+	[MaPhieuThuTien] [int] IDENTITY(1,1),
 	[MaKH] [int] NOT NULL,
-	[SoTienThu] [money] NOT NULL,
-	[NgayThu] [date] NOT NULL,
-	[NguoiPhuTrach] [int] NOT NULL,
+	[TienThu] [money] NOT NULL,
+	[NgayThuTien] [datetime] NOT NULL,
 	PRIMARY KEY CLUSTERED
 	(
-		[MaPTT] ASC
+		[MaPhieuThuTien] ASC
 	)
 	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]	
 ) ON [PRIMARY]
 GO
 
-/****** Object: Table [dbo].[PHIEUNHAPVATU]		Scripyt Date: 5/31/2023 34:4:4 PM ******/
+/****** Object: Table [dbo].[PHIEUNHAPVTPT]		Scripyt Date: 5/31/2023 34:4:4 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[PHIEUNHAPVATTU]
+CREATE TABLE [dbo].[PHIEUNHAPVTPT]
 (
-	[MaPNhap] [int] IDENTITY(1,1),
-	[NguoiPhuTrach] [int] NOT NULL,
-	[MaVT] [int] NOT NULL,
-	[SoLuongNhap] [int] NOT NULL,
-	[NgayNhap] [date] NOT NULL,
-	[TongTien] [money] NOT NULL,
+	[MaPNVTPT] [int] IDENTITY(1,1),
+	[MaPhuTung] [int] NOT NULL,
+	[SoLuong] [int] NOT NULL,
+	[ThoiDiem] [datetime] NOT NULL,
 	PRIMARY KEY CLUSTERED
 	(
-		[MaPNhap] ASC
-	)
-	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]	
-) ON [PRIMARY]
-GO
-
-/****** Object: Table [dbo].[BAOCAODOANHTHU]		Scripyt Date: 5/31/2023 34:4:4 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[BAOCAODOANHTHU]
-(
-	[MaBCDT] [int] IDENTITY(1,1),
-	[Thang] [char](2) NOT NULL,
-	[Nam] [char](4) NOT NULL,
-	[ThoiDiemTao] [date] NOT NULL,
-	[TongDoanhThu] [money] NULL,
-	PRIMARY KEY CLUSTERED
-	(
-		[MaBCDT] ASC
-	)
-	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]	
-) ON [PRIMARY]
-GO
-
-/****** Object: Table [dbo].[CT_BAOCAODOANHTHU]		Scripyt Date: 5/31/2023 34:4:4 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[CT_BAOCAODOANHTHU]
-(
-	[MaBCDT] [int] NOT NULL,
-	[HieuXe] [int] NOT NULL,
-	[SoLuongSua] [int] NOT NULL,
-	[TyLe] [numeric](4,2) NOT NULL,
-	[ThanhTien] [money] NOT NULL,
-	PRIMARY KEY CLUSTERED
-	(
-		[MaBCDT] ASC,
-		[HieuXe] ASC
+		[MaPNVTPT] ASC
 	)
 	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]	
 ) ON [PRIMARY]
@@ -385,9 +283,7 @@ GO
 CREATE TABLE [dbo].[BAOCAOTON]
 (
 	[MaBCT] [int] IDENTITY(1,1),
-	[Thang] [char](2) NOT NULL,
-	[Nam] [char](4) NOT NULL,
-	[ThoiDiemTao] [date] NOT NULL,
+	[ThoiDiemBaoCao] [datetime] NOT NULL,
 	PRIMARY KEY CLUSTERED
 	(
 		[MaBCT] ASC
@@ -404,162 +300,112 @@ GO
 CREATE TABLE [dbo].[CT_BAOCAOTON]
 (
 	[MaBCT] [int] IDENTITY(1,1),
-	[VatTu] [int] NOT NULL,
+	[MaPhuTung] [int] NOT NULL,
 	[TonDau] [int] NOT NULL,
-	[PhatSinh] [int] NOT NULL,
 	[TonCuoi] [int] NOT NULL,
+	[PhatSinh] [int] NOT NULL,
 	CONSTRAINT [PK_CTBCT] PRIMARY KEY CLUSTERED
 	(
 		[MaBCT] ASC,
-		[VatTu] ASC
+		[MaPhuTung] ASC
 	)
 	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]	
 ) ON [PRIMARY]
 GO
 
-INSERT [dbo].[NGUOIDUNG] ( [HoTen], [NgaySinh],[GioiTinh], [SODT], [DiaChi]) VALUES ( N'Nguyen Van A','2023-05-31', 0,  N'0783777888', N'đường Mậu Thân, phường 3')
-INSERT [dbo].[NGUOIDUNG] ( [HoTen], [NgaySinh],[GioiTinh], [SODT], [DiaChi]) VALUES ( N'Nguyen Thi B','2000-05-31', 0,  N'0873888777', N'Thang Binh, Quang Nam')
-INSERT [dbo].[NGUOIDUNG] ( [HoTen], [NgaySinh],[GioiTinh], [SODT], [DiaChi]) VALUES ( N'Tran Minh Duy','2003-03-16', 0,  N'0783666066', N'Vung Liem Vinh Long')
-INSERT [dbo].[NGUOIDUNG] ( [HoTen], [NgaySinh],[GioiTinh], [SODT], [DiaChi]) VALUES ( N'Nguyen Thuy Khanh Doan','2003-01-01', 1,  N'0783444555', N'Phuong 2 Vinh Long')
+INSERT [dbo].[TAIKHOAN]([TenDangNhap], [MatKhau], [QuyenHan]) VALUES ( N'quanly01', N'quanly01', 1)
+INSERT [dbo].[TAIKHOAN]([TenDangNhap], [MatKhau], [QuyenHan]) VALUES ( N'quanly02', N'quanly02', 1)
+INSERT [dbo].[TAIKHOAN]([TenDangNhap], [MatKhau], [QuyenHan]) VALUES ( N'nhanvien01', N'nhanvien01', 0)
+INSERT [dbo].[TAIKHOAN]([TenDangNhap], [MatKhau], [QuyenHan]) VALUES ( N'nhanvien02', N'nhanvien02', 0)
 
-INSERT [dbo].[TAIKHOAN]( [TenDN], [MatKhau], [QuyenHan]) VALUES ( N'quanly02', N'quanly02', 1)
-INSERT [dbo].[TAIKHOAN]( [TenDN], [MatKhau], [QuyenHan]) VALUES ( N'quanly01', N'quanly01', 1)
-INSERT [dbo].[TAIKHOAN]( [TenDN], [MatKhau], [QuyenHan]) VALUES ( N'nhanvien01', N'nhanvien01', 0)
-INSERT [dbo].[TAIKHOAN]( [TenDN], [MatKhau], [QuyenHan]) VALUES ( N'nhanvien02', N'nhanvien02', 0)
+INSERT [dbo].[KHACHHANG]( [TenKH],  [DienThoai],  [DiaChi]) VALUES ( N'Nguyen Tung Duong',  N'0777987601',  N'15/3 A duong Phuoc Hau, xa Phuoc Hong')
+INSERT [dbo].[KHACHHANG]( [TenKH],  [DienThoai],  [DiaChi]) VALUES ( N'Dang Khoi Nguyen',  N'0666987601',  N'23/4 B duong Long My, xa Mau Hong')
+INSERT [dbo].[KHACHHANG]( [TenKH],  [DienThoai],  [DiaChi]) VALUES ( N'Nguyen Thi My Duyen',  N'0888987601',  N'33/5 A duong Hoa Phat, xa Hong Chau')
 
-INSERT [dbo].[KHACHHANG]( [HoTen],  [SoDT],  [DiaChi], [SoTienNo]) VALUES ( N'Nguyen Tung Duong',  N'0777987601',  N'15/3 A duong Phuoc Hau, xa Phuoc Hong', 0 )
-INSERT [dbo].[KHACHHANG]( [HoTen],  [SoDT],  [DiaChi], [SoTienNo]) VALUES ( N'Dang Khoi Nguyen',  N'0666987601',  N'23/4 B duong Long My, xa Mau Hong', 2000 )
-INSERT [dbo].[KHACHHANG]( [HoTen],  [SoDT],  [DiaChi], [SoTienNo]) VALUES ( N'Nguyen Thi My Duyen',  N'0888987601',  N'33/5 A duong Hoa Phat, xa Hong Chau', 1000 )
+INSERT [dbo].[XE]([MaKH], [BienSo], [HieuXe]) VALUES (1, N'001001', N'Toyota')
+INSERT [dbo].[XE]([MaKH], [BienSo], [HieuXe]) VALUES (2, N'002002', N'Kia')
+INSERT [dbo].[XE]([MaKH], [BienSo], [HieuXe]) VALUES (3, N'003003', N'Suzuki')
 
-INSERT [dbo].[HIEUXE]( [TenHX]) VALUES ( N'Toyota')
-INSERT [dbo].[HIEUXE]( [TenHX]) VALUES ( N'Kia')
-INSERT [dbo].[HIEUXE]( [TenHX]) VALUES ( N'Mazda')
+INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Slqd', 8)
+INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Slhx', 10)
+INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Slhx2', 30)
+INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Slpt', 200)
+INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Sltc', 100)
+INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Sltk', 1)
+INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Slhs', 1)
+INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Sltd', 5)
 
-INSERT [dbo].[XE]([MaKH], [BienSo], [HieuXe]) VALUES (N'001', N'001001', N'001')
-INSERT [dbo].[XE]([MaKH], [BienSo], [HieuXe]) VALUES (N'002', N'002002', N'002')
-INSERT [dbo].[XE]([MaKH], [BienSo], [HieuXe]) VALUES (N'003', N'003003', N'003')
-
-ALTER TABLE [dbo].[TAIKHOAN] WITH CHECK ADD FOREIGN KEY([MaND]) REFERENCES [dbo].[NGUOIDUNG]([MaND]) 
-GO
 ALTER TABLE [dbo].[XE] WITH CHECK ADD FOREIGN KEY ([MaKH]) REFERENCES [dbo].[KHACHHANG]([MaKH])
-GO
-ALTER TABLE [dbo].[XE] WITH CHECK ADD FOREIGN KEY ([HieuXe]) REFERENCES [dbo].[HIEUXE]([MaHX])
-GO
-ALTER TABLE [dbo].[CT_TIEPNHANXE] WITH CHECK ADD FOREIGN KEY ([BienSo]) REFERENCES [dbo].[XE] ([BienSo])
-GO
-ALTER TABLE [dbo].[PHIEUSUACHUA] WITH CHECK ADD FOREIGN KEY (NguoiPhuTrach) REFERENCES [dbo].[NGUOIDUNG]([MaND])
 GO
 ALTER TABLE [dbo].[PHIEUSUACHUA] WITH CHECK ADD FOREIGN KEY ([BienSo])  REFERENCES [dbo].[XE](BienSo)
 GO
-ALTER TABLE [dbo].[CT_PHIEUSUACHUA] WITH CHECK ADD FOREIGN KEY ([MaPSC]) REFERENCES [dbo].[PHIEUSUACHUA]([MaPSC])
+ALTER TABLE [dbo].[PHIEUSUACHUA] WITH CHECK ADD FOREIGN KEY ([MaKH])  REFERENCES [dbo].[KHACHHANG](MaKH)
 GO
-ALTER TABLE [dbo].[CT_PHIEUSUACHUA] WITH CHECK ADD FOREIGN KEY ([MaVT]) REFERENCES [dbo].[KHOVATTU]([MaVT])
+ALTER TABLE [dbo].[CT_PHIEUSUACHUA] WITH CHECK ADD FOREIGN KEY ([MaPhieuSuaChua]) REFERENCES [dbo].[PHIEUSUACHUA]([MaPhieuSuaChua])
+GO
+ALTER TABLE [dbo].[CT_PHIEUSUACHUA] WITH CHECK ADD FOREIGN KEY ([MaPhuTung]) REFERENCES [dbo].[KHO]([MaPhuTung])
 GO
 ALTER TABLE [dbo].[CT_PHIEUSUACHUA] WITH CHECK ADD FOREIGN KEY ([MaTC]) REFERENCES [dbo].[TIENCONG]([MaTC])
 GO
 ALTER TABLE [dbo].[PHIEUTHUTIEN] WITH CHECK ADD FOREIGN KEY ([MaKH]) REFERENCES [dbo].[KHACHHANG]([MaKH])
 GO
-ALTER TABLE [dbo].[PHIEUTHUTIEN] WITH CHECK ADD FOREIGN KEY ([NguoiPhuTrach]) REFERENCES [dbo].[NGUOIDUNG]([MaND])
+ALTER TABLE [dbo].[PHIEUNHAPVTPT] WITH CHECK ADD FOREIGN KEY (MaPhuTung) REFERENCES [dbo].[KHO]([MaPhuTung])
 GO
-ALTER TABLE [dbo].[PHIEUNHAPVATTU] WITH CHECK ADD FOREIGN KEY ([NguoiPhuTrach]) REFERENCES [dbo].[NGUOIDUNG]([MaND])
+ALTER TABLE [dbo].[CT_BAOCAOTON] WITH CHECK ADD FOREIGN KEY ([MaBCT]) REFERENCES [dbo].[BAOCAOTON]([MaBCT])
 GO
-ALTER TABLE [dbo].[PHIEUNHAPVATTU] WITH CHECK ADD FOREIGN KEY (MaVT) REFERENCES [dbo].[KHOVATTU]([MaVT])
-GO
-ALTER TABLE [dbo].[CT_BAOCAODOANHTHU] WITH CHECK ADD FOREIGN KEY ([HieuXe]) REFERENCES [dbo].[HIEUXE]([MaHX]) 
-GO
-ALTER TABLE [dbo].[CT_BAOCAOTON] WITH CHECK ADD FOREIGN KEY ([VatTu]) REFERENCES [dbo].[KHOVATTU]([MaVT])
+ALTER TABLE [dbo].[CT_BAOCAOTON] WITH CHECK ADD FOREIGN KEY ([MaPhuTung]) REFERENCES [dbo].[KHO]([MaPhuTung])
 GO
 
-/****** SELECT COUNT(*) FROM [dbo].[TAIKHOAN] WHERE [TenDN] = N'quanly01' and [MatKhau] =N'quanly01' ******/
-/****** Object:  StoredProcedure [dbo].[usp_dangnhap]    Script Date: 6/2/2023 8:28:49 AM ******/
-/****** EXEC [dbo].[DangNhap] @TenDN = 'quanly02', @MatKhau = 'quanly02' ******/
-/****** UC-1: Đăng nhập: usp_dangnhap ******/
+/****** EXEC [dbo].[USP_DangNhap] @TenDN = 'quanly01', @MatKhau = 'quanly01' ******/
+/****** UC-1: Đăng nhập: USP_DangNhap ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE	PROCEDURE [dbo].[usp_dangnhap]
-	@TenDN varchar(20),
+	@TenDangNhap varchar(20),
 	@MatKhau varchar(20)
 AS
 BEGIN
 	SELECT COUNT(*) as 'Số lượng tài khoản'
 	FROM TAIKHOAN
-	WHERE @TenDN = TenDN and @MatKhau = MatKhau
-	GROUP BY TenDN, MatKhau
+	WHERE @TenDangNhap= TenDangNhap and @MatKhau = MatKhau
+	GROUP BY TenDangNhap, MatKhau
 END
 GO
 
-/****** Object: UC-3  StoredProcedure [dbo].[usp_tracuuxe]    Script Date: 6/2/2023 8:28:49 AM ******/
-/****** Object: UC-3  EXEC [dbo].[usp_tiepnhanxe] @HoTen = 'Nguyen Van C', @SoDT = '0987776612', @DiaChi = 'Ho Chi Minh City', @BienSo = '005005', @HieuXe = 2, @NgayTiepNhan = '06/06/2023'   ******/
-/******  UC-3: Tiếp nhận xe: usp_tiepnhanxe  ******/
-/******  UC-3: PROCEDURE themkhachhang  ******/
+/******  UC-3: PROCEDURE ThemKhachHang  ******/
+/****** EXEC ThemKhachHang @TenKH = 'Tran Minh Duy', @DienThoai = '0985670111', @DiaChi = 'huyen Vung Liem' ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE	PROCEDURE [dbo].[themkhachhang]
-	@HoTen varchar(50),
-	@SoDT varchar(50),
-	@DiaChi varchar(100)
+CREATE	PROCEDURE [dbo].[ThemKhachHang]
+	@TenKH varchar(50),
+	@DienThoai varchar(50),
+	@DiaChi varchar(100),
+	@TienNo money
 AS
 BEGIN
-	INSERT INTO [dbo].[KHACHHANG]([HoTen], [SoDT], [DiaChi]) VALUES( @HoTen, @SoDT, @DiaChi)
+	INSERT INTO [dbo].[KHACHHANG]([TenKH], [DienThoai], [DiaChi], [TienNo]) VALUES( @TenKH, @DienThoai, @DiaChi, @TienNo)
 END
 GO
 
-/******  UC-3: PROCEDURE themxe  ******/
+/******  UC-3: PROCEDURE ThemXe  ******/
+/******  EXEC ThemXe @BienSo = '004004', @HieuXe = 'Hyundai' ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE	PROCEDURE [dbo].[themxe]
+CREATE	PROCEDURE [dbo].[ThemXe]
 	@BienSo varchar(10),
-	@HieuXe int,
-	@NgayTiepNhan date
+	@HieuXe varchar(50),
+	@NgayTiepNhan datetime = NULL
 AS
 BEGIN
-	IF NOT EXISTS (SELECT 1 FROM [dbo].[XE] WHERE BienSo = @BienSo)
-	BEGIN
-		DECLARE @MaKH int
-		SELECT @MaKH = ISNULL(MAX(MAKH),0) + 1 FROM KHACHHANG
-		INSERT INTO [dbo].[XE] ( [MaKH], [BienSo], [HieuXe], [NgayTiepNhan]) VALUES (@MaKH, @BienSo, @HieuXe, @NgayTiepNhan)
-	END
-END
-GO
-
-/****** Object:  StoredProcedure [dbo].[usp_tracuuxe]    Script Date: 6/2/2023 8:28:49 AM ******/
-/****** UC-4: Tra cứu xe: usp_tracuuxe ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[tracuuxe]
-	@BienSo varchar(10) = NULL,
-	@HieuXe int = NULL
-AS
-BEGIN
-	SELECT *
-	FROM XE
-	WHERE (BienSo = @BienSo OR @BienSo IS NULL)
-		AND (HieuXe = @HieuXe OR @HieuXe IS NULL)
-		AND ((@BienSo IS NOT NULL AND @HieuXe IS NOT NULL) OR (@BienSo IS NULL AND @HieuXe IS NOT NULL) OR (@BienSo IS NOT NULL AND @HieuXe IS NULL))
-END
-GO
-
-/****** Object: UC-5 StoredProcedure [dbo].[usp_xemdanhsachxe]    Script Date: 6/2/2023 8:28:49 AM ******/
-/****** UC-5 Xem danh sách xe: usp_xemdanhsachxe ******/
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE	PROCEDURE [dbo].[xemdanhsachxe]
-AS
-BEGIN
-	SELECT  x.BienSo, x.HieuXe, kh.MaKH, kh.SoTienNo
-	FROM XE x, KHACHHANG kh
-	WHERE x.MaKH = kh.MaKH
+	DECLARE @MaKH int
+	SELECT @MaKH = ISNULL(MAX(MAKH),1) FROM KHACHHANG
+	INSERT INTO [dbo].[XE] ( [MaKH], [BienSo], [HieuXe], [NgayTiepNhan]) VALUES (@MaKH, @BienSo, @HieuXe, @NgayTiepNhan)
 END
 GO
 

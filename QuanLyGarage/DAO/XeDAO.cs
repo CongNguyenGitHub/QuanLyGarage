@@ -25,39 +25,17 @@ namespace DAO
         }
         private XeDAO() { }
 
-        public DataTable CacXeDaTiepNhan()
-        {
-            string query = "SELECT BienSo, TenHieuXe, TenKH, DienThoai, DiaChi FROM XE, HIEUXE as HX, KHACHHANG as KH WHERE XE.MaKH = KH.MaKH and XE.MaHX = HX.MaHX and XE.TrangThai = 1";
-            return DataProvider.Instance.ExecuteQuery(query);
-        }
-
         public DataTable SoXeTiepNhanTrongNgay(DateTime now)
         {
             string query = "SELECT COUNT(BienSo) FROM XE WHERE day(NgayTiepNhan) = " + now.Day + " and month(NgayTiepNhan) = " + now.Month + " and year(NgayTiepNhan) = " + now.Year;
             return DataProvider.Instance.ExecuteQuery(query);
         }
 
-        public DataTable LamMoiDanhSachXe()
+        
+        public int ThemXeDAO(string BienSo, string HieuXe, DateTime now) // now nguyên lấy thời gian của hiện tại nha
         {
-            string query = "SELECT TenHieuXe, BienSo, TenKH, DienThoai, DiaChi FROM XE, HIEUXE as HX, KHACHHANG as KH WHERE Xe.MaKH = KH.MaKH and Xe.MaHX = HX.MaHX and XE.TrangThai = 1";
-            return DataProvider.Instance.ExecuteQuery(query);
-        }
-
-        public DataTable TimKiemTuongDoi(string DL)
-        {
-            string query = "TimKiemTuongDoi @DuLieu";
-            return DataProvider.Instance.ExecuteQuery(query, new object[] { DL });
-        }
-
-        public DataTable TimKiemChinhXac(string BienSo, string HieuXe)
-        {
-            string query = "TimKiemChinhXac @BienSo , @HieuXe";
-            return DataProvider.Instance.ExecuteQuery(query, new object[] { BienSo, HieuXe });
-        }
-        public int ThemXeDAO(string BienSo, string HieuXe, int MaKH, DateTime now)
-        {
-            string query = "ThemXe @BienSo , @HieuXe , @MaKH , @NgayTiepNhan";
-            return DataProvider.Instance.ExecuteNonQuery(query, new object[] { BienSo, HieuXe, MaKH, now });
+            string query = "ThemXe @BienSo , @HieuXe , @NgayTiepNhan";
+            return DataProvider.Instance.ExecuteNonQuery(query, new object[] { BienSo, HieuXe, now });
         }
     }
 }
