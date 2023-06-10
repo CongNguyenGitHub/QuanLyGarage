@@ -52,6 +52,10 @@ namespace GUI
             TreeNode treeNode18 = new TreeNode("Thêm tài khoản");
             TreeNode treeNode19 = new TreeNode("Đăng xuất");
             TreeNode treeNode20 = new TreeNode("Tài khoản", 7, 7, new TreeNode[] { treeNode16, treeNode17, treeNode18, treeNode19 });
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             imageList1 = new ImageList(components);
             treeView1 = new TreeView();
             tabControl1 = new TabControl();
@@ -81,7 +85,6 @@ namespace GUI
             label8 = new Label();
             tabPage4 = new TabPage();
             dataGridView1 = new DataGridView();
-            label11 = new Label();
             tabPage5 = new TabPage();
             dataGridView2 = new DataGridView();
             Column1 = new DataGridViewTextBoxColumn();
@@ -224,6 +227,7 @@ namespace GUI
             treeView1.ItemHeight = 90;
             treeView1.LineColor = Color.FromArgb(34, 34, 34);
             treeView1.Location = new Point(4, 2);
+            treeView1.Margin = new Padding(0);
             treeView1.Name = "treeView1";
             treeNode1.BackColor = Color.FromArgb(34, 34, 34);
             treeNode1.ForeColor = Color.White;
@@ -323,15 +327,13 @@ namespace GUI
             treeView1.ShowLines = false;
             treeView1.ShowPlusMinus = false;
             treeView1.ShowRootLines = false;
-            treeView1.Size = new Size(298, 832);
+            treeView1.Size = new Size(289, 841);
             treeView1.TabIndex = 1;
             treeView1.AfterSelect += treeView1_AfterSelect;
             // 
             // tabControl1
             // 
             tabControl1.Appearance = TabAppearance.FlatButtons;
-            tabControl1.ItemSize = new Size(0, 1);
-            tabControl1.SizeMode = TabSizeMode.Fixed;
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Controls.Add(tabPage3);
@@ -345,19 +347,22 @@ namespace GUI
             tabControl1.Controls.Add(tabPage11);
             tabControl1.Controls.Add(tabPage12);
             tabControl1.Controls.Add(tabPage13);
-            tabControl1.Location = new Point(292,-40);
+            tabControl1.ItemSize = new Size(0, 1);
+            tabControl1.Location = new Point(292, 0);
+            tabControl1.Margin = new Padding(0);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
             tabControl1.Size = new Size(1095, 878);
+            tabControl1.SizeMode = TabSizeMode.Fixed;
             tabControl1.TabIndex = 3;
             // 
             // tabPage1
             // 
             tabPage1.Controls.Add(pictureBox1);
-            tabPage1.Location = new Point(4, 39);
+            tabPage1.Location = new Point(4, 5);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1087, 835);
+            tabPage1.Size = new Size(1087, 869);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "tabPage1";
             tabPage1.UseVisualStyleBackColor = true;
@@ -365,9 +370,10 @@ namespace GUI
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.image11;
-            pictureBox1.Location = new Point(-4, 37);
+            pictureBox1.Location = new Point(-4, 0);
+            pictureBox1.Margin = new Padding(0);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(1095, 836);
+            pictureBox1.Size = new Size(1099, 836);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
@@ -389,10 +395,10 @@ namespace GUI
             tabPage2.Controls.Add(textBox2);
             tabPage2.Controls.Add(textBox1);
             tabPage2.Controls.Add(label1);
-            tabPage2.Location = new Point(4, 39);
+            tabPage2.Location = new Point(4, 5);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1087, 835);
+            tabPage2.Size = new Size(1087, 869);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "tabPage2";
             // 
@@ -542,9 +548,9 @@ namespace GUI
             tabPage3.Controls.Add(textBox5);
             tabPage3.Controls.Add(comboBox2);
             tabPage3.Controls.Add(label8);
-            tabPage3.Location = new Point(4, 39);
+            tabPage3.Location = new Point(4, 5);
             tabPage3.Name = "tabPage3";
-            tabPage3.Size = new Size(1087, 835);
+            tabPage3.Size = new Size(1087, 869);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "tabPage3";
             // 
@@ -613,32 +619,75 @@ namespace GUI
             // 
             tabPage4.BackColor = Color.FromArgb(34, 34, 34);
             tabPage4.Controls.Add(dataGridView1);
-            tabPage4.Controls.Add(label11);
-            tabPage4.Location = new Point(4, 39);
+            tabPage4.Location = new Point(4, 5);
             tabPage4.Name = "tabPage4";
-            tabPage4.Size = new Size(1087, 835);
+            tabPage4.Size = new Size(1087, 869);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "tabPage4";
+            tabPage4.Click += tabPage4_Click;
             // 
             // dataGridView1
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(75, 141);
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.AllowUserToResizeColumns = false;
+            dataGridView1.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.BackgroundColor = Color.FromArgb(34, 34, 34);
+            dataGridView1.BorderStyle = BorderStyle.None;
+            dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.RaisedHorizontal;
+            dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle2.SelectionForeColor = Color.White;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridView1.ColumnHeadersHeight = 54;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridView1.Dock = DockStyle.Fill;
+            dataGridView1.EnableHeadersVisualStyles = false;
+            dataGridView1.GridColor = Color.White;
+            dataGridView1.Location = new Point(0, 0);
+            dataGridView1.Margin = new Padding(0);
+            dataGridView1.MultiSelect = false;
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 72;
+            dataGridView1.ReadOnly = true;
+            dataGridView1.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle4.ForeColor = Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle4.SelectionForeColor = Color.White;
+            dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridView1.RowHeadersVisible = false;
+            dataGridView1.RowHeadersWidth = 50;
+            dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dataGridView1.RowTemplate.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView1.RowTemplate.DefaultCellStyle.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridView1.RowTemplate.DefaultCellStyle.ForeColor = Color.White;
+            dataGridView1.RowTemplate.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             dataGridView1.RowTemplate.Height = 37;
-            dataGridView1.Size = new Size(972, 503);
-            dataGridView1.TabIndex = 2;
-            // 
-            // label11
-            // 
-            label11.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
-            label11.ForeColor = Color.White;
-            label11.Location = new Point(75, 43);
-            label11.Name = "label11";
-            label11.Size = new Size(475, 56);
-            label11.TabIndex = 1;
-            label11.Text = "Danh sách xe đã tiếp nhận";
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.Size = new Size(1087, 869);
+            dataGridView1.TabIndex = 0;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // tabPage5
             // 
@@ -652,9 +701,9 @@ namespace GUI
             tabPage5.Controls.Add(textBox6);
             tabPage5.Controls.Add(label12);
             tabPage5.ForeColor = SystemColors.ControlText;
-            tabPage5.Location = new Point(4, 39);
+            tabPage5.Location = new Point(4, 5);
             tabPage5.Name = "tabPage5";
-            tabPage5.Size = new Size(1087, 835);
+            tabPage5.Size = new Size(1087, 869);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "tabPage5";
             tabPage5.Click += tabPage5_Click;
@@ -805,9 +854,9 @@ namespace GUI
             tabPage6.Controls.Add(textBox9);
             tabPage6.Controls.Add(textBox10);
             tabPage6.Controls.Add(label15);
-            tabPage6.Location = new Point(4, 39);
+            tabPage6.Location = new Point(4, 5);
             tabPage6.Name = "tabPage6";
-            tabPage6.Size = new Size(1087, 835);
+            tabPage6.Size = new Size(1087, 869);
             tabPage6.TabIndex = 5;
             tabPage6.Text = "tabPage6";
             tabPage6.Click += tabPage6_Click;
@@ -966,9 +1015,9 @@ namespace GUI
             tabPage7.Controls.Add(label23);
             tabPage7.Controls.Add(textBox12);
             tabPage7.Controls.Add(label24);
-            tabPage7.Location = new Point(4, 39);
+            tabPage7.Location = new Point(4, 5);
             tabPage7.Name = "tabPage7";
-            tabPage7.Size = new Size(1087, 835);
+            tabPage7.Size = new Size(1087, 869);
             tabPage7.TabIndex = 6;
             tabPage7.Text = "tabPage7";
             // 
@@ -1049,9 +1098,9 @@ namespace GUI
             tabPage8.Controls.Add(button9);
             tabPage8.Controls.Add(dataGridView3);
             tabPage8.Controls.Add(label25);
-            tabPage8.Location = new Point(4, 39);
+            tabPage8.Location = new Point(4, 5);
             tabPage8.Name = "tabPage8";
-            tabPage8.Size = new Size(1087, 835);
+            tabPage8.Size = new Size(1087, 869);
             tabPage8.TabIndex = 7;
             tabPage8.Text = "tabPage8";
             // 
@@ -1097,9 +1146,9 @@ namespace GUI
             tabPage9.Controls.Add(label26);
             tabPage9.Controls.Add(label27);
             tabPage9.Controls.Add(label28);
-            tabPage9.Location = new Point(4, 39);
+            tabPage9.Location = new Point(4, 5);
             tabPage9.Name = "tabPage9";
-            tabPage9.Size = new Size(1087, 835);
+            tabPage9.Size = new Size(1087, 869);
             tabPage9.TabIndex = 8;
             tabPage9.Text = "tabPage9";
             tabPage9.Click += tabPage9_Click;
@@ -1187,9 +1236,9 @@ namespace GUI
             tabPage10.Controls.Add(label29);
             tabPage10.Controls.Add(label30);
             tabPage10.Controls.Add(label31);
-            tabPage10.Location = new Point(4, 39);
+            tabPage10.Location = new Point(4, 5);
             tabPage10.Name = "tabPage10";
-            tabPage10.Size = new Size(1087, 835);
+            tabPage10.Size = new Size(1087, 869);
             tabPage10.TabIndex = 9;
             tabPage10.Text = "tabPage10";
             // 
@@ -1287,9 +1336,9 @@ namespace GUI
             tabPage11.Controls.Add(label34);
             tabPage11.Controls.Add(label33);
             tabPage11.Controls.Add(label32);
-            tabPage11.Location = new Point(4, 39);
+            tabPage11.Location = new Point(4, 5);
             tabPage11.Name = "tabPage11";
-            tabPage11.Size = new Size(1087, 835);
+            tabPage11.Size = new Size(1087, 869);
             tabPage11.TabIndex = 10;
             tabPage11.Text = "tabPage11";
             // 
@@ -1478,9 +1527,9 @@ namespace GUI
             tabPage12.Controls.Add(label44);
             tabPage12.Controls.Add(label45);
             tabPage12.Controls.Add(label43);
-            tabPage12.Location = new Point(4, 39);
+            tabPage12.Location = new Point(4, 5);
             tabPage12.Name = "tabPage12";
-            tabPage12.Size = new Size(1087, 835);
+            tabPage12.Size = new Size(1087, 869);
             tabPage12.TabIndex = 11;
             tabPage12.Text = "tabPage12";
             tabPage12.Click += tabPage12_Click;
@@ -1556,9 +1605,9 @@ namespace GUI
             tabPage13.Controls.Add(label50);
             tabPage13.Controls.Add(label51);
             tabPage13.Controls.Add(label52);
-            tabPage13.Location = new Point(4, 39);
+            tabPage13.Location = new Point(4, 5);
             tabPage13.Name = "tabPage13";
-            tabPage13.Size = new Size(1087, 835);
+            tabPage13.Size = new Size(1087, 869);
             tabPage13.TabIndex = 12;
             tabPage13.Text = "tabPage13";
             tabPage13.Click += tabPage13_Click;
@@ -1712,7 +1761,6 @@ namespace GUI
         private TabPage tabPage3;
         private PictureBox pictureBox1;
         private Label label1;
-        private TabPage tabPage4;
         private TabPage tabPage5;
         private TabPage tabPage6;
         private TabPage tabPage7;
@@ -1741,8 +1789,6 @@ namespace GUI
         private Label label10;
         private Label label9;
         private Button button2;
-        private DataGridView dataGridView1;
-        private Label label11;
         private Label label12;
         private Label label14;
         private DateTimePicker dateTimePicker2;
@@ -1832,5 +1878,7 @@ namespace GUI
         private TextBox textBox19;
         private TextBox textBox18;
         private TextBox textBox25;
+        private TabPage tabPage4;
+        private DataGridView dataGridView1;
     }
 }
