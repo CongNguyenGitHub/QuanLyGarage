@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BUS
 {
@@ -36,5 +37,18 @@ namespace BUS
         {
             return XeDAO.Instance.ThemXeDAO(BienSo, HieuXe, now);
         }
+        public bool TiepNhanXe(string HoTen, string BienSo, string DiaChi, string HieuXe, string SDT, DateTime NgayTiepNhan)
+        {
+            int SoXeTrongNgay = SoXeTiepNhanTrongNgay(NgayTiepNhan);
+            int SoXeToiDa = QuyDinhBUS.Instance.LaySoXeSuaToiDa();
+            if (SoXeTrongNgay < SoXeToiDa)
+            {
+                ThemXeBUS(BienSo, HieuXe, NgayTiepNhan);
+                KhachHangBUS.Instance.ThemKhachHangBUS(HoTen, SDT, DiaChi);
+                return true;
+            }            
+            return false;
+        }
+
     }
 }
