@@ -326,15 +326,6 @@ INSERT [dbo].[XE]([MaKH], [BienSo], [HieuXe]) VALUES (1, N'001001', N'Toyota')
 INSERT [dbo].[XE]([MaKH], [BienSo], [HieuXe]) VALUES (2, N'002002', N'Kia')
 INSERT [dbo].[XE]([MaKH], [BienSo], [HieuXe]) VALUES (3, N'003003', N'Suzuki')
 
-INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Slqd', 8)
-INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Slhx', 10)
-INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Slhx2', 30)
-INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Slpt', 200)
-INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Sltc', 100)
-INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Sltk', 1)
-INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Slhs', 1)
-INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Sltd', 5)
-
 ALTER TABLE [dbo].[XE] WITH CHECK ADD FOREIGN KEY ([MaKH]) REFERENCES [dbo].[KHACHHANG]([MaKH])
 GO
 ALTER TABLE [dbo].[PHIEUSUACHUA] WITH CHECK ADD FOREIGN KEY ([BienSo])  REFERENCES [dbo].[XE](BienSo)
@@ -408,6 +399,35 @@ BEGIN
 	INSERT INTO [dbo].[XE] ( [MaKH], [BienSo], [HieuXe], [NgayTiepNhan]) VALUES (@MaKH, @BienSo, @HieuXe, @NgayTiepNhan)
 END
 GO
+
+/****** UC-5: PROCEDURE XemDanhSachXe  ******/
+/****** EXEC XemDanhSachXe  ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[XemDanhSachXe]
+AS
+BEGIN
+	SELECT ROW_NUMBER() OVER (ORDER BY x.BienSo) AS STT,
+		   x.BienSo AS [Biển số],
+		   x.HieuXe AS [Hiệu xe],
+		   kh.TenKH AS [Chủ xe],
+		   kh.TienNo AS [Tiền nợ]
+	FROM XE x, KHACHHANG kh 
+	WHERE x.MaKH = kh.MaKH
+END
+GO
+
+INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Slqd', 8)
+INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Slhx', 10)
+INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Slhx2', 30)
+INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Slpt', 200)
+INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Sltc', 100)
+INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Sltk', 1)
+INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Slhs', 1)
+INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Sltd', 5)
+
 
 USE [master]
 GO

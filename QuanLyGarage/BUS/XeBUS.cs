@@ -26,8 +26,10 @@ namespace BUS
             }
         }
         private XeBUS() { }
-        // goi phuong thuc them khach hang trước, xong mới gọi phương thức xêm xe
-        // hàm này cg sẽ trả về số thao tác insert thành công như hàm themkhachhangbus
+        public DataTable CacXeDaTiepNhan()
+        {
+            return XeDAO.Instance.CacXeDaTiepNhan();
+        }
         public int SoXeTiepNhanTrongNgay(DateTime now)
         {
             DataTable dt = XeDAO.Instance.SoXeTiepNhanTrongNgay(now);

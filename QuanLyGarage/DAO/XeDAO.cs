@@ -25,18 +25,23 @@ namespace DAO
         }
         private XeDAO() { }
 
+        public DataTable CacXeDaTiepNhan()
+        {
+            string query = "XemDanhSachXe";
+            return DataProvider.Instance.ExecuteQuery(query);
+        }
         public DataTable SoXeTiepNhanTrongNgay(DateTime now)
         {
             string query = "SELECT COUNT(BienSo) FROM XE WHERE day(NgayTiepNhan) = " + now.Day + " and month(NgayTiepNhan) = " + now.Month + " and year(NgayTiepNhan) = " + now.Year;
             return DataProvider.Instance.ExecuteQuery(query);
         }
-
-        
         public int ThemXeDAO(string BienSo, string HieuXe, DateTime now) // now nguyên lấy thời gian của hiện tại nha
         {
             string query = "ThemXe @BienSo , @HieuXe , @NgayTiepNhan";
             return DataProvider.Instance.ExecuteNonQuery(query, new object[] { BienSo, HieuXe, now });
         }
+
+
     }
 }
 
