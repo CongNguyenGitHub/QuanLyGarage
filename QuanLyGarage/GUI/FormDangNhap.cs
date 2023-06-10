@@ -15,14 +15,14 @@ namespace GUI
         {
             if (this.textBox1.Text=="" || this.textBox2.Text=="")
             {
-                MessageBox.Show("Required information was missing","Warning",0,MessageBoxIcon.Warning);
+                MessageBox.Show("Thiếu thông tin","Cảnh báo",0,MessageBoxIcon.Warning);
                 return;
             }
             string TaiKhoan = this.textBox1.Text;
             string MatKhau = this.textBox2.Text;
             if (BUS.DangNhapBUS.Instance.checkDangNhapBUS(TaiKhoan , MatKhau)==false)
             {
-                MessageBox.Show("The username or password you entered was incorrect", "Error", 0, MessageBoxIcon.Error);
+                MessageBox.Show("Tên đăng nhập hoặc mật khẩu sai", "Lỗi", 0, MessageBoxIcon.Error);
             }
             else
             {
@@ -30,6 +30,7 @@ namespace GUI
                 this.Hide();
                 frmain.ShowDialog();
                 this.Show();
+
             }
             this.textBox1.Clear();
             this.textBox2.Clear();

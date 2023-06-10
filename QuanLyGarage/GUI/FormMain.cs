@@ -19,7 +19,7 @@ namespace GUI
         }
         private void FormMain_Load(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = XeBUS.Instance.CacXeDaTiepNhan();
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -108,6 +108,7 @@ namespace GUI
                     break;
                 case "Xem danh sách xe":
                     tabControl1.SelectedIndex = 3;
+                    dataGridView1.DataSource = XeBUS.Instance.CacXeDaTiepNhan();
                     break;
                 case "Lập phiếu sửa chữa":
                     tabControl1.SelectedIndex = 4;
@@ -142,7 +143,6 @@ namespace GUI
                     if (result == DialogResult.OK)
                     {
                         this.Close();
-
                     }
                     break;
             }
@@ -152,7 +152,7 @@ namespace GUI
         {
             if (textBox1.Text == "" || textBox2.Text == "" || textBox3.Text == "" || textBox4.Text == "" || comboBox1.SelectedIndex == -1)
             {
-                MessageBox.Show("Nhập thiếu thong tin", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Nhập thiếu thong tin", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             if (XeBUS.Instance.TiepNhanXe(textBox1.Text, textBox2.Text, textBox3.Text, comboBox1.SelectedItem.ToString(), textBox4.Text, dateTimePicker1.Value))
@@ -163,6 +163,13 @@ namespace GUI
             {
                 MessageBox.Show("Vượt quá số xe trong ngày", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            textBox1.Clear();
+            textBox2.Clear();
+            textBox3.Clear();
+            textBox4.Clear();
+            comboBox1.SelectedIndex = -1;
+            dateTimePicker1.Value = DateTime.Now;
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -184,5 +191,16 @@ namespace GUI
         {
 
         }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            textBox1.Clear();
+            textBox2.Clear();
+            textBox3.Clear();
+            textBox4.Clear();
+            comboBox1.SelectedIndex = -1;
+            dateTimePicker1.Value = DateTime.Now;
+        }
+
     }
 }

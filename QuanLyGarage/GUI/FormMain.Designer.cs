@@ -62,6 +62,7 @@ namespace GUI
             tabPage1 = new TabPage();
             pictureBox1 = new PictureBox();
             tabPage2 = new TabPage();
+            button16 = new Button();
             button1 = new Button();
             label7 = new Label();
             label6 = new Label();
@@ -333,6 +334,8 @@ namespace GUI
             // 
             // tabControl1
             // 
+            tabControl1.SizeMode = TabSizeMode.Fixed;
+            tabControl1.ItemSize = new Size(0, 1);
             tabControl1.Appearance = TabAppearance.FlatButtons;
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
@@ -347,22 +350,20 @@ namespace GUI
             tabControl1.Controls.Add(tabPage11);
             tabControl1.Controls.Add(tabPage12);
             tabControl1.Controls.Add(tabPage13);
-            tabControl1.ItemSize = new Size(0, 1);
             tabControl1.Location = new Point(292, 0);
             tabControl1.Margin = new Padding(0);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
             tabControl1.Size = new Size(1095, 878);
-            tabControl1.SizeMode = TabSizeMode.Fixed;
             tabControl1.TabIndex = 3;
             // 
             // tabPage1
             // 
             tabPage1.Controls.Add(pictureBox1);
-            tabPage1.Location = new Point(4, 5);
+            tabPage1.Location = new Point(4, 39);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1087, 869);
+            tabPage1.Size = new Size(1087, 835);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "tabPage1";
             tabPage1.UseVisualStyleBackColor = true;
@@ -381,6 +382,7 @@ namespace GUI
             // tabPage2
             // 
             tabPage2.BackColor = Color.FromArgb(34, 34, 34);
+            tabPage2.Controls.Add(button16);
             tabPage2.Controls.Add(button1);
             tabPage2.Controls.Add(label7);
             tabPage2.Controls.Add(label6);
@@ -395,12 +397,25 @@ namespace GUI
             tabPage2.Controls.Add(textBox2);
             tabPage2.Controls.Add(textBox1);
             tabPage2.Controls.Add(label1);
-            tabPage2.Location = new Point(4, 5);
+            tabPage2.Location = new Point(4, 39);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1087, 869);
+            tabPage2.Size = new Size(1087, 835);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "tabPage2";
+            // 
+            // button16
+            // 
+            button16.BackColor = Color.FromArgb(250, 136, 40);
+            button16.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            button16.ForeColor = Color.White;
+            button16.Location = new Point(341, 629);
+            button16.Name = "button16";
+            button16.Size = new Size(131, 40);
+            button16.TabIndex = 14;
+            button16.Text = "Làm mới";
+            button16.UseVisualStyleBackColor = false;
+            button16.Click += button16_Click;
             // 
             // button1
             // 
@@ -548,9 +563,9 @@ namespace GUI
             tabPage3.Controls.Add(textBox5);
             tabPage3.Controls.Add(comboBox2);
             tabPage3.Controls.Add(label8);
-            tabPage3.Location = new Point(4, 5);
+            tabPage3.Location = new Point(4, 39);
             tabPage3.Name = "tabPage3";
-            tabPage3.Size = new Size(1087, 869);
+            tabPage3.Size = new Size(1087, 835);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "tabPage3";
             // 
@@ -619,9 +634,9 @@ namespace GUI
             // 
             tabPage4.BackColor = Color.FromArgb(34, 34, 34);
             tabPage4.Controls.Add(dataGridView1);
-            tabPage4.Location = new Point(4, 5);
+            tabPage4.Location = new Point(4, 39);
             tabPage4.Name = "tabPage4";
-            tabPage4.Size = new Size(1087, 869);
+            tabPage4.Size = new Size(1087, 835);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "tabPage4";
             tabPage4.Click += tabPage4_Click;
@@ -638,6 +653,7 @@ namespace GUI
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView1.BackgroundColor = Color.FromArgb(34, 34, 34);
             dataGridView1.BorderStyle = BorderStyle.None;
             dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.RaisedHorizontal;
@@ -685,7 +701,7 @@ namespace GUI
             dataGridView1.RowTemplate.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             dataGridView1.RowTemplate.Height = 37;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(1087, 869);
+            dataGridView1.Size = new Size(1087, 835);
             dataGridView1.TabIndex = 0;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -701,9 +717,9 @@ namespace GUI
             tabPage5.Controls.Add(textBox6);
             tabPage5.Controls.Add(label12);
             tabPage5.ForeColor = SystemColors.ControlText;
-            tabPage5.Location = new Point(4, 5);
+            tabPage5.Location = new Point(4, 39);
             tabPage5.Name = "tabPage5";
-            tabPage5.Size = new Size(1087, 869);
+            tabPage5.Size = new Size(1087, 835);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "tabPage5";
             tabPage5.Click += tabPage5_Click;
@@ -854,9 +870,9 @@ namespace GUI
             tabPage6.Controls.Add(textBox9);
             tabPage6.Controls.Add(textBox10);
             tabPage6.Controls.Add(label15);
-            tabPage6.Location = new Point(4, 5);
+            tabPage6.Location = new Point(4, 39);
             tabPage6.Name = "tabPage6";
-            tabPage6.Size = new Size(1087, 869);
+            tabPage6.Size = new Size(1087, 835);
             tabPage6.TabIndex = 5;
             tabPage6.Text = "tabPage6";
             tabPage6.Click += tabPage6_Click;
@@ -1015,9 +1031,9 @@ namespace GUI
             tabPage7.Controls.Add(label23);
             tabPage7.Controls.Add(textBox12);
             tabPage7.Controls.Add(label24);
-            tabPage7.Location = new Point(4, 5);
+            tabPage7.Location = new Point(4, 39);
             tabPage7.Name = "tabPage7";
-            tabPage7.Size = new Size(1087, 869);
+            tabPage7.Size = new Size(1087, 835);
             tabPage7.TabIndex = 6;
             tabPage7.Text = "tabPage7";
             // 
@@ -1098,9 +1114,9 @@ namespace GUI
             tabPage8.Controls.Add(button9);
             tabPage8.Controls.Add(dataGridView3);
             tabPage8.Controls.Add(label25);
-            tabPage8.Location = new Point(4, 5);
+            tabPage8.Location = new Point(4, 39);
             tabPage8.Name = "tabPage8";
-            tabPage8.Size = new Size(1087, 869);
+            tabPage8.Size = new Size(1087, 835);
             tabPage8.TabIndex = 7;
             tabPage8.Text = "tabPage8";
             // 
@@ -1146,9 +1162,9 @@ namespace GUI
             tabPage9.Controls.Add(label26);
             tabPage9.Controls.Add(label27);
             tabPage9.Controls.Add(label28);
-            tabPage9.Location = new Point(4, 5);
+            tabPage9.Location = new Point(4, 39);
             tabPage9.Name = "tabPage9";
-            tabPage9.Size = new Size(1087, 869);
+            tabPage9.Size = new Size(1087, 835);
             tabPage9.TabIndex = 8;
             tabPage9.Text = "tabPage9";
             tabPage9.Click += tabPage9_Click;
@@ -1236,9 +1252,9 @@ namespace GUI
             tabPage10.Controls.Add(label29);
             tabPage10.Controls.Add(label30);
             tabPage10.Controls.Add(label31);
-            tabPage10.Location = new Point(4, 5);
+            tabPage10.Location = new Point(4, 39);
             tabPage10.Name = "tabPage10";
-            tabPage10.Size = new Size(1087, 869);
+            tabPage10.Size = new Size(1087, 835);
             tabPage10.TabIndex = 9;
             tabPage10.Text = "tabPage10";
             // 
@@ -1336,9 +1352,9 @@ namespace GUI
             tabPage11.Controls.Add(label34);
             tabPage11.Controls.Add(label33);
             tabPage11.Controls.Add(label32);
-            tabPage11.Location = new Point(4, 5);
+            tabPage11.Location = new Point(4, 39);
             tabPage11.Name = "tabPage11";
-            tabPage11.Size = new Size(1087, 869);
+            tabPage11.Size = new Size(1087, 835);
             tabPage11.TabIndex = 10;
             tabPage11.Text = "tabPage11";
             // 
@@ -1527,9 +1543,9 @@ namespace GUI
             tabPage12.Controls.Add(label44);
             tabPage12.Controls.Add(label45);
             tabPage12.Controls.Add(label43);
-            tabPage12.Location = new Point(4, 5);
+            tabPage12.Location = new Point(4, 39);
             tabPage12.Name = "tabPage12";
-            tabPage12.Size = new Size(1087, 869);
+            tabPage12.Size = new Size(1087, 835);
             tabPage12.TabIndex = 11;
             tabPage12.Text = "tabPage12";
             tabPage12.Click += tabPage12_Click;
@@ -1605,9 +1621,9 @@ namespace GUI
             tabPage13.Controls.Add(label50);
             tabPage13.Controls.Add(label51);
             tabPage13.Controls.Add(label52);
-            tabPage13.Location = new Point(4, 5);
+            tabPage13.Location = new Point(4, 39);
             tabPage13.Name = "tabPage13";
-            tabPage13.Size = new Size(1087, 869);
+            tabPage13.Size = new Size(1087, 835);
             tabPage13.TabIndex = 12;
             tabPage13.Text = "tabPage13";
             tabPage13.Click += tabPage13_Click;
@@ -1880,5 +1896,6 @@ namespace GUI
         private TextBox textBox25;
         private TabPage tabPage4;
         private DataGridView dataGridView1;
+        private Button button16;
     }
 }
