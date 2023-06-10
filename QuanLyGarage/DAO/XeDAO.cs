@@ -24,6 +24,17 @@ namespace DAO
             }
         }
         private XeDAO() { }
+        public DataTable TimKiemMotDoiSo(string DL)
+        {
+            string query = "TimKiemMotDoiSo @DuLieu";
+            return DataProvider.Instance.ExecuteQuery(query, new object[] { DL });
+        }
+
+        public DataTable TimKiemHaiDoiSo(string BienSo, string HieuXe)
+        {
+            string query = "TimKiemHaiDoiSo @BienSo , @HieuXe";
+            return DataProvider.Instance.ExecuteQuery(query, new object[] { BienSo, HieuXe });
+        }
 
         public DataTable CacXeDaTiepNhan()
         {

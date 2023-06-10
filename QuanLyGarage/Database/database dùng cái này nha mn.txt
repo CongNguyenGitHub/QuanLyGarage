@@ -313,19 +313,6 @@ CREATE TABLE [dbo].[CT_BAOCAOTON]
 ) ON [PRIMARY]
 GO
 
-INSERT [dbo].[TAIKHOAN]([TenDangNhap], [MatKhau], [QuyenHan]) VALUES ( N'quanly01', N'quanly01', 1)
-INSERT [dbo].[TAIKHOAN]([TenDangNhap], [MatKhau], [QuyenHan]) VALUES ( N'quanly02', N'quanly02', 1)
-INSERT [dbo].[TAIKHOAN]([TenDangNhap], [MatKhau], [QuyenHan]) VALUES ( N'nhanvien01', N'nhanvien01', 0)
-INSERT [dbo].[TAIKHOAN]([TenDangNhap], [MatKhau], [QuyenHan]) VALUES ( N'nhanvien02', N'nhanvien02', 0)
-
-INSERT [dbo].[KHACHHANG]( [TenKH],  [DienThoai],  [DiaChi]) VALUES ( N'Nguyen Tung Duong',  N'0777987601',  N'15/3 A duong Phuoc Hau, xa Phuoc Hong')
-INSERT [dbo].[KHACHHANG]( [TenKH],  [DienThoai],  [DiaChi]) VALUES ( N'Dang Khoi Nguyen',  N'0666987601',  N'23/4 B duong Long My, xa Mau Hong')
-INSERT [dbo].[KHACHHANG]( [TenKH],  [DienThoai],  [DiaChi]) VALUES ( N'Nguyen Thi My Duyen',  N'0888987601',  N'33/5 A duong Hoa Phat, xa Hong Chau')
-
-INSERT [dbo].[XE]([MaKH], [BienSo], [HieuXe]) VALUES (1, N'001001', N'Toyota')
-INSERT [dbo].[XE]([MaKH], [BienSo], [HieuXe]) VALUES (2, N'002002', N'Kia')
-INSERT [dbo].[XE]([MaKH], [BienSo], [HieuXe]) VALUES (3, N'003003', N'Suzuki')
-
 ALTER TABLE [dbo].[XE] WITH CHECK ADD FOREIGN KEY ([MaKH]) REFERENCES [dbo].[KHACHHANG]([MaKH])
 GO
 ALTER TABLE [dbo].[PHIEUSUACHUA] WITH CHECK ADD FOREIGN KEY ([BienSo])  REFERENCES [dbo].[XE](BienSo)
@@ -418,6 +405,64 @@ BEGIN
 	WHERE x.MaKH = kh.MaKH
 END
 GO
+
+/******   PROCEDURE TimKiemMotDoiSo  ******/
+/****** EXEC TimKiemMotDoiSo @Dulieu = '004004'  ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[TimKiemMotDoiSo]
+	@Dulieu varchar(10)
+AS
+BEGIN
+	SELECT ROW_NUMBER() OVER (ORDER BY x.BienSo) AS STT,
+		   x.BienSo AS [Biển số],
+		   x.HieuXe AS [Hiệu xe],
+		   kh.TenKH AS [Chủ xe],
+		   kh.TienNo AS [Tiền nợ]
+	FROM XE x, KHACHHANG kh 
+	WHERE x.MaKH = kh.MaKH
+	and ((x.BienSo like '%'+@Dulieu+'%') or (x.HieuXe like '%'+@Dulieu+'%')) 
+END
+GO
+
+/******   PROCEDURE TimKiemHaiDoiSo  ******/
+/****** EXEC TimKiemHaiDoiSo @BienSo = '001001', @HieuXe = 'dai'  ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[TimKiemHaiDoiSo]
+	@BienSo varchar(10),
+	@HieuXe varchar(50)
+AS
+BEGIN
+	SELECT ROW_NUMBER() OVER (ORDER BY x.BienSo) AS STT,
+		   x.BienSo AS [Biển số],
+		   x.HieuXe AS [Hiệu xe],
+		   kh.TenKH AS [Chủ xe],
+		   kh.TienNo AS [Tiền nợ]
+	FROM XE x, KHACHHANG kh 
+	WHERE x.MaKH = kh.MaKH
+	and x.BienSo like '%'+@BienSo+'%' 
+	and x.HieuXe like '%'+@HieuXe+'%' 
+END
+GO
+
+INSERT [dbo].[TAIKHOAN]([TenDangNhap], [MatKhau], [QuyenHan]) VALUES ( N'quanly01', N'quanly01', 1)
+INSERT [dbo].[TAIKHOAN]([TenDangNhap], [MatKhau], [QuyenHan]) VALUES ( N'quanly02', N'quanly02', 1)
+INSERT [dbo].[TAIKHOAN]([TenDangNhap], [MatKhau], [QuyenHan]) VALUES ( N'nhanvien01', N'nhanvien01', 0)
+INSERT [dbo].[TAIKHOAN]([TenDangNhap], [MatKhau], [QuyenHan]) VALUES ( N'nhanvien02', N'nhanvien02', 0)
+
+EXEC ThemKhachHang @TenKH = 'Nguyen Tung Duong', @DienThoai = '0783771000', @DiaChi = '15/3 A duong Phuoc Hau, xa Phuoc Hong', @TienNo = 0 
+EXEC ThemXe @BienSo = '001001', @HieuXe = 'Toyota'
+
+EXEC ThemKhachHang @TenKH = 'Dang Khoi Nguyen', @DienThoai = '0666987601', @DiaChi = '23/4 B duong Long My, xa Mau Hong', @TienNo = 0
+EXEC ThemXe @BienSo = '002002', @HieuXe = 'Kia'
+
+EXEC ThemKhachHang @TenKH = 'Nguyen Thi My Duyen', @DienThoai = '0888987601', @DiaChi = '33/5 A duong Hoa Phat, xa Hong Chau', @TienNo = 0 
+EXEC ThemXe @BienSo = '003003', @HieuXe = 'Suzuki'
 
 INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Slqd', 8)
 INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Slhx', 10)

@@ -26,6 +26,15 @@ namespace BUS
             }
         }
         private XeBUS() { }
+        public DataTable TimKiemMotDoiSo(string DuLieu)  // cái này là nhập 1 trong 2 ô rồi bấm tìm kiếm
+        {
+            return XeDAO.Instance.TimKiemMotDoiSo(DuLieu);
+        }
+
+        public DataTable TimKiemHaiDoiSo(string BienSo, string HieuXe) // cái này là 2 ô đều được nhập rồi ms bấm tìm kiếm
+        {
+            return XeDAO.Instance.TimKiemHaiDoiSo(BienSo, HieuXe);
+        }
         public DataTable CacXeDaTiepNhan()
         {
             return XeDAO.Instance.CacXeDaTiepNhan();
