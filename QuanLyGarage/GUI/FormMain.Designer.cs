@@ -52,10 +52,14 @@ namespace GUI
             TreeNode treeNode18 = new TreeNode("Thêm tài khoản");
             TreeNode treeNode19 = new TreeNode("Đăng xuất");
             TreeNode treeNode20 = new TreeNode("Tài khoản", 7, 7, new TreeNode[] { treeNode16, treeNode17, treeNode18, treeNode19 });
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle19 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle20 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle21 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle22 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle23 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle24 = new DataGridViewCellStyle();
             imageList1 = new ImageList(components);
             treeView1 = new TreeView();
             tabControl1 = new TabControl();
@@ -71,13 +75,13 @@ namespace GUI
             label3 = new Label();
             label2 = new Label();
             dateTimePicker1 = new DateTimePicker();
-            comboBox1 = new ComboBox();
             textBox4 = new TextBox();
             textBox3 = new TextBox();
             textBox2 = new TextBox();
             textBox1 = new TextBox();
             label1 = new Label();
             tabPage3 = new TabPage();
+            dataGridView4 = new DataGridView();
             button2 = new Button();
             label10 = new Label();
             label9 = new Label();
@@ -184,11 +188,14 @@ namespace GUI
             label50 = new Label();
             label51 = new Label();
             label52 = new Label();
+            comboBox1 = new ComboBox();
+            button17 = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             tabPage2.SuspendLayout();
             tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView4).BeginInit();
             tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             tabPage5.SuspendLayout();
@@ -334,9 +341,9 @@ namespace GUI
             // 
             // tabControl1
             // 
-            tabControl1.SizeMode = TabSizeMode.Fixed;
-            tabControl1.ItemSize = new Size(0, 1);
             tabControl1.Appearance = TabAppearance.FlatButtons;
+            tabControl1.ItemSize = new Size(0, 1);
+            tabControl1.SizeMode = TabSizeMode.Fixed;
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Controls.Add(tabPage3);
@@ -505,16 +512,6 @@ namespace GUI
             dateTimePicker1.Size = new Size(333, 35);
             dateTimePicker1.TabIndex = 6;
             // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "HONDA", "TOYOTA", "LEXUS", "SUZUKI", "ASTON MARTIN", "BENTLEY", "RANDROVER", "ROLLS-ROYCE" });
-            comboBox1.Location = new Point(605, 344);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(268, 38);
-            comboBox1.TabIndex = 5;
-            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
-            // 
             // textBox4
             // 
             textBox4.Location = new Point(75, 507);
@@ -557,6 +554,8 @@ namespace GUI
             // tabPage3
             // 
             tabPage3.BackColor = Color.FromArgb(34, 34, 34);
+            tabPage3.Controls.Add(button17);
+            tabPage3.Controls.Add(dataGridView4);
             tabPage3.Controls.Add(button2);
             tabPage3.Controls.Add(label10);
             tabPage3.Controls.Add(label9);
@@ -568,6 +567,68 @@ namespace GUI
             tabPage3.Size = new Size(1087, 835);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "tabPage3";
+            // 
+            // dataGridView4
+            // 
+            dataGridView4.AllowUserToAddRows = false;
+            dataGridView4.AllowUserToDeleteRows = false;
+            dataGridView4.AllowUserToResizeColumns = false;
+            dataGridView4.AllowUserToResizeRows = false;
+            dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle17.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle17.ForeColor = Color.White;
+            dataGridViewCellStyle17.WrapMode = DataGridViewTriState.True;
+            dataGridView4.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle17;
+            dataGridView4.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView4.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridView4.BackgroundColor = Color.FromArgb(34, 34, 34);
+            dataGridView4.BorderStyle = BorderStyle.None;
+            dataGridView4.CellBorderStyle = DataGridViewCellBorderStyle.RaisedHorizontal;
+            dataGridView4.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle18.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle18.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle18.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle18.ForeColor = Color.White;
+            dataGridViewCellStyle18.SelectionBackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle18.SelectionForeColor = Color.White;
+            dataGridViewCellStyle18.WrapMode = DataGridViewTriState.True;
+            dataGridView4.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle18;
+            dataGridView4.ColumnHeadersHeight = 54;
+            dataGridView4.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle19.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle19.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle19.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle19.ForeColor = Color.White;
+            dataGridViewCellStyle19.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle19.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle19.WrapMode = DataGridViewTriState.True;
+            dataGridView4.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridView4.EnableHeadersVisualStyles = false;
+            dataGridView4.GridColor = Color.White;
+            dataGridView4.Location = new Point(0, 335);
+            dataGridView4.Margin = new Padding(0);
+            dataGridView4.MultiSelect = false;
+            dataGridView4.Name = "dataGridView4";
+            dataGridView4.ReadOnly = true;
+            dataGridView4.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle20.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle20.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle20.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle20.ForeColor = Color.White;
+            dataGridViewCellStyle20.SelectionBackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle20.SelectionForeColor = Color.White;
+            dataGridView4.RowHeadersDefaultCellStyle = dataGridViewCellStyle20;
+            dataGridView4.RowHeadersVisible = false;
+            dataGridView4.RowHeadersWidth = 50;
+            dataGridView4.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dataGridView4.RowTemplate.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView4.RowTemplate.DefaultCellStyle.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridView4.RowTemplate.DefaultCellStyle.ForeColor = Color.White;
+            dataGridView4.RowTemplate.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            dataGridView4.RowTemplate.Height = 37;
+            dataGridView4.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView4.Size = new Size(1080, 455);
+            dataGridView4.TabIndex = 15;
             // 
             // button2
             // 
@@ -614,6 +675,7 @@ namespace GUI
             // comboBox2
             // 
             comboBox2.FormattingEnabled = true;
+            comboBox2.Items.AddRange(new object[] { "HONDA", "TOYOTA", "LEXUS", "SUZUKI", "ASTON MARTIN", "BENTLEY", "RANDROVER", "ROLLS-ROYCE" });
             comboBox2.Location = new Point(602, 172);
             comboBox2.Name = "comboBox2";
             comboBox2.Size = new Size(268, 38);
@@ -647,35 +709,35 @@ namespace GUI
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.AllowUserToResizeColumns = false;
             dataGridView1.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(34, 34, 34);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle21.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle21.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle21.ForeColor = Color.White;
+            dataGridViewCellStyle21.WrapMode = DataGridViewTriState.True;
+            dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle21;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView1.BackgroundColor = Color.FromArgb(34, 34, 34);
             dataGridView1.BorderStyle = BorderStyle.None;
             dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.RaisedHorizontal;
             dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(34, 34, 34);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(34, 34, 34);
-            dataGridViewCellStyle2.SelectionForeColor = Color.White;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle22.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle22.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle22.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle22.ForeColor = Color.White;
+            dataGridViewCellStyle22.SelectionBackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle22.SelectionForeColor = Color.White;
+            dataGridViewCellStyle22.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
             dataGridView1.ColumnHeadersHeight = 54;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = Color.FromArgb(34, 34, 34);
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle23.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle23.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle23.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle23.ForeColor = Color.White;
+            dataGridViewCellStyle23.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle23.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle23.WrapMode = DataGridViewTriState.True;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle23;
             dataGridView1.Dock = DockStyle.Fill;
             dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.GridColor = Color.White;
@@ -685,13 +747,13 @@ namespace GUI
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = Color.FromArgb(34, 34, 34);
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = Color.White;
-            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(34, 34, 34);
-            dataGridViewCellStyle4.SelectionForeColor = Color.White;
-            dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle24.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle24.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle24.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle24.ForeColor = Color.White;
+            dataGridViewCellStyle24.SelectionBackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle24.SelectionForeColor = Color.White;
+            dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle24;
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 50;
             dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
@@ -1724,6 +1786,29 @@ namespace GUI
             label52.TabIndex = 44;
             label52.Text = "Thêm tài khoản mới";
             // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Items.AddRange(new object[] { "HONDA", "TOYOTA", "LEXUS", "SUZUKI", "ASTON MARTIN", "BENTLEY", "RANDROVER", "ROLLS-ROYCE" });
+            comboBox1.Location = new Point(605, 344);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(268, 38);
+            comboBox1.TabIndex = 5;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            // 
+            // button17
+            // 
+            button17.BackColor = Color.FromArgb(250, 136, 40);
+            button17.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            button17.ForeColor = Color.White;
+            button17.Location = new Point(311, 259);
+            button17.Name = "button17";
+            button17.Size = new Size(131, 40);
+            button17.TabIndex = 16;
+            button17.Text = "Làm mới";
+            button17.UseVisualStyleBackColor = false;
+            button17.Click += button17_Click;
+            // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
@@ -1736,6 +1821,7 @@ namespace GUI
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "FormMain";
+            FormClosed += FormMain_FormClosed;
             Load += FormMain_Load;
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
@@ -1744,6 +1830,7 @@ namespace GUI
             tabPage2.PerformLayout();
             tabPage3.ResumeLayout(false);
             tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView4).EndInit();
             tabPage4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             tabPage5.ResumeLayout(false);
@@ -1786,7 +1873,6 @@ namespace GUI
         private TabPage tabPage11;
         private TabPage tabPage12;
         private TabPage tabPage13;
-        private ComboBox comboBox1;
         private TextBox textBox4;
         private TextBox textBox3;
         private TextBox textBox2;
@@ -1897,5 +1983,8 @@ namespace GUI
         private TabPage tabPage4;
         private DataGridView dataGridView1;
         private Button button16;
+        private DataGridView dataGridView4;
+        private ComboBox comboBox1;
+        private Button button17;
     }
 }

@@ -174,6 +174,27 @@ namespace GUI
 
         private void button2_Click(object sender, EventArgs e)
         {
+            DataTable dt = new DataTable();
+            if (textBox5.Text == "" && comboBox2.SelectedIndex == -1)
+            {
+                MessageBox.Show("Nhập thiếu thong tin", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (textBox5.Text == "")
+            {
+                dt = XeBUS.Instance.TimKiemMotDoiSo(comboBox2.SelectedItem.ToString());
+            }
+            else if (comboBox2.SelectedIndex == -1)
+            {
+                dt = XeBUS.Instance.TimKiemMotDoiSo(textBox5.Text);
+            }
+            else
+            {
+                dt = XeBUS.Instance.TimKiemHaiDoiSo(textBox5.Text, comboBox2.SelectedItem.ToString());
+            }
+            textBox5.ReadOnly=true;
+            comboBox2.Enabled=false;
+            dataGridView4.DataSource = dt;
+
 
         }
 
@@ -202,5 +223,18 @@ namespace GUI
             dateTimePicker1.Value = DateTime.Now;
         }
 
+        private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            System.Windows.Forms.Application.Exit();
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            textBox5.ReadOnly = false;
+            comboBox2.Enabled = true;
+            textBox5.Clear();
+            comboBox2.SelectedIndex = -1;
+            dataGridView4.DataSource = null;
+        }
     }
 }
