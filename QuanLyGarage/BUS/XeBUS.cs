@@ -54,8 +54,8 @@ namespace BUS
             int SoXeToiDa = QuyDinhBUS.Instance.LaySoXeSuaToiDa();
             if (SoXeTrongNgay < SoXeToiDa)
             {
-                ThemXeBUS(BienSo, HieuXe, NgayTiepNhan);
                 KhachHangBUS.Instance.ThemKhachHangBUS(HoTen, SDT, DiaChi);
+                ThemXeBUS(BienSo, HieuXe, NgayTiepNhan);
                 return true;
             }            
             return false;
