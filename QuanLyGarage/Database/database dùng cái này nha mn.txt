@@ -369,10 +369,9 @@ CREATE	PROCEDURE [dbo].[usp_dangnhap]
 	@MatKhau varchar(20)
 AS
 BEGIN
-	SELECT COUNT(*) as 'Số lượng tài khoản'
+	SELECT *
 	FROM TAIKHOAN
 	WHERE @TenDangNhap= TenDangNhap and @MatKhau = MatKhau
-	GROUP BY TenDangNhap, MatKhau
 END
 GO
 
