@@ -90,7 +90,7 @@ GO
 CREATE TABLE [dbo].[THAMSO]
 (
 	[MaThamSo] [int] IDENTITY(1,1),
-	[TenThamSo] [varchar](5) NOT NULL,
+	[TenThamSo] [nvarchar](100) NOT NULL,
 	[GiaTri] [int] NOT NULL,
 	PRIMARY KEY CLUSTERED
 	(
@@ -108,13 +108,34 @@ GO
 CREATE TABLE [dbo].[KHACHHANG]
 (
 	[MaKH] [int] IDENTITY(1,1),
-	[TenKH] [varchar](50) NOT NULL,
+	[TenKH] [nvarchar](50) NOT NULL,
 	[DienThoai] [varchar](50) NOT NULL,
-	[DiaChi] [varchar](100) NOT NULL,
+	[DiaChi] [nvarchar](100) NOT NULL,
 	[TienNo] [money] NOT NULL DEFAULT 0,
 	PRIMARY KEY  CLUSTERED
 	(
 		[MaKH] ASC
+	)
+	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]	
+) ON [PRIMARY]
+GO
+
+/****** Object: Table [dbo].[NGUOIDUNG]		Scripyt Date: 5/31/2023 24:4:4 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[NGUOIDUNG]
+(
+	[MaNguoiDung] [int] IDENTITY(1,1),
+	[TenND] [nvarchar](50) NOT NULL,
+	[GioiTinh] [int] NULL,
+	[DiaChi] [nvarchar](100) NOT NULL,
+	[NgaySinh] [date]  NULL,
+	[DienThoai] [varchar](50) NOT NULL,
+	PRIMARY KEY  CLUSTERED
+	(
+		[MaNguoiDung] ASC
 	)
 	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]	
 ) ON [PRIMARY]
@@ -128,6 +149,7 @@ GO
 CREATE TABLE [dbo].[TAIKHOAN]
 (
 	[MaTK] [int] IDENTITY(1,1),
+	[MaNguoiDung] [int] NOT NULL,
 	[TenDangNhap] [varchar](20) NOT NULL,
 	[MatKhau] [varchar](20) NOT NULL,
 	[QuyenHan] [bit] NOT NULL,
@@ -167,7 +189,7 @@ GO
 CREATE TABLE [dbo].[KHO]
 (
 	[MaPhuTung] [int] IDENTITY(1,1),
-	[TenVatTuPhuTung] [varchar](50) NOT NULL,
+	[TenVatTuPhuTung] [nvarchar](50) NOT NULL,
 	[SoLuong] [int] NOT NULL,
 	[DonGia] [money] NOT NULL,
 	PRIMARY KEY CLUSTERED 
@@ -186,7 +208,7 @@ GO
 CREATE TABLE [dbo].[TIENCONG]
 (
 	[MaTC] [int] IDENTITY(1,1),
-	[TenTienCong] [varchar](50) NOT NULL,
+	[TenTienCong] [nvarchar](50) NOT NULL,
 	[ChiPhi] [money] NOT NULL,
 	PRIMARY KEY CLUSTERED 
 	(
@@ -333,6 +355,8 @@ ALTER TABLE [dbo].[CT_BAOCAOTON] WITH CHECK ADD FOREIGN KEY ([MaBCT]) REFERENCES
 GO
 ALTER TABLE [dbo].[CT_BAOCAOTON] WITH CHECK ADD FOREIGN KEY ([MaPhuTung]) REFERENCES [dbo].[KHO]([MaPhuTung])
 GO
+ALTER TABLE [dbo].[TAIKHOAN] WITH CHECK ADD FOREIGN KEY ([MaNguoiDung]) REFERENCES [dbo].[NGUOIDUNG]([MaNguoiDung])
+GO
 
 /****** EXEC [dbo].[USP_DangNhap] @TenDN = 'quanly01', @MatKhau = 'quanly01' ******/
 /****** UC-1: Đăng nhập: USP_DangNhap ******/
@@ -353,15 +377,15 @@ END
 GO
 
 /******  UC-3: PROCEDURE ThemKhachHang  ******/
-/****** EXEC ThemKhachHang @TenKH = 'Tran Minh Duy', @DienThoai = '0985670111', @DiaChi = 'huyen Vung Liem' ******/
+/****** EXEC ThemKhachHang @TenKH = 'Trần Minh Duy', @DienThoai = '0985670111', @DiaChi = 'huyện Vũng Liêm' ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE	PROCEDURE [dbo].[ThemKhachHang]
-	@TenKH varchar(50),
+	@TenKH nvarchar(50),
 	@DienThoai varchar(50),
-	@DiaChi varchar(100),
+	@DiaChi nvarchar(100),
 	@TienNo money
 AS
 BEGIN
@@ -403,6 +427,7 @@ BEGIN
 		   kh.TienNo AS [Tiền nợ]
 	FROM XE x, KHACHHANG kh 
 	WHERE x.MaKH = kh.MaKH
+	ORDER BY x.NgayTiepNhan ASC
 END
 GO
 
@@ -450,28 +475,71 @@ BEGIN
 END
 GO
 
-INSERT [dbo].[TAIKHOAN]([TenDangNhap], [MatKhau], [QuyenHan]) VALUES ( N'quanly01', N'quanly01', 1)
-INSERT [dbo].[TAIKHOAN]([TenDangNhap], [MatKhau], [QuyenHan]) VALUES ( N'quanly02', N'quanly02', 1)
-INSERT [dbo].[TAIKHOAN]([TenDangNhap], [MatKhau], [QuyenHan]) VALUES ( N'nhanvien01', N'nhanvien01', 0)
-INSERT [dbo].[TAIKHOAN]([TenDangNhap], [MatKhau], [QuyenHan]) VALUES ( N'nhanvien02', N'nhanvien02', 0)
+/******   PROCEDURE LayDuLieuQuyDinh  ******/
+/****** EXEC LayDuLieuQuyDinh  ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[LayDuLieuQuyDinh]
+AS
+BEGIN
+	SELECT MaThamSo AS STT,
+		   TenThamSo AS [Nội dung],
+		   GiaTri AS [Giá trị]
+	FROM THAMSO
+	ORDER BY MaThamSo ASC
+END
+GO
 
-EXEC ThemKhachHang @TenKH = 'Nguyen Tung Duong', @DienThoai = '0783771000', @DiaChi = '15/3 A duong Phuoc Hau, xa Phuoc Hong', @TienNo = 0 
+/****** UC-12  PROCEDURE ThayDoiQuyDinh  ******/
+/****** EXEC ThayDoiQuyDinh @MaThamSo = 1, @GiaTriMoi = 10  ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[ThayDoiQuyDinh]
+	@MaThamSo int,
+	@GiaTriMoi int
+AS
+BEGIN
+	UPDATE THAMSO
+	SET GiaTri = @GiaTriMoi
+	WHERE MaThamSo = @MaThamSo
+END
+GO
+
+INSERT [dbo].[NGUOIDUNG]([TenND], [GioiTinh], [DiaChi], [NgaySinh], [DienThoai]) VALUES ( N'Nguyễn Quan Thịnh',0, N'23 Hai Bà Trưng', N'04/04/2000', N'0987887709')
+INSERT [dbo].[TAIKHOAN]([MaNguoiDung], [TenDangNhap], [MatKhau], [QuyenHan]) VALUES ( 1, N'quanly01', N'quanly01', 1)
+
+INSERT [dbo].[NGUOIDUNG]([TenND], [GioiTinh], [DiaChi], [NgaySinh], [DienThoai]) VALUES ( N'Mai Anh Tuấn',0, N' 25 Tân Lập', N'07/05/2000', N'0985687609')
+INSERT [dbo].[TAIKHOAN]([MaNguoiDung], [TenDangNhap], [MatKhau], [QuyenHan]) VALUES ( 2, N'quanly02', N'quanly02', 1)
+
+INSERT [dbo].[NGUOIDUNG]([TenND], [GioiTinh], [DiaChi], [NgaySinh], [DienThoai]) VALUES ( N'Nguyễn Ngọc Linh',1, N'53A đường Mậu Thân', N'04/09/2000', N'0985346522')
+INSERT [dbo].[TAIKHOAN]([MaNguoiDung], [TenDangNhap], [MatKhau], [QuyenHan]) VALUES ( 3, N'nhanvien01', N'nhanvien01', 0)
+
+INSERT [dbo].[NGUOIDUNG]([TenND], [GioiTinh], [DiaChi], [NgaySinh], [DienThoai]) VALUES ( N'Trần Mỹ Dung',1, N'9A Nguyễn Văn Trỗi', N'12/11/2000', N'0788390091')
+INSERT [dbo].[TAIKHOAN]([MaNguoiDung], [TenDangNhap], [MatKhau], [QuyenHan]) VALUES ( 4, N'nhanvien02', N'nhanvien02', 0)
+
+
+EXEC ThemKhachHang @TenKH = 'Nguyễn Tùng Dương', @DienThoai = '0783771000', @DiaChi = '15/3 A đường Phước Hậu, xã Phước Hồng', @TienNo = 0 
 EXEC ThemXe @BienSo = '001001', @HieuXe = 'Toyota'
 
-EXEC ThemKhachHang @TenKH = 'Dang Khoi Nguyen', @DienThoai = '0666987601', @DiaChi = '23/4 B duong Long My, xa Mau Hong', @TienNo = 0
+EXEC ThemKhachHang @TenKH = 'Đặng Khôi Nguyên', @DienThoai = '0666987601', @DiaChi = '23/4 B đường Long Mỹ, xã Mậu Hồng', @TienNo = 0
 EXEC ThemXe @BienSo = '002002', @HieuXe = 'Kia'
 
-EXEC ThemKhachHang @TenKH = 'Nguyen Thi My Duyen', @DienThoai = '0888987601', @DiaChi = '33/5 A duong Hoa Phat, xa Hong Chau', @TienNo = 0 
+EXEC ThemKhachHang @TenKH = 'Nguyễn Thị Mỹ Duyên', @DienThoai = '0888987601', @DiaChi = '33/5 A đường Hòa Phát, xã Hồng Châu', @TienNo = 0 
 EXEC ThemXe @BienSo = '003003', @HieuXe = 'Suzuki'
 
-INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Slqd', 8)
-INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Slhx', 10)
-INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Slhx2', 30)
-INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Slpt', 200)
-INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Sltc', 100)
-INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Sltk', 1)
-INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Slhs', 1)
-INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Sltd', 5)
+INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Số lượng quy định', 8)
+INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Số lượng hiệu xe', 10)
+INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Số xe sửa chữa tối đa trong ngày', 30)
+INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Số lượng loại phụ tùng', 200)
+INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Số lượng loại tiền công', 100)
+INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Số lượng tài khoản/1 người ', 1)
+INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Số lượng hồ sơ/1 xe', 1)
+INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Số quy định quản lý có thể thay đổi', 5)
+
 
 
 USE [master]
