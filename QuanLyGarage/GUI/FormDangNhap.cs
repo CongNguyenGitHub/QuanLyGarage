@@ -27,6 +27,8 @@ namespace GUI
             else
             {
                 FormMain frmain = new FormMain();
+                frmain.taiKhoan = textBox1.Text;
+                frmain.matKhau = textBox2.Text;
                 this.Hide();
                 frmain.ShowDialog();
                 this.Show();

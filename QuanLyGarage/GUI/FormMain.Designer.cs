@@ -32,30 +32,34 @@ namespace GUI
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            TreeNode treeNode1 = new TreeNode("Trang chủ", 6, 6);
-            TreeNode treeNode2 = new TreeNode("Tiếp nhận xe");
-            TreeNode treeNode3 = new TreeNode("Tra cứu xe");
-            TreeNode treeNode4 = new TreeNode("Xem danh sách xe");
-            TreeNode treeNode5 = new TreeNode("Quản lý xe", 0, 0, new TreeNode[] { treeNode2, treeNode3, treeNode4 });
-            TreeNode treeNode6 = new TreeNode("Lập phiếu sửa chữa");
-            TreeNode treeNode7 = new TreeNode("Lập phiếu thu tiền");
-            TreeNode treeNode8 = new TreeNode("Quản lý dịch vụ", 1, 1, new TreeNode[] { treeNode6, treeNode7 });
-            TreeNode treeNode9 = new TreeNode("Nhập vật tư phụ tùng");
-            TreeNode treeNode10 = new TreeNode("Quản lý kho", 2, 2, new TreeNode[] { treeNode9 });
-            TreeNode treeNode11 = new TreeNode("Thay đổi quy định");
-            TreeNode treeNode12 = new TreeNode("Quản lý quy định", 3, 3, new TreeNode[] { treeNode11 });
-            TreeNode treeNode13 = new TreeNode("Doanh thu");
-            TreeNode treeNode14 = new TreeNode("Tồn kho");
-            TreeNode treeNode15 = new TreeNode("Báo cáo thống kê", 4, 4, new TreeNode[] { treeNode13, treeNode14 });
-            TreeNode treeNode16 = new TreeNode("Thông tin cá nhân");
-            TreeNode treeNode17 = new TreeNode("Thay đổi mật khẩu");
-            TreeNode treeNode18 = new TreeNode("Thêm tài khoản");
-            TreeNode treeNode19 = new TreeNode("Đăng xuất");
-            TreeNode treeNode20 = new TreeNode("Tài khoản", 7, 7, new TreeNode[] { treeNode16, treeNode17, treeNode18, treeNode19 });
+            TreeNode treeNode21 = new TreeNode("Trang chủ", 6, 6);
+            TreeNode treeNode22 = new TreeNode("Tiếp nhận xe");
+            TreeNode treeNode23 = new TreeNode("Tra cứu xe");
+            TreeNode treeNode24 = new TreeNode("Xem danh sách xe");
+            TreeNode treeNode25 = new TreeNode("Quản lý xe", 0, 0, new TreeNode[] { treeNode22, treeNode23, treeNode24 });
+            TreeNode treeNode26 = new TreeNode("Lập phiếu sửa chữa");
+            TreeNode treeNode27 = new TreeNode("Lập phiếu thu tiền");
+            TreeNode treeNode28 = new TreeNode("Quản lý dịch vụ", 1, 1, new TreeNode[] { treeNode26, treeNode27 });
+            TreeNode treeNode29 = new TreeNode("Nhập vật tư phụ tùng");
+            TreeNode treeNode30 = new TreeNode("Quản lý kho", 2, 2, new TreeNode[] { treeNode29 });
+            TreeNode treeNode31 = new TreeNode("Thay đổi quy định");
+            TreeNode treeNode32 = new TreeNode("Quản lý quy định", 3, 3, new TreeNode[] { treeNode31 });
+            TreeNode treeNode33 = new TreeNode("Doanh thu");
+            TreeNode treeNode34 = new TreeNode("Tồn kho");
+            TreeNode treeNode35 = new TreeNode("Báo cáo thống kê", 4, 4, new TreeNode[] { treeNode33, treeNode34 });
+            TreeNode treeNode36 = new TreeNode("Thông tin cá nhân");
+            TreeNode treeNode37 = new TreeNode("Thay đổi mật khẩu");
+            TreeNode treeNode38 = new TreeNode("Thêm tài khoản");
+            TreeNode treeNode39 = new TreeNode("Đăng xuất");
+            TreeNode treeNode40 = new TreeNode("Tài khoản", 7, 7, new TreeNode[] { treeNode36, treeNode37, treeNode38, treeNode39 });
             DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle19 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle20 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle21 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle22 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle23 = new DataGridViewCellStyle();
@@ -75,12 +79,14 @@ namespace GUI
             label3 = new Label();
             label2 = new Label();
             dateTimePicker1 = new DateTimePicker();
+            comboBox1 = new ComboBox();
             textBox4 = new TextBox();
             textBox3 = new TextBox();
             textBox2 = new TextBox();
             textBox1 = new TextBox();
             label1 = new Label();
             tabPage3 = new TabPage();
+            button17 = new Button();
             dataGridView4 = new DataGridView();
             button2 = new Button();
             label10 = new Label();
@@ -131,8 +137,8 @@ namespace GUI
             textBox12 = new TextBox();
             label24 = new Label();
             tabPage8 = new TabPage();
-            button9 = new Button();
             dataGridView3 = new DataGridView();
+            button9 = new Button();
             label25 = new Label();
             tabPage9 = new TabPage();
             comboBox5 = new ComboBox();
@@ -188,8 +194,7 @@ namespace GUI
             label50 = new Label();
             label51 = new Label();
             label52 = new Label();
-            comboBox1 = new ComboBox();
-            button17 = new Button();
+            label11 = new Label();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -237,100 +242,100 @@ namespace GUI
             treeView1.Location = new Point(4, 2);
             treeView1.Margin = new Padding(0);
             treeView1.Name = "treeView1";
-            treeNode1.BackColor = Color.FromArgb(34, 34, 34);
-            treeNode1.ForeColor = Color.White;
-            treeNode1.ImageIndex = 6;
-            treeNode1.Name = "Node0";
-            treeNode1.SelectedImageIndex = 6;
-            treeNode1.Text = "Trang chủ";
-            treeNode2.BackColor = Color.FromArgb(34, 34, 34);
-            treeNode2.ForeColor = Color.White;
-            treeNode2.Name = "Node2";
-            treeNode2.Text = "Tiếp nhận xe";
-            treeNode3.BackColor = Color.FromArgb(34, 34, 34);
-            treeNode3.ForeColor = Color.White;
-            treeNode3.Name = "Node3";
-            treeNode3.Text = "Tra cứu xe";
-            treeNode4.BackColor = Color.FromArgb(34, 34, 34);
-            treeNode4.ForeColor = Color.White;
-            treeNode4.Name = "Node4";
-            treeNode4.Text = "Xem danh sách xe";
-            treeNode5.BackColor = Color.FromArgb(34, 34, 34);
-            treeNode5.ForeColor = Color.White;
-            treeNode5.ImageIndex = 0;
-            treeNode5.Name = "Node1";
-            treeNode5.SelectedImageIndex = 0;
-            treeNode5.Text = "Quản lý xe";
-            treeNode6.BackColor = Color.FromArgb(34, 34, 34);
-            treeNode6.ForeColor = Color.White;
-            treeNode6.Name = "Node6";
-            treeNode6.Text = "Lập phiếu sửa chữa";
-            treeNode7.BackColor = Color.FromArgb(34, 34, 34);
-            treeNode7.ForeColor = Color.White;
-            treeNode7.Name = "Node7";
-            treeNode7.Text = "Lập phiếu thu tiền";
-            treeNode8.BackColor = Color.FromArgb(34, 34, 34);
-            treeNode8.ForeColor = Color.White;
-            treeNode8.ImageIndex = 1;
-            treeNode8.Name = "Node5";
-            treeNode8.SelectedImageIndex = 1;
-            treeNode8.Text = "Quản lý dịch vụ";
-            treeNode9.BackColor = Color.FromArgb(34, 34, 34);
-            treeNode9.Name = "Node9";
-            treeNode9.Text = "Nhập vật tư phụ tùng";
-            treeNode10.BackColor = Color.FromArgb(34, 34, 34);
-            treeNode10.ForeColor = Color.White;
-            treeNode10.ImageIndex = 2;
-            treeNode10.Name = "Node8";
-            treeNode10.SelectedImageIndex = 2;
-            treeNode10.Text = "Quản lý kho";
-            treeNode11.BackColor = Color.FromArgb(34, 34, 34);
-            treeNode11.ForeColor = Color.White;
-            treeNode11.Name = "Node11";
-            treeNode11.Text = "Thay đổi quy định";
-            treeNode12.BackColor = Color.FromArgb(34, 34, 34);
-            treeNode12.ForeColor = Color.White;
-            treeNode12.ImageIndex = 3;
-            treeNode12.Name = "Node10";
-            treeNode12.SelectedImageIndex = 3;
-            treeNode12.Text = "Quản lý quy định";
-            treeNode13.BackColor = Color.FromArgb(34, 34, 34);
-            treeNode13.ForeColor = Color.White;
-            treeNode13.Name = "Node13";
-            treeNode13.Text = "Doanh thu";
-            treeNode14.BackColor = Color.FromArgb(34, 34, 34);
-            treeNode14.ForeColor = Color.White;
-            treeNode14.Name = "Node14";
-            treeNode14.Text = "Tồn kho";
-            treeNode15.BackColor = Color.FromArgb(34, 34, 34);
-            treeNode15.ForeColor = Color.White;
-            treeNode15.ImageIndex = 4;
-            treeNode15.Name = "Node12";
-            treeNode15.SelectedImageIndex = 4;
-            treeNode15.Text = "Báo cáo thống kê";
-            treeNode16.BackColor = Color.FromArgb(34, 34, 34);
-            treeNode16.ForeColor = Color.White;
-            treeNode16.Name = "Node16";
-            treeNode16.Text = "Thông tin cá nhân";
-            treeNode17.BackColor = Color.FromArgb(34, 34, 34);
-            treeNode17.ForeColor = Color.White;
-            treeNode17.Name = "Node17";
-            treeNode17.Text = "Thay đổi mật khẩu";
-            treeNode18.BackColor = Color.FromArgb(34, 34, 34);
-            treeNode18.ForeColor = Color.White;
-            treeNode18.Name = "Node18";
-            treeNode18.Text = "Thêm tài khoản";
-            treeNode19.BackColor = Color.FromArgb(34, 34, 34);
-            treeNode19.ForeColor = Color.White;
-            treeNode19.Name = "Node20";
-            treeNode19.Text = "Đăng xuất";
-            treeNode20.BackColor = Color.FromArgb(34, 34, 34);
-            treeNode20.ForeColor = Color.White;
-            treeNode20.ImageIndex = 7;
-            treeNode20.Name = "Node15";
-            treeNode20.SelectedImageIndex = 7;
-            treeNode20.Text = "Tài khoản";
-            treeView1.Nodes.AddRange(new TreeNode[] { treeNode1, treeNode5, treeNode8, treeNode10, treeNode12, treeNode15, treeNode20 });
+            treeNode21.BackColor = Color.FromArgb(34, 34, 34);
+            treeNode21.ForeColor = Color.White;
+            treeNode21.ImageIndex = 6;
+            treeNode21.Name = "Node0";
+            treeNode21.SelectedImageIndex = 6;
+            treeNode21.Text = "Trang chủ";
+            treeNode22.BackColor = Color.FromArgb(34, 34, 34);
+            treeNode22.ForeColor = Color.White;
+            treeNode22.Name = "Node2";
+            treeNode22.Text = "Tiếp nhận xe";
+            treeNode23.BackColor = Color.FromArgb(34, 34, 34);
+            treeNode23.ForeColor = Color.White;
+            treeNode23.Name = "Node3";
+            treeNode23.Text = "Tra cứu xe";
+            treeNode24.BackColor = Color.FromArgb(34, 34, 34);
+            treeNode24.ForeColor = Color.White;
+            treeNode24.Name = "Node4";
+            treeNode24.Text = "Xem danh sách xe";
+            treeNode25.BackColor = Color.FromArgb(34, 34, 34);
+            treeNode25.ForeColor = Color.White;
+            treeNode25.ImageIndex = 0;
+            treeNode25.Name = "Node1";
+            treeNode25.SelectedImageIndex = 0;
+            treeNode25.Text = "Quản lý xe";
+            treeNode26.BackColor = Color.FromArgb(34, 34, 34);
+            treeNode26.ForeColor = Color.White;
+            treeNode26.Name = "Node6";
+            treeNode26.Text = "Lập phiếu sửa chữa";
+            treeNode27.BackColor = Color.FromArgb(34, 34, 34);
+            treeNode27.ForeColor = Color.White;
+            treeNode27.Name = "Node7";
+            treeNode27.Text = "Lập phiếu thu tiền";
+            treeNode28.BackColor = Color.FromArgb(34, 34, 34);
+            treeNode28.ForeColor = Color.White;
+            treeNode28.ImageIndex = 1;
+            treeNode28.Name = "Node5";
+            treeNode28.SelectedImageIndex = 1;
+            treeNode28.Text = "Quản lý dịch vụ";
+            treeNode29.BackColor = Color.FromArgb(34, 34, 34);
+            treeNode29.Name = "Node9";
+            treeNode29.Text = "Nhập vật tư phụ tùng";
+            treeNode30.BackColor = Color.FromArgb(34, 34, 34);
+            treeNode30.ForeColor = Color.White;
+            treeNode30.ImageIndex = 2;
+            treeNode30.Name = "Node8";
+            treeNode30.SelectedImageIndex = 2;
+            treeNode30.Text = "Quản lý kho";
+            treeNode31.BackColor = Color.FromArgb(34, 34, 34);
+            treeNode31.ForeColor = Color.White;
+            treeNode31.Name = "Node11";
+            treeNode31.Text = "Thay đổi quy định";
+            treeNode32.BackColor = Color.FromArgb(34, 34, 34);
+            treeNode32.ForeColor = Color.White;
+            treeNode32.ImageIndex = 3;
+            treeNode32.Name = "Node10";
+            treeNode32.SelectedImageIndex = 3;
+            treeNode32.Text = "Quản lý quy định";
+            treeNode33.BackColor = Color.FromArgb(34, 34, 34);
+            treeNode33.ForeColor = Color.White;
+            treeNode33.Name = "Node13";
+            treeNode33.Text = "Doanh thu";
+            treeNode34.BackColor = Color.FromArgb(34, 34, 34);
+            treeNode34.ForeColor = Color.White;
+            treeNode34.Name = "Node14";
+            treeNode34.Text = "Tồn kho";
+            treeNode35.BackColor = Color.FromArgb(34, 34, 34);
+            treeNode35.ForeColor = Color.White;
+            treeNode35.ImageIndex = 4;
+            treeNode35.Name = "Node12";
+            treeNode35.SelectedImageIndex = 4;
+            treeNode35.Text = "Báo cáo thống kê";
+            treeNode36.BackColor = Color.FromArgb(34, 34, 34);
+            treeNode36.ForeColor = Color.White;
+            treeNode36.Name = "Node16";
+            treeNode36.Text = "Thông tin cá nhân";
+            treeNode37.BackColor = Color.FromArgb(34, 34, 34);
+            treeNode37.ForeColor = Color.White;
+            treeNode37.Name = "Node17";
+            treeNode37.Text = "Thay đổi mật khẩu";
+            treeNode38.BackColor = Color.FromArgb(34, 34, 34);
+            treeNode38.ForeColor = Color.White;
+            treeNode38.Name = "Node18";
+            treeNode38.Text = "Thêm tài khoản";
+            treeNode39.BackColor = Color.FromArgb(34, 34, 34);
+            treeNode39.ForeColor = Color.White;
+            treeNode39.Name = "Node20";
+            treeNode39.Text = "Đăng xuất";
+            treeNode40.BackColor = Color.FromArgb(34, 34, 34);
+            treeNode40.ForeColor = Color.White;
+            treeNode40.ImageIndex = 7;
+            treeNode40.Name = "Node15";
+            treeNode40.SelectedImageIndex = 7;
+            treeNode40.Text = "Tài khoản";
+            treeView1.Nodes.AddRange(new TreeNode[] { treeNode21, treeNode25, treeNode28, treeNode30, treeNode32, treeNode35, treeNode40 });
             treeView1.SelectedImageIndex = 5;
             treeView1.ShowLines = false;
             treeView1.ShowPlusMinus = false;
@@ -512,6 +517,16 @@ namespace GUI
             dateTimePicker1.Size = new Size(333, 35);
             dateTimePicker1.TabIndex = 6;
             // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Items.AddRange(new object[] { "HONDA", "TOYOTA", "LEXUS", "SUZUKI", "ASTON MARTIN", "BENTLEY", "RANDROVER", "ROLLS-ROYCE" });
+            comboBox1.Location = new Point(605, 344);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(268, 38);
+            comboBox1.TabIndex = 5;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            // 
             // textBox4
             // 
             textBox4.Location = new Point(75, 507);
@@ -567,6 +582,19 @@ namespace GUI
             tabPage3.Size = new Size(1087, 835);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "tabPage3";
+            // 
+            // button17
+            // 
+            button17.BackColor = Color.FromArgb(250, 136, 40);
+            button17.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            button17.ForeColor = Color.White;
+            button17.Location = new Point(311, 259);
+            button17.Name = "button17";
+            button17.Size = new Size(131, 40);
+            button17.TabIndex = 16;
+            button17.Text = "Làm mới";
+            button17.UseVisualStyleBackColor = false;
+            button17.Click += button17_Click;
             // 
             // dataGridView4
             // 
@@ -695,6 +723,7 @@ namespace GUI
             // tabPage4
             // 
             tabPage4.BackColor = Color.FromArgb(34, 34, 34);
+            tabPage4.Controls.Add(label11);
             tabPage4.Controls.Add(dataGridView1);
             tabPage4.Location = new Point(4, 39);
             tabPage4.Name = "tabPage4";
@@ -709,51 +738,50 @@ namespace GUI
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.AllowUserToResizeColumns = false;
             dataGridView1.AllowUserToResizeRows = false;
-            dataGridViewCellStyle21.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle21.BackColor = Color.FromArgb(34, 34, 34);
-            dataGridViewCellStyle21.ForeColor = Color.White;
-            dataGridViewCellStyle21.WrapMode = DataGridViewTriState.True;
-            dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle13.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle13.ForeColor = Color.White;
+            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.True;
+            dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView1.BackgroundColor = Color.FromArgb(34, 34, 34);
             dataGridView1.BorderStyle = BorderStyle.None;
             dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.RaisedHorizontal;
             dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle22.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle22.BackColor = Color.FromArgb(34, 34, 34);
-            dataGridViewCellStyle22.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle22.ForeColor = Color.White;
-            dataGridViewCellStyle22.SelectionBackColor = Color.FromArgb(34, 34, 34);
-            dataGridViewCellStyle22.SelectionForeColor = Color.White;
-            dataGridViewCellStyle22.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle14.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle14.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle14.ForeColor = Color.White;
+            dataGridViewCellStyle14.SelectionBackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle14.SelectionForeColor = Color.White;
+            dataGridViewCellStyle14.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
             dataGridView1.ColumnHeadersHeight = 54;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle23.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle23.BackColor = Color.FromArgb(34, 34, 34);
-            dataGridViewCellStyle23.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle23.ForeColor = Color.White;
-            dataGridViewCellStyle23.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle23.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle23.WrapMode = DataGridViewTriState.True;
-            dataGridView1.DefaultCellStyle = dataGridViewCellStyle23;
-            dataGridView1.Dock = DockStyle.Fill;
+            dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle15.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle15.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle15.ForeColor = Color.White;
+            dataGridViewCellStyle15.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle15.WrapMode = DataGridViewTriState.True;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle15;
             dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.GridColor = Color.White;
-            dataGridView1.Location = new Point(0, 0);
+            dataGridView1.Location = new Point(0, 112);
             dataGridView1.Margin = new Padding(0);
             dataGridView1.MultiSelect = false;
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle24.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle24.BackColor = Color.FromArgb(34, 34, 34);
-            dataGridViewCellStyle24.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle24.ForeColor = Color.White;
-            dataGridViewCellStyle24.SelectionBackColor = Color.FromArgb(34, 34, 34);
-            dataGridViewCellStyle24.SelectionForeColor = Color.White;
-            dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle16.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle16.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle16.ForeColor = Color.White;
+            dataGridViewCellStyle16.SelectionBackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle16.SelectionForeColor = Color.White;
+            dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle16;
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 50;
             dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
@@ -763,7 +791,7 @@ namespace GUI
             dataGridView1.RowTemplate.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             dataGridView1.RowTemplate.Height = 37;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(1087, 835);
+            dataGridView1.Size = new Size(1087, 678);
             dataGridView1.TabIndex = 0;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -1173,8 +1201,8 @@ namespace GUI
             // tabPage8
             // 
             tabPage8.BackColor = Color.FromArgb(34, 34, 34);
-            tabPage8.Controls.Add(button9);
             tabPage8.Controls.Add(dataGridView3);
+            tabPage8.Controls.Add(button9);
             tabPage8.Controls.Add(label25);
             tabPage8.Location = new Point(4, 39);
             tabPage8.Name = "tabPage8";
@@ -1182,27 +1210,80 @@ namespace GUI
             tabPage8.TabIndex = 7;
             tabPage8.Text = "tabPage8";
             // 
+            // dataGridView3
+            // 
+            dataGridView3.AllowUserToAddRows = false;
+            dataGridView3.AllowUserToDeleteRows = false;
+            dataGridView3.AllowUserToResizeColumns = false;
+            dataGridView3.AllowUserToResizeRows = false;
+            dataGridViewCellStyle21.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle21.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle21.ForeColor = Color.White;
+            dataGridViewCellStyle21.WrapMode = DataGridViewTriState.True;
+            dataGridView3.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle21;
+            dataGridView3.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView3.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridView3.BackgroundColor = Color.FromArgb(34, 34, 34);
+            dataGridView3.BorderStyle = BorderStyle.None;
+            dataGridView3.CellBorderStyle = DataGridViewCellBorderStyle.RaisedHorizontal;
+            dataGridView3.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle22.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle22.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle22.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle22.ForeColor = Color.White;
+            dataGridViewCellStyle22.SelectionBackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle22.SelectionForeColor = Color.White;
+            dataGridViewCellStyle22.WrapMode = DataGridViewTriState.True;
+            dataGridView3.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
+            dataGridView3.ColumnHeadersHeight = 54;
+            dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle23.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle23.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle23.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle23.ForeColor = Color.White;
+            dataGridViewCellStyle23.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle23.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle23.WrapMode = DataGridViewTriState.True;
+            dataGridView3.DefaultCellStyle = dataGridViewCellStyle23;
+            dataGridView3.EnableHeadersVisualStyles = false;
+            dataGridView3.GridColor = Color.White;
+            dataGridView3.Location = new Point(43, 132);
+            dataGridView3.Margin = new Padding(0);
+            dataGridView3.MultiSelect = false;
+            dataGridView3.Name = "dataGridView3";
+            dataGridView3.ReadOnly = true;
+            dataGridView3.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle24.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle24.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle24.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle24.ForeColor = Color.White;
+            dataGridViewCellStyle24.SelectionBackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle24.SelectionForeColor = Color.White;
+            dataGridView3.RowHeadersDefaultCellStyle = dataGridViewCellStyle24;
+            dataGridView3.RowHeadersVisible = false;
+            dataGridView3.RowHeadersWidth = 50;
+            dataGridView3.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dataGridView3.RowTemplate.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView3.RowTemplate.DefaultCellStyle.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridView3.RowTemplate.DefaultCellStyle.ForeColor = Color.White;
+            dataGridView3.RowTemplate.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            dataGridView3.RowTemplate.Height = 37;
+            dataGridView3.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView3.Size = new Size(1006, 286);
+            dataGridView3.TabIndex = 22;
+            // 
             // button9
             // 
             button9.BackColor = Color.FromArgb(250, 136, 40);
             button9.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             button9.ForeColor = Color.White;
-            button9.Location = new Point(74, 420);
+            button9.Location = new Point(74, 453);
             button9.Name = "button9";
             button9.Size = new Size(131, 40);
             button9.TabIndex = 21;
             button9.Text = "Thay đổi";
             button9.UseVisualStyleBackColor = false;
-            // 
-            // dataGridView3
-            // 
-            dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView3.Location = new Point(74, 138);
-            dataGridView3.Name = "dataGridView3";
-            dataGridView3.RowHeadersWidth = 72;
-            dataGridView3.RowTemplate.Height = 37;
-            dataGridView3.Size = new Size(490, 211);
-            dataGridView3.TabIndex = 17;
+            button9.Click += button9_Click;
             // 
             // label25
             // 
@@ -1786,28 +1867,16 @@ namespace GUI
             label52.TabIndex = 44;
             label52.Text = "Thêm tài khoản mới";
             // 
-            // comboBox1
+            // label11
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "HONDA", "TOYOTA", "LEXUS", "SUZUKI", "ASTON MARTIN", "BENTLEY", "RANDROVER", "ROLLS-ROYCE" });
-            comboBox1.Location = new Point(605, 344);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(268, 38);
-            comboBox1.TabIndex = 5;
-            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
-            // 
-            // button17
-            // 
-            button17.BackColor = Color.FromArgb(250, 136, 40);
-            button17.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            button17.ForeColor = Color.White;
-            button17.Location = new Point(311, 259);
-            button17.Name = "button17";
-            button17.Size = new Size(131, 40);
-            button17.TabIndex = 16;
-            button17.Text = "Làm mới";
-            button17.UseVisualStyleBackColor = false;
-            button17.Click += button17_Click;
+            label11.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
+            label11.ForeColor = Color.White;
+            label11.Location = new Point(53, 33);
+            label11.Name = "label11";
+            label11.Size = new Size(345, 56);
+            label11.TabIndex = 1;
+            label11.Text = "Danh sách xe";
+            label11.Click += label11_Click;
             // 
             // FormMain
             // 
@@ -1856,6 +1925,7 @@ namespace GUI
         }
 
         #endregion
+        public string taiKhoan, matKhau;
         private ImageList imageList1;
         private TreeView treeView1;
         private TabControl tabControl1;
@@ -1929,7 +1999,6 @@ namespace GUI
         private TextBox textBox12;
         private Label label24;
         private Button button9;
-        private DataGridView dataGridView3;
         private Label label25;
         private Button button10;
         private ComboBox comboBox3;
@@ -1986,5 +2055,7 @@ namespace GUI
         private DataGridView dataGridView4;
         private ComboBox comboBox1;
         private Button button17;
+        private DataGridView dataGridView3;
+        private Label label11;
     }
 }

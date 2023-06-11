@@ -1,4 +1,6 @@
 ﻿using BUS;
+using DAO;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace GUI
 {
@@ -91,7 +94,6 @@ namespace GUI
         {
 
         }
-
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (e.Node == null) return;
@@ -120,6 +122,12 @@ namespace GUI
                     tabControl1.SelectedIndex = 6;
                     break;
                 case "Thay đổi quy định":
+                    if (TaiKhoanBUS.Instance.LayQuyenHan(taiKhoan, matKhau) == "False")
+                    {
+                        MessageBox.Show("Chỉ có quản lý mới được xem quy định", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    dataGridView3.DataSource = QuyDinhBUS.Instance.LayTatCaQuyDinh();
                     tabControl1.SelectedIndex = 7;
                     break;
                 case "Doanh thu":
@@ -191,8 +199,8 @@ namespace GUI
             {
                 dt = XeBUS.Instance.TimKiemHaiDoiSo(textBox5.Text, comboBox2.SelectedItem.ToString());
             }
-            textBox5.ReadOnly=true;
-            comboBox2.Enabled=false;
+            textBox5.ReadOnly = true;
+            comboBox2.Enabled = false;
             dataGridView4.DataSource = dt;
 
 
@@ -235,6 +243,36 @@ namespace GUI
             textBox5.Clear();
             comboBox2.SelectedIndex = -1;
             dataGridView4.DataSource = null;
+        }
+        private void button9_Click(object sender, EventArgs e)
+        {
+            DataGridViewSelectedRowCollection rows = dataGridView3.SelectedRows;
+            string MaThamSo = rows[0].Cells["STT"].Value.ToString();
+            string NoiDung = rows[0].Cells["Nội dung"].Value.ToString().ToLower();
+            using (FromDiaglog frmDialog = new FromDiaglog())
+            {
+                frmDialog.Label1.Text = "Nhập " + NoiDung + " mới";
+                if (frmDialog.ShowDialog() == DialogResult.OK)
+                {
+                    int GiaTriMoi;
+                    if (Int32.TryParse(frmDialog.TextBox1.Text, out GiaTriMoi))
+                    {
+                        QuyDinhBUS.Instance.CapNhatQuyDinh(MaThamSo, GiaTriMoi);
+                        MessageBox.Show("Thay đổi quy định thành công", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        dataGridView3.DataSource = QuyDinhBUS.Instance.LayTatCaQuyDinh();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Tìm thấy ký tự không phải là chữ số", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+
+        }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
