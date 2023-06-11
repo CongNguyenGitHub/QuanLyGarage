@@ -37,3 +37,16 @@ C:\Users\NguyenNguyen\test\QuanLyGarage\QuanLyGarage\DAO\obj\Debug\DAO.csproj.Co
 C:\Users\NguyenNguyen\test\QuanLyGarage\QuanLyGarage\DAO\obj\Debug\DAO.csproj.CopyComplete
 C:\Users\NguyenNguyen\test\QuanLyGarage\QuanLyGarage\DAO\obj\Debug\DAO.exe
 C:\Users\NguyenNguyen\test\QuanLyGarage\QuanLyGarage\DAO\obj\Debug\DAO.pdb
+C:\Users\NguyenNguyen\SE104\QuanLyGarage\QuanLyGarage\DAO\bin\Debug\DAO.exe.config
+C:\Users\NguyenNguyen\SE104\QuanLyGarage\QuanLyGarage\DAO\bin\Debug\DAO.exe
+C:\Users\NguyenNguyen\SE104\QuanLyGarage\QuanLyGarage\DAO\bin\Debug\DAO.pdb
+C:\Users\NguyenNguyen\SE104\QuanLyGarage\QuanLyGarage\DAO\bin\Debug\System.Data.SqlClient.dll
+C:\Users\NguyenNguyen\SE104\QuanLyGarage\QuanLyGarage\DAO\bin\Debug\System.Data.SqlClient.xml
+C:\Users\NguyenNguyen\SE104\QuanLyGarage\QuanLyGarage\DAO\obj\Debug\DAO.csproj.AssemblyReference.cache
+C:\Users\NguyenNguyen\SE104\QuanLyGarage\QuanLyGarage\DAO\obj\Debug\DAO.csproj.SuggestedBindingRedirects.cache
+C:\Users\NguyenNguyen\SE104\QuanLyGarage\QuanLyGarage\DAO\obj\Debug\DAO.Properties.Resources.resources
+C:\Users\NguyenNguyen\SE104\QuanLyGarage\QuanLyGarage\DAO\obj\Debug\DAO.csproj.GenerateResource.cache
+C:\Users\NguyenNguyen\SE104\QuanLyGarage\QuanLyGarage\DAO\obj\Debug\DAO.csproj.CoreCompileInputs.cache
+C:\Users\NguyenNguyen\SE104\QuanLyGarage\QuanLyGarage\DAO\obj\Debug\DAO.csproj.CopyComplete
+C:\Users\NguyenNguyen\SE104\QuanLyGarage\QuanLyGarage\DAO\obj\Debug\DAO.exe
+C:\Users\NguyenNguyen\SE104\QuanLyGarage\QuanLyGarage\DAO\obj\Debug\DAO.pdb

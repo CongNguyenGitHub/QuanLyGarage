@@ -131,9 +131,19 @@ namespace GUI
                     tabControl1.SelectedIndex = 7;
                     break;
                 case "Doanh thu":
+                    if (TaiKhoanBUS.Instance.LayQuyenHan(taiKhoan, matKhau) == "False")
+                    {
+                        MessageBox.Show("Chỉ có quản lý mới được lập báo cáo doanh thu", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
                     tabControl1.SelectedIndex = 8;
                     break;
                 case "Tồn kho":
+                    if (TaiKhoanBUS.Instance.LayQuyenHan(taiKhoan, matKhau) == "False")
+                    {
+                        MessageBox.Show("Chỉ có quản lý mới được lập báo cáo tồn kho", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
                     tabControl1.SelectedIndex = 9;
                     break;
                 case "Thông tin cá nhân":
@@ -186,8 +196,9 @@ namespace GUI
             if (textBox5.Text == "" && comboBox2.SelectedIndex == -1)
             {
                 MessageBox.Show("Nhập thiếu thong tin", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-            else if (textBox5.Text == "")
+            if (textBox5.Text == "")
             {
                 dt = XeBUS.Instance.TimKiemMotDoiSo(comboBox2.SelectedItem.ToString());
             }
@@ -199,6 +210,7 @@ namespace GUI
             {
                 dt = XeBUS.Instance.TimKiemHaiDoiSo(textBox5.Text, comboBox2.SelectedItem.ToString());
             }
+            button2.Enabled = false;
             textBox5.ReadOnly = true;
             comboBox2.Enabled = false;
             dataGridView4.DataSource = dt;
@@ -243,13 +255,14 @@ namespace GUI
             textBox5.Clear();
             comboBox2.SelectedIndex = -1;
             dataGridView4.DataSource = null;
+            button2.Enabled = true;
         }
         private void button9_Click(object sender, EventArgs e)
         {
             DataGridViewSelectedRowCollection rows = dataGridView3.SelectedRows;
             string? MaThamSo = rows[0].Cells["STT"].Value.ToString();
             string? NoiDung = rows[0].Cells["Nội dung"].Value.ToString();
-            if (NoiDung==null||MaThamSo==null) return;
+            if (NoiDung == null || MaThamSo == null) return;
             using (FromDiaglog frmDialog = new FromDiaglog())
             {
                 frmDialog.Label1.Text = "Nhập " + NoiDung.ToLower() + " mới";
@@ -274,6 +287,66 @@ namespace GUI
         private void label11_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            if (comboBox5.SelectedIndex == -1 || comboBox3.SelectedIndex == -1)
+            {
+                MessageBox.Show("Nhập thiếu thông tin tháng hoặc năm", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            string? Thang = comboBox3.SelectedItem.ToString();
+            string? Nam = comboBox5.SelectedItem.ToString();
+            dataGridView5.DataSource = BaoCaoDoanhThuBUS.Instance.BaoCaoDoanhThu(Thang, Nam);
+            string TongDoanhThu = BaoCaoDoanhThuBUS.Instance.TongTienDoanhThu(Thang, Nam);
+            label46.Text = "Tổng doanh thu: " + TongDoanhThu;
+            comboBox3.Enabled = false;
+            comboBox5.Enabled = false;
+            button11.Enabled = false;
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            comboBox3.SelectedIndex = -1;
+            comboBox5.SelectedIndex = -1;
+            button11.Enabled = true;
+            comboBox3.Enabled = true;
+            comboBox5.Enabled = true;
+            label46.Text = "";
+            dataGridView5.DataSource = null;
+            comboBox5.Text = "None";
+            comboBox3.Text = "None";
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            if (comboBox6.SelectedIndex == -1 || comboBox7.SelectedIndex == -1)
+            {
+                MessageBox.Show("Nhập thiếu thông tin tháng hoặc năm", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            string? Thang = comboBox7.SelectedIndex.ToString();
+            string? Nam = comboBox6.SelectedIndex.ToString();
+            dataGridView6.DataSource = BaoCaoTonBUS.Instance.BaoCaoTon(Thang, Nam);
+            comboBox6.Enabled = false;
+            comboBox7.Enabled = false;
+            button13.Enabled = false;
+           
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            dataGridView6.DataSource = null;
+            comboBox6.Enabled = true;
+            comboBox7.Enabled= true;
+            button13.Enabled= true;
+            comboBox6.SelectedIndex = -1;
+            comboBox7.SelectedIndex = -1;
+            comboBox7.Text = "None";
+            comboBox6.Text = "None";
+           
         }
     }
 }
