@@ -246,7 +246,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[CT_PHIEUSUACHUA]
 (
-	[MaPhieuSuaChua] [int] IDENTITY(1,1),
+	[MaPhieuSuaChua] [int],
 	[MaTC] [int] NOT NULL,
 	[MaPhuTung] [int] NOT NULL,
 	CONSTRAINT [PK_CTPSC] PRIMARY KEY CLUSTERED
@@ -321,7 +321,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[CT_BAOCAOTON]
 (
-	[MaBCT] [int] IDENTITY(1,1),
+	[MaBCT] [int],
 	[MaPhuTung] [int] NOT NULL,
 	[TonDau] [int] NOT NULL,
 	[TonCuoi] [int] NOT NULL,
@@ -358,6 +358,8 @@ GO
 ALTER TABLE [dbo].[TAIKHOAN] WITH CHECK ADD FOREIGN KEY ([MaNguoiDung]) REFERENCES [dbo].[NGUOIDUNG]([MaNguoiDung])
 GO
 
+SET DATEFORMAT dmy;
+
 /****** EXEC [dbo].[USP_DangNhap] @TenDN = 'quanly01', @MatKhau = 'quanly01' ******/
 /****** UC-1: Đăng nhập: USP_DangNhap ******/
 SET ANSI_NULLS ON
@@ -365,13 +367,14 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE	PROCEDURE [dbo].[usp_dangnhap]
-	@TenDangNhap varchar(20),
+	@TenDangNhap nvarchar(20),
 	@MatKhau varchar(20)
 AS
 BEGIN
 	SELECT *
 	FROM TAIKHOAN
-	WHERE @TenDangNhap= TenDangNhap and @MatKhau = MatKhau
+	WHERE TenDangNhap = @TenDangNhap and MatKhau = @MatKhau
+	ORDER BY MaTK ASC
 END
 GO
 
@@ -508,6 +511,81 @@ BEGIN
 END
 GO
 
+/****** Procedure BaoCaoDoanhThu ******/
+/****** EXEC BaoCaoDoanhThu @Thang = 6, @Nam = 2023 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE	PROCEDURE [dbo].[BaoCaoDoanhThu]
+	@Thang int,
+	@Nam int 
+AS
+BEGIN
+	SELECT ROW_NUMBER() OVER (ORDER BY x.HieuXe) AS STT,
+			x.HieuXe AS [Hiệu xe],
+			COUNT(psc.MaPhieuSuaChua) AS [Số lượt],
+			SUM(ptt.TienThu) AS [Thành tiền],
+			(	COUNT(psc.MaPhieuSuaChua) * 100 / (Select COUNT (*)
+												   FROM PHIEUTHUTIEN ptt, PHIEUSUACHUA psc
+												   WHERE ptt.MaKH = psc.MaKH
+												   and MONTH(ptt.NgayThuTien) = @Thang
+												   and YEAR(ptt.NgayThuTien) = @Nam)
+			) AS [Tỉ lệ]
+	FROM XE x, PHIEUTHUTIEN ptt, PHIEUSUACHUA psc
+	WHERE x.MaKH = ptt.MaKH 
+	and ptt.MaKH = psc.MaKH
+	and MONTH(NgayThuTien) = @Thang
+	and YEAR(NgayThuTien) = @Nam
+	GROUP BY x.HieuXe
+END
+GO
+
+/****** Procedure BaoCaoTonKho ******/
+/****** EXEC BaoCaoTonKho @Thang = 6, @Nam = 2023 ******/
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE	PROCEDURE [dbo].[BaoCaoTonKho]
+	@Thang int,
+	@Nam int
+AS
+BEGIN
+	SELECT k.MaPhuTung AS STT,
+		   k.TenVatTuPhuTung AS [Vật tư phụ tùng],
+		   ctbct.TonDau AS [Tồn đầu],
+		   ctbct.PhatSinh AS [Phát sinh],
+		   ctbct.TonCuoi AS [Tồn cuối]
+	FROM KHO k, CT_BAOCAOTON ctbct, BAOCAOTON bct
+	WHERE k.MaPhuTung = ctbct.MaPhuTung
+	and ctbct.MaBCT = bct.MaBCT
+	and MONTH(bct.ThoiDiemBaoCao) = @Thang
+	and YEAR(bct.ThoiDiemBaoCao) = @Nam
+END
+GO
+
+/****** Procedure TongTienDoanhThu ******/
+/****** EXEC TongTienDoanhThu @Thang = 6, @Nam = 2023 ******/
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE	PROCEDURE [dbo].[TongTienDoanhThu]
+	@Thang int,
+	@Nam int
+AS
+BEGIN
+	SELECT SUM(TienThu)
+	FROM PHIEUTHUTIEN
+	WHERE MONTH(NgayThuTien) = @Thang
+	AND YEAR(NgayThuTien) = @Nam
+END
+GO
+
+
 INSERT [dbo].[NGUOIDUNG]([TenND], [GioiTinh], [DiaChi], [NgaySinh], [DienThoai]) VALUES ( N'Nguyễn Quan Thịnh',0, N'23 Hai Bà Trưng', N'04/04/2000', N'0987887709')
 INSERT [dbo].[TAIKHOAN]([MaNguoiDung], [TenDangNhap], [MatKhau], [QuyenHan]) VALUES ( 1, N'quanly01', N'quanly01', 1)
 
@@ -520,15 +598,35 @@ INSERT [dbo].[TAIKHOAN]([MaNguoiDung], [TenDangNhap], [MatKhau], [QuyenHan]) VAL
 INSERT [dbo].[NGUOIDUNG]([TenND], [GioiTinh], [DiaChi], [NgaySinh], [DienThoai]) VALUES ( N'Trần Mỹ Dung',1, N'9A Nguyễn Văn Trỗi', N'12/11/2000', N'0788390091')
 INSERT [dbo].[TAIKHOAN]([MaNguoiDung], [TenDangNhap], [MatKhau], [QuyenHan]) VALUES ( 4, N'nhanvien02', N'nhanvien02', 0)
 
-
-EXEC ThemKhachHang @TenKH = 'Nguyễn Tùng Dương', @DienThoai = '0783771000', @DiaChi = '15/3 A đường Phước Hậu, xã Phước Hồng', @TienNo = 0 
+--- Khách hàng tháng 6 năm 2023
+EXEC ThemKhachHang @TenKH = N'Nguyễn Tùng Dương', @DienThoai = '0783771000', @DiaChi = N'15/3 A đường Phước Hậu, xã Phước Hồng', @TienNo = 0 
 EXEC ThemXe @BienSo = '001001', @HieuXe = 'Toyota'
 
-EXEC ThemKhachHang @TenKH = 'Đặng Khôi Nguyên', @DienThoai = '0666987601', @DiaChi = '23/4 B đường Long Mỹ, xã Mậu Hồng', @TienNo = 0
+EXEC ThemKhachHang @TenKH = N'Đặng Khôi Nguyên', @DienThoai = '0666987601', @DiaChi = N'23/4 B đường Long Mỹ, xã Mậu Hồng', @TienNo = 0
 EXEC ThemXe @BienSo = '002002', @HieuXe = 'Kia'
 
-EXEC ThemKhachHang @TenKH = 'Nguyễn Thị Mỹ Duyên', @DienThoai = '0888987601', @DiaChi = '33/5 A đường Hòa Phát, xã Hồng Châu', @TienNo = 0 
+EXEC ThemKhachHang @TenKH = N'Nguyễn Thị Mỹ Duyên', @DienThoai = '0888987601', @DiaChi = N'33/5 A đường Hòa Phát, xã Hồng Châu', @TienNo = 0 
 EXEC ThemXe @BienSo = '003003', @HieuXe = 'Suzuki'
+
+--- Khách hàng tháng 5 năm 2023
+EXEC ThemKhachHang @TenKH = N'Trần Văn Minh', @DienThoai = '0783099800', @DiaChi = N'23/3 A đường Thanh Long', @TienNo = 0 
+EXEC ThemXe @BienSo = '004004', @HieuXe = 'Suzuki'
+
+EXEC ThemKhachHang @TenKH = N'Nguyễn My', @DienThoai = '0969453786', @DiaChi = N'13/4 B đường Nguyễn Trãi', @TienNo = 0
+EXEC ThemXe @BienSo = '005005', @HieuXe = 'Kia'
+
+EXEC ThemKhachHang @TenKH = N'Lâm Văn Tài', @DienThoai = '0888227609', @DiaChi = N'133A đường Long Chu', @TienNo = 0 
+EXEC ThemXe @BienSo = '006006', @HieuXe = 'Suzuki'
+
+--- Khách hàng tháng 4 năm 2023
+EXEC ThemKhachHang @TenKH = N'Nguyễn Văn Vũ', @DienThoai = '07830435098', @DiaChi = N'3A đường Nguyễn Bỉnh Khiêm', @TienNo = 0 
+EXEC ThemXe @BienSo = '007007', @HieuXe = 'Suzuki'
+
+EXEC ThemKhachHang @TenKH = N'Lê Ngọc Minh', @DienThoai = '0769459823', @DiaChi = N'4B đường Lê Hồng Phong', @TienNo = 0
+EXEC ThemXe @BienSo = '008008', @HieuXe = 'Kia'
+
+EXEC ThemKhachHang @TenKH = N'Hứa Hoàng Linh', @DienThoai = '0834723109', @DiaChi = N'123A đường Hưng Long', @TienNo = 0 
+EXEC ThemXe @BienSo = '009009', @HieuXe = 'Kia'
 
 INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Số lượng quy định', 8)
 INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Số lượng hiệu xe', 10)
@@ -539,6 +637,48 @@ INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Số lượng tài kho�
 INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Số lượng hồ sơ/1 xe', 1)
 INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Số quy định quản lý có thể thay đổi', 5)
 
+
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'001001', 1,0,0,0)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'002002', 2,0,0,0)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'003003', 3,0,0,0)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'004004', 4,0,0,0)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'005005', 5,0,0,0)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'006006', 6,0,0,0)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'007007', 7,0,0,0)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'008008', 8,0,0,0)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'009009', 9,0,0,0)
+
+
+INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (1, 100000, '01/06/2023 09:00:00')
+INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (2, 200000, '02/06/2023 14:30:00')
+INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (3, 400000, '03/06/2023 18:15:00')
+INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (4, 600000, '01/05/2023 09:00:00')
+INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (5, 900000, '02/05/2023 14:30:00')
+INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (6, 700000, '03/05/2023 18:15:00')
+INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (7, 150000, '01/04/2023 09:00:00')
+INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (8, 850000, '02/04/2023 14:30:00')
+INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (9, 300000, '03/04/2023 18:15:00')
+
+INSERT [dbo].[KHO] ([TenVatTuPhuTung],[SoLuong], [DonGia]) VALUES (N'Bánh xe', 100, 200000)
+INSERT [dbo].[KHO] ([TenVatTuPhuTung],[SoLuong], [DonGia]) VALUES (N'Lọc dầu', 200, 300000)
+INSERT [dbo].[KHO] ([TenVatTuPhuTung],[SoLuong], [DonGia]) VALUES (N'Lọc gió', 300, 400000)
+
+
+INSERT [dbo].[BAOCAOTON] ([ThoiDiemBaoCao]) VALUES ('01/06/2023 09:00:00')
+INSERT [dbo].[BAOCAOTON] ([ThoiDiemBaoCao]) VALUES ('01/05/2023 09:00:00')
+INSERT [dbo].[BAOCAOTON] ([ThoiDiemBaoCao]) VALUES ('01/04/2023 09:00:00')
+
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (1,1,100,0,100)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (1,2,200,0,200)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (1,3,300,0,300)
+
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (2,1,100,0,100)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (2,2,200,0,200)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (2,3,300,0,300)
+
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (3,1,100,0,100)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (3,2,200,0,200)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (3,3,300,0,300)
 
 
 USE [master]
