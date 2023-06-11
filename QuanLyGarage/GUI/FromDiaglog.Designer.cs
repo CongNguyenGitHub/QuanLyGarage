@@ -70,12 +70,12 @@
             // 
             // label1
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(68, 71);
+            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.Location = new Point(77, 31);
             label1.Name = "label1";
-            label1.Size = new Size(68, 30);
+            label1.Size = new Size(299, 66);
             label1.TabIndex = 18;
-            label1.Text = "label1";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
             label1.Click += label1_Click_1;
             // 
             // FromDiaglog
@@ -95,7 +95,7 @@
             MinimizeBox = false;
             MinimumSize = new Size(500, 350);
             Name = "FromDiaglog";
-            StartPosition = FormStartPosition.CenterScreen;
+            StartPosition = FormStartPosition.CenterParent;
             Text = "Quy định";
             ResumeLayout(false);
             PerformLayout();

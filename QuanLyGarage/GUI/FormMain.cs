@@ -247,11 +247,12 @@ namespace GUI
         private void button9_Click(object sender, EventArgs e)
         {
             DataGridViewSelectedRowCollection rows = dataGridView3.SelectedRows;
-            string MaThamSo = rows[0].Cells["STT"].Value.ToString();
-            string NoiDung = rows[0].Cells["Nội dung"].Value.ToString().ToLower();
+            string? MaThamSo = rows[0].Cells["STT"].Value.ToString();
+            string? NoiDung = rows[0].Cells["Nội dung"].Value.ToString();
+            if (NoiDung==null||MaThamSo==null) return;
             using (FromDiaglog frmDialog = new FromDiaglog())
             {
-                frmDialog.Label1.Text = "Nhập " + NoiDung + " mới";
+                frmDialog.Label1.Text = "Nhập " + NoiDung.ToLower() + " mới";
                 if (frmDialog.ShowDialog() == DialogResult.OK)
                 {
                     int GiaTriMoi;
@@ -263,7 +264,7 @@ namespace GUI
                     }
                     else
                     {
-                        MessageBox.Show("Tìm thấy ký tự không phải là chữ số", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Thông tin nhập không hợp lệ", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
