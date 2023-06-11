@@ -24,7 +24,18 @@ namespace DAO
             }
         }
         private QuyDinhDAO() { }
-        
+        public DataTable LayTatCaQuyDinh()
+        {
+            string query = "LayDuLieuQuyDinh";
+            return DataProvider.Instance.ExecuteQuery(query);
+        }
+        public int CapNhatQuyDinh(string MaThamSo, int GiaTriMoi)
+        {
+            int result = 0;
+            string query = "ThayDoiQuyDinh @MaThamSo , @GiaTriMoi";
+            result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { MaThamSo, GiaTriMoi });
+            return result;
+        }
         public DataTable LaySoXeSuaToiDa()
         {
             string query = "SELECT GiaTri FROM THAMSO WHERE MaThamSo = '3'";

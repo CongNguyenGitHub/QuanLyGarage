@@ -37,7 +37,7 @@ namespace DAO
         }
         public string LayQuyenHan(string User, string Pass)
         {
-            string query = "USP_Dangnhap @TenDangNhap , @MatKhau";
+            string query = "usp_dangnhap @TenDN , @MatKhau";
 
             DataTable result = DataProvider.Instance.ExecuteQuery(query, new object[] { User, Pass });
 
