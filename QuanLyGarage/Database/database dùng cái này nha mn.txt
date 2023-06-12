@@ -604,8 +604,8 @@ BEGIN
 		END AS GioiTinh,
 		nd.DienThoai, nd.DiaChi, tk.TenDangNhap, tk.TenDangNhap, tk.MatKhau, 
 		CASE
-			WHEN tk.QuyenHan = 0 THEN N'Quản lý'
-			WHEN tk.QuyenHan = 1 THEN N'Nhân Viên'
+			WHEN tk.QuyenHan = 1 THEN N'Quản lý'
+			WHEN tk.QuyenHan = 0 THEN N'Nhân Viên'
 		END AS QuyenHan
 	FROM TAIKHOAN tk, NGUOIDUNG nd
 	WHERE tk.MaNguoiDung = nd.MaNguoiDung
