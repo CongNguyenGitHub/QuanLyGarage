@@ -45,30 +45,25 @@ namespace DAO
             return qh;
         }
 
-        public string LayHoTen(string User, string Pass)
+        public DataTable LayToanBoThongTinTaiKhoan(string User, string Pass) 
         {
-            string query = "USP_Dangnhap @TenDangNhap , @MatKhau";
-
-            DataTable result = DataProvider.Instance.ExecuteQuery(query, new object[] { User, Pass });
-
-            string qh = result.Rows[0][1].ToString();
-            return qh;
+            string query = "LayToanBoThongTinTaiKhoan @TenDN , @MatKhau";
+        
+            return DataProvider.Instance.ExecuteQuery(query, new object[] { User, Pass });
         }
 
-        public int LayMaTaiKhoan(string User, string Pass)
+        public int CapNhatMatKhau(string User, string Pass, string newPass) 
         {
-            string query = "USP_Dangnhap @TenDangNhap , @MatKhau";
-
-            DataTable result = DataProvider.Instance.ExecuteQuery(query, new object[] { User, Pass });
-
-            int ma = int.Parse(result.Rows[0][0].ToString());
-            return ma;
+            int result = 0;
+            string query = "CapNhatMatKhau @TenDN , @MatKhau , @MatKhauMoi";
+            result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { User, Pass, newPass });
+            return result;
         }
-
-        public void CapNhatMatKhau(string matkhau, int id)
+        public int ThemTaiKhoan(string User, string Pass, int QuyenHan)
         {
-            string query = "DoiMK @MaTK , @MatKhauMoi";
-            DataProvider.Instance.UpdateDatabase(query, new object[] { id, matkhau });
+          
+            string query = "ThemTaiKhoan @TenDN , @MatKhau , @QuyenHan";
+            return DataProvider.Instance.ExecuteNonQuery(query, new object[] { User, Pass, QuyenHan });
         }
     }
 }
