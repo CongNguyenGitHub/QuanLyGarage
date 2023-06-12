@@ -136,6 +136,8 @@ namespace GUI
                         MessageBox.Show("Chỉ có quản lý mới được lập báo cáo doanh thu", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
+                    comboBox3.SelectedIndex= comboBox3.Items.IndexOf(DateTime.Now.Month.ToString());
+                    comboBox5.SelectedIndex=comboBox5.Items.IndexOf(DateTime.Now.Year.ToString());
                     tabControl1.SelectedIndex = 8;
                     break;
                 case "Tồn kho":
@@ -144,6 +146,8 @@ namespace GUI
                         MessageBox.Show("Chỉ có quản lý mới được lập báo cáo tồn kho", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
+                    comboBox7.SelectedIndex = comboBox7.Items.IndexOf(DateTime.Now.Month.ToString());
+                    comboBox6.SelectedIndex=comboBox6.Items.IndexOf(DateTime.Now.Year.ToString());
                     tabControl1.SelectedIndex = 9;
                     break;
                 case "Thông tin cá nhân":
@@ -316,8 +320,8 @@ namespace GUI
             comboBox5.Enabled = true;
             label46.Text = "";
             dataGridView5.DataSource = null;
-            comboBox5.Text = "None";
-            comboBox3.Text = "None";
+            comboBox3.SelectedIndex = comboBox3.Items.IndexOf(DateTime.Now.Month.ToString());
+            comboBox5.SelectedIndex = comboBox5.Items.IndexOf(DateTime.Now.Year.ToString());
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -327,8 +331,8 @@ namespace GUI
                 MessageBox.Show("Nhập thiếu thông tin tháng hoặc năm", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            string? Thang = comboBox7.SelectedIndex.ToString();
-            string? Nam = comboBox6.SelectedIndex.ToString();
+            string? Thang = comboBox7.SelectedItem.ToString();
+            string? Nam = comboBox6.SelectedItem.ToString();
             dataGridView6.DataSource = BaoCaoTonBUS.Instance.BaoCaoTon(Thang, Nam);
             comboBox6.Enabled = false;
             comboBox7.Enabled = false;
@@ -344,9 +348,9 @@ namespace GUI
             button13.Enabled= true;
             comboBox6.SelectedIndex = -1;
             comboBox7.SelectedIndex = -1;
-            comboBox7.Text = "None";
-            comboBox6.Text = "None";
-           
+            comboBox7.SelectedIndex = comboBox7.Items.IndexOf(DateTime.Now.Month.ToString());
+            comboBox6.SelectedIndex = comboBox6.Items.IndexOf(DateTime.Now.Year.ToString());
+
         }
     }
 }
