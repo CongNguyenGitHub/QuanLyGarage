@@ -111,7 +111,7 @@ CREATE TABLE [dbo].[KHACHHANG]
 	[TenKH] [nvarchar](50) NOT NULL,
 	[DienThoai] [varchar](50) NOT NULL,
 	[DiaChi] [nvarchar](100) NOT NULL,
-	[TienNo] [money] NOT NULL DEFAULT 0,
+	[TienNo] [int] NOT NULL DEFAULT 0,
 	PRIMARY KEY  CLUSTERED
 	(
 		[MaKH] ASC
@@ -191,7 +191,7 @@ CREATE TABLE [dbo].[KHO]
 	[MaPhuTung] [int] IDENTITY(1,1),
 	[TenVatTuPhuTung] [nvarchar](50) NOT NULL,
 	[SoLuong] [int] NOT NULL,
-	[DonGia] [money] NOT NULL,
+	[DonGia] [int] NOT NULL,
 	PRIMARY KEY CLUSTERED 
 	(
 		[MaPhuTung] ASC
@@ -209,7 +209,7 @@ CREATE TABLE [dbo].[TIENCONG]
 (
 	[MaTC] [int] IDENTITY(1,1),
 	[TenTienCong] [nvarchar](50) NOT NULL,
-	[ChiPhi] [money] NOT NULL,
+	[ChiPhi] [int] NOT NULL,
 	PRIMARY KEY CLUSTERED 
 	(
 		[MaTC] ASC
@@ -230,7 +230,7 @@ CREATE TABLE [dbo].[PHIEUSUACHUA]
 	[MaKH] [int] NOT NULL,
 	[TienCong] [int]  NOT NULL,
 	[TienPhuTung] [int] NOT NULL,
-	[TongTien] [money] NOT NULL
+	[TongTien] [int] NOT NULL
 	PRIMARY KEY CLUSTERED
 	(
 		[MaPhieuSuaChua] ASC
@@ -268,7 +268,7 @@ CREATE TABLE [dbo].[PHIEUTHUTIEN]
 (
 	[MaPhieuThuTien] [int] IDENTITY(1,1),
 	[MaKH] [int] NOT NULL,
-	[TienThu] [money] NOT NULL,
+	[TienThu] [int] NOT NULL,
 	[NgayThuTien] [datetime] NOT NULL,
 	PRIMARY KEY CLUSTERED
 	(
@@ -388,7 +388,7 @@ CREATE	PROCEDURE [dbo].[ThemKhachHang]
 	@TenKH nvarchar(50),
 	@DienThoai varchar(50),
 	@DiaChi nvarchar(100),
-	@TienNo money
+	@TienNo int
 AS
 BEGIN
 	INSERT INTO [dbo].[KHACHHANG]([TenKH], [DienThoai], [DiaChi], [TienNo]) VALUES( @TenKH, @DienThoai, @DiaChi, @TienNo)
@@ -531,7 +531,7 @@ BEGIN
 												   WHERE ptt.MaKH = psc.MaKH
 												   and MONTH(ptt.NgayThuTien) = @Thang
 												   and YEAR(ptt.NgayThuTien) = @Nam)
-			) AS [Tỉ lệ]
+			) AS [Tỉ lệ %]
 	FROM XE x, PHIEUTHUTIEN ptt, PHIEUSUACHUA psc
 	WHERE x.MaKH = ptt.MaKH 
 	and ptt.MaKH = psc.MaKH
@@ -584,6 +584,96 @@ BEGIN
 	AND YEAR(NgayThuTien) = @Nam
 END
 GO
+
+/****** Procedure LayToanBoThongTinTaiKhoan ******/
+/****** EXEC LayToanBoThongTinTaiKhoan @TenDangNhap = 'quanly01', @MatKhau = 'quanly01' ******/
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[LayToanBoThongTinTaiKhoan]
+	@TenDangNhap varchar(20),
+	@MatKhau varchar(20)
+AS
+BEGIN
+	SELECT nd.TenND, nd.NgaySinh, 
+		CASE 
+			WHEN nd.GioiTinh = 0 THEN 'Nam'
+			WHEN nd.GioiTinh = 1 THEN N'Nữ'
+		END AS GioiTinh,
+		nd.DienThoai, nd.DiaChi, tk.TenDangNhap, tk.TenDangNhap, tk.MatKhau, 
+		CASE
+			WHEN tk.QuyenHan = 0 THEN N'Quản lý'
+			WHEN tk.QuyenHan = 1 THEN N'Nhân Viên'
+		END AS QuyenHan
+	FROM TAIKHOAN tk, NGUOIDUNG nd
+	WHERE tk.MaNguoiDung = nd.MaNguoiDung
+		AND tk.TenDangNhap = @TenDangNhap
+		AND tk.MatKhau = @MatKhau
+END
+GO
+
+
+
+/****** Procedure CapNhatMatKhau ******/
+/****** EXEC CapNhatMatKhau @TenDangNhap = 'quanly01', @MatKhau = 'quanly01', @MatKhauMoi = 'quanly03' ******/
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[CapNhatMatKhau]
+	@TenDangNhap varchar(20),
+	@MatKhau varchar(20),
+	@MatKhauMoi varchar(20)
+AS
+BEGIN
+	UPDATE TAIKHOAN
+	SET MatKhau = @MatKhauMoi
+	WHERE TenDangNhap = @TenDangNhap and MatKhau = @MatKhau
+END
+GO
+
+
+/****** Procedure ThemNguoiDung ******/
+/****** EXEC ThemNguoiDung @TenND = 'Trần Văn Khánh', @GioiTinh = 0, @DiaChi = '45A đường Ngô Quyền', @NgaySinh = '04/04/2000', @DienThoai = '0989912344' ******/
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[ThemNguoiDung]
+	@TenND nvarchar(50),
+	@NgaySinh date,
+	@GioiTinh int = NULL,
+	@DienThoai varchar(20),
+	@DiaChi nvarchar(100)
+AS
+BEGIN
+	INSERT INTO NGUOIDUNG([TenND], [NgaySinh],[GioiTinh],[DienThoai], [DiaChi]) VALUES(@TenND, @NgaySinh,@GioiTinh, @DienThoai, @DiaChi)
+END
+GO
+
+/****** Procedure ThemTaiKhoan ******/
+/****** EXEC ThemTaiKhoan @user = 'nhanvien03', @pass = 'nhanvien03', @QuyenHan = 0 ******/
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[ThemTaiKhoan]
+	@user varchar(20),
+	@pass varchar(20),
+	@QuyenHan int
+AS
+BEGIN
+	DECLARE @MaNguoiDung int
+	SELECT @MaNguoiDung = ISNULL(MAX(MaNguoiDung),1) FROM NGUOIDUNG
+	INSERT INTO TAIKHOAN([MaNguoiDung], [TenDangNhap],[MatKhau],[QuyenHan]) VALUES(@MaNguoiDung, @user,@pass, @QuyenHan)
+END
+GO
+
 
 
 INSERT [dbo].[NGUOIDUNG]([TenND], [GioiTinh], [DiaChi], [NgaySinh], [DienThoai]) VALUES ( N'Nguyễn Quan Thịnh',0, N'23 Hai Bà Trưng', N'04/04/2000', N'0987887709')
