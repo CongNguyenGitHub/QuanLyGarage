@@ -43,15 +43,21 @@ namespace BUS
         {
             return DAO.TaiKhoanDAO.Instance.CapNhatMatKhau(User, Pass, newPass);
         }
-        public int ThemTaiKhoan(string User, string Pass, string QuyenHan)  // trẩ về số hàng insert thành công, >0 là thành công
-        {
-            return DAO.TaiKhoanDAO.Instance.ThemTaiKhoan(User, Pass, int.Parse(QuyenHan));
-        }
         public bool checkDangNhapBUS(string TaiKhoan, string MatKhau)
         {
             DataTable result = TaiKhoanDAO.Instance.DangNhapDAO(TaiKhoan, MatKhau);
             if (result.Rows.Count > 0) return true;
             else return false;
+        }
+        public int ThemTaiKhoan(string User, string Pass, string QuyenHan)  // trẩ về số hàng insert thành công, >0 là thành công
+        {
+            return DAO.TaiKhoanDAO.Instance.ThemTaiKhoan(User, Pass, int.Parse(QuyenHan));
+        }
+        public bool KiemTraTenDNTonTai(string User) // true thi chua tồn tại, mà false thì đã có trong database rồi
+        {
+            DataTable result = TaiKhoanDAO.Instance.KiemTraTenDNTonTai(User);
+            if (result.Rows.Count > 0) return false;
+            else return true;
         }
         public string LayQuyenHan(string User, string Pass)
         {

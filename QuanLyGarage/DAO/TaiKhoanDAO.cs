@@ -59,6 +59,11 @@ namespace DAO
             result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { User, Pass, newPass });
             return result;
         }
+        public DataTable KiemTraTenDNTonTai(string User)
+        {
+            string query = "KiemTraTenDNTonTai @TenDN";
+            return DataProvider.Instance.ExecuteQuery(query, new object[] { User }); 
+        }
         public int ThemTaiKhoan(string User, string Pass, int QuyenHan)
         {
           
