@@ -26,7 +26,7 @@ namespace DAO
         private BaoCaoTonDAO() { }
         public DataTable BaoCaoTon(int Thang, int Nam)
         {
-            string query = "BaoCaoTonKho @Thang , @Nam";
+            string query = "BaoCaoTonKho45 @Thang , @Nam";
             return DataProvider.Instance.ExecuteQuery(query, new object[] { Thang, Nam });
         }
     }
