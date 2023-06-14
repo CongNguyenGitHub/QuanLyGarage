@@ -22,77 +22,10 @@ namespace GUI
         }
         private void FormMain_Load(object sender, EventArgs e)
         {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabPage5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void label21_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabPage6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label16_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label27_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabPage9_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabPage13_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabPage12_Click(object sender, EventArgs e)
-        {
-
+            comboBox3.SelectedIndex = comboBox3.Items.IndexOf(DateTime.Now.Month.ToString());
+            comboBox5.SelectedIndex = comboBox5.Items.IndexOf(DateTime.Now.Year.ToString());
+            comboBox7.SelectedIndex = comboBox7.Items.IndexOf(DateTime.Now.Month.ToString());
+            comboBox6.SelectedIndex = comboBox6.Items.IndexOf(DateTime.Now.Year.ToString());
         }
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
@@ -136,8 +69,7 @@ namespace GUI
                         MessageBox.Show("Chỉ có quản lý mới được lập báo cáo doanh thu", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
-                    comboBox3.SelectedIndex= comboBox3.Items.IndexOf(DateTime.Now.Month.ToString());
-                    comboBox5.SelectedIndex=comboBox5.Items.IndexOf(DateTime.Now.Year.ToString());
+
                     tabControl1.SelectedIndex = 8;
                     break;
                 case "Tồn kho":
@@ -146,17 +78,29 @@ namespace GUI
                         MessageBox.Show("Chỉ có quản lý mới được lập báo cáo tồn kho", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
-                    comboBox7.SelectedIndex = comboBox7.Items.IndexOf(DateTime.Now.Month.ToString());
-                    comboBox6.SelectedIndex=comboBox6.Items.IndexOf(DateTime.Now.Year.ToString());
                     tabControl1.SelectedIndex = 9;
                     break;
                 case "Thông tin cá nhân":
                     tabControl1.SelectedIndex = 10;
+                    DataTable dt = TaiKhoanBUS.Instance.LayToanBoThongTinTaiKhoan(taiKhoan, matKhau);
+                    label47.Text = dt.Rows[0][0].ToString();
+                    label55.Text = dt.Rows[0][1].ToString();
+                    label53.Text = dt.Rows[0][2].ToString();
+                    label56.Text = dt.Rows[0][3].ToString();
+                    label54.Text = dt.Rows[0][4].ToString();
+                    label57.Text = dt.Rows[0][5].ToString();
+                    label59.Text = dt.Rows[0][6].ToString();
+                    label58.Text = dt.Rows[0][7].ToString();
                     break;
                 case "Thay đổi mật khẩu":
                     tabControl1.SelectedIndex = 11;
                     break;
                 case "Thêm tài khoản":
+                    if (TaiKhoanBUS.Instance.LayQuyenHan(taiKhoan, matKhau) == "False")
+                    {
+                        MessageBox.Show("Chỉ có quản lý mới được thêm tài khoản", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
                     tabControl1.SelectedIndex = 12;
                     break;
                 case "Đăng xuất":
@@ -164,6 +108,7 @@ namespace GUI
                     , MessageBoxOptions.ServiceNotification);
                     if (result == DialogResult.OK)
                     {
+                        this.DialogResult = DialogResult.OK;
                         this.Close();
                     }
                     break;
@@ -222,21 +167,6 @@ namespace GUI
 
         }
 
-        private void tabPage4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void button16_Click(object sender, EventArgs e)
         {
             textBox1.Clear();
@@ -246,12 +176,6 @@ namespace GUI
             comboBox1.SelectedIndex = -1;
             dateTimePicker1.Value = DateTime.Now;
         }
-
-        private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            System.Windows.Forms.Application.Exit();
-        }
-
         private void button17_Click(object sender, EventArgs e)
         {
             textBox5.ReadOnly = false;
@@ -285,11 +209,6 @@ namespace GUI
                     }
                 }
             }
-
-        }
-
-        private void label11_Click(object sender, EventArgs e)
-        {
 
         }
 
@@ -337,20 +256,108 @@ namespace GUI
             comboBox6.Enabled = false;
             comboBox7.Enabled = false;
             button13.Enabled = false;
-           
+
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
             dataGridView6.DataSource = null;
             comboBox6.Enabled = true;
-            comboBox7.Enabled= true;
-            button13.Enabled= true;
+            comboBox7.Enabled = true;
+            button13.Enabled = true;
             comboBox6.SelectedIndex = -1;
             comboBox7.SelectedIndex = -1;
             comboBox7.SelectedIndex = comboBox7.Items.IndexOf(DateTime.Now.Month.ToString());
             comboBox6.SelectedIndex = comboBox6.Items.IndexOf(DateTime.Now.Year.ToString());
 
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            string currentPass = textBox14.Text;
+            string newPass = textBox13.Text;
+            if (currentPass == "" || newPass == "")
+            {
+                MessageBox.Show("Nhập thiếu thông tin", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (currentPass != matKhau)
+            {
+                MessageBox.Show("Mật khẩu không chính xác", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            TaiKhoanBUS.Instance.CapNhatMatKhau(taiKhoan, currentPass, newPass);
+            MessageBox.Show("Đổi mật khẩu thành công", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            matKhau = newPass;
+            textBox14.Clear();
+            textBox13.Clear();
+
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            string tenDN, MK, quyenHan, hoTen, ngaySinh, gioiTinh, SDT, diaChi;
+            tenDN = textBox16.Text;
+            MK = textBox15.Text;
+            quyenHan = comboBox11.SelectedIndex.ToString();
+            hoTen = textBox17.Text;
+            ngaySinh = dateTimePicker3.Value.ToString();
+            gioiTinh = comboBox10.SelectedIndex.ToString();
+            SDT = textBox19.Text;
+            diaChi = textBox20.Text;
+            if (tenDN == "" || MK == "" || quyenHan == "-1" || hoTen == "" || ngaySinh == "" || gioiTinh == "-1" || SDT == "" || diaChi == "")
+            {
+                MessageBox.Show("Nhập thiếu thông tin", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (!TaiKhoanBUS.Instance.KiemTraTenDNTonTai(tenDN))
+            {
+                MessageBox.Show("Tên đăng nhập tồn tại", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            MessageBox.Show("Thêm người dùng thành công", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            NguoiDungBUS.Instance.ThemNguoiDung(hoTen, ngaySinh, gioiTinh, SDT, diaChi);
+            TaiKhoanBUS.Instance.ThemTaiKhoan(tenDN, MK, quyenHan);
+            textBox16.ReadOnly = true;
+            textBox15.ReadOnly = true;
+            comboBox11.Enabled = false;
+            textBox17.ReadOnly = true;
+            dateTimePicker3.Enabled = false;
+            comboBox10.Enabled = false;
+            textBox19.ReadOnly = true;
+            textBox20.ReadOnly = true;
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            textBox16.ReadOnly = false;
+            textBox15.ReadOnly = false;
+            comboBox11.Enabled = true;
+            textBox17.ReadOnly = false;
+            dateTimePicker3.Enabled = true;
+            comboBox10.Enabled = true;
+            textBox19.ReadOnly = false;
+            textBox20.ReadOnly = false;
+            textBox16.Clear();
+            textBox15.Clear();
+            comboBox11.SelectedIndex = -1;
+            textBox17.Clear();
+            dateTimePicker3.Value = DateTime.Now;
+            comboBox10.SelectedIndex = -1;
+            textBox19.Clear();
+            textBox20.Clear();
+        }
+        private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+        }
+
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (this.DialogResult != DialogResult.OK)
+            {
+                System.Windows.Forms.Application.Exit();
+            }
         }
     }
 }

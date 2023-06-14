@@ -169,14 +169,14 @@ namespace GUI
             label30 = new Label();
             label31 = new Label();
             tabPage11 = new TabPage();
-            textBox25 = new TextBox();
-            textBox24 = new TextBox();
-            textBox23 = new TextBox();
-            textBox22 = new TextBox();
-            textBox21 = new TextBox();
-            textBox20 = new TextBox();
-            textBox19 = new TextBox();
-            textBox18 = new TextBox();
+            label59 = new Label();
+            label58 = new Label();
+            label57 = new Label();
+            label56 = new Label();
+            label55 = new Label();
+            label54 = new Label();
+            label53 = new Label();
+            label47 = new Label();
             label42 = new Label();
             label41 = new Label();
             label40 = new Label();
@@ -196,11 +196,21 @@ namespace GUI
             label45 = new Label();
             label43 = new Label();
             tabPage13 = new TabPage();
+            button18 = new Button();
+            dateTimePicker3 = new DateTimePicker();
+            textBox20 = new TextBox();
+            textBox19 = new TextBox();
+            textBox17 = new TextBox();
+            label64 = new Label();
+            label63 = new Label();
+            label62 = new Label();
+            label61 = new Label();
+            label60 = new Label();
+            label48 = new Label();
+            comboBox10 = new ComboBox();
             textBox15 = new TextBox();
             textBox16 = new TextBox();
-            label48 = new Label();
             label49 = new Label();
-            comboBox10 = new ComboBox();
             comboBox11 = new ComboBox();
             button14 = new Button();
             label50 = new Label();
@@ -360,8 +370,6 @@ namespace GUI
             // tabControl1
             // 
             tabControl1.Appearance = TabAppearance.FlatButtons;
-            tabControl1.ItemSize = new Size(0, 1);
-            tabControl1.SizeMode = TabSizeMode.Fixed;
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Controls.Add(tabPage3);
@@ -375,20 +383,22 @@ namespace GUI
             tabControl1.Controls.Add(tabPage11);
             tabControl1.Controls.Add(tabPage12);
             tabControl1.Controls.Add(tabPage13);
+            tabControl1.ItemSize = new Size(0, 1);
             tabControl1.Location = new Point(292, 0);
             tabControl1.Margin = new Padding(0);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
             tabControl1.Size = new Size(1095, 878);
+            tabControl1.SizeMode = TabSizeMode.Fixed;
             tabControl1.TabIndex = 3;
             // 
             // tabPage1
             // 
             tabPage1.Controls.Add(pictureBox1);
-            tabPage1.Location = new Point(4, 39);
+            tabPage1.Location = new Point(4, 5);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1087, 835);
+            tabPage1.Size = new Size(1087, 869);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "tabPage1";
             tabPage1.UseVisualStyleBackColor = true;
@@ -422,10 +432,10 @@ namespace GUI
             tabPage2.Controls.Add(textBox2);
             tabPage2.Controls.Add(textBox1);
             tabPage2.Controls.Add(label1);
-            tabPage2.Location = new Point(4, 39);
+            tabPage2.Location = new Point(4, 5);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1087, 835);
+            tabPage2.Size = new Size(1087, 869);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "tabPage2";
             // 
@@ -476,7 +486,6 @@ namespace GUI
             label6.Size = new Size(139, 30);
             label6.TabIndex = 11;
             label6.Text = "Số điện thoại";
-            label6.Click += label6_Click;
             // 
             // label5
             // 
@@ -521,7 +530,6 @@ namespace GUI
             label2.Size = new Size(146, 30);
             label2.TabIndex = 7;
             label2.Text = "Họ tên chủ xe";
-            label2.Click += label2_Click;
             // 
             // dateTimePicker1
             // 
@@ -538,7 +546,6 @@ namespace GUI
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(268, 38);
             comboBox1.TabIndex = 5;
-            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // textBox4
             // 
@@ -577,7 +584,6 @@ namespace GUI
             label1.Size = new Size(348, 56);
             label1.TabIndex = 0;
             label1.Text = "Phiếu tiếp nhận xe ";
-            label1.Click += label1_Click;
             // 
             // tabPage3
             // 
@@ -590,9 +596,9 @@ namespace GUI
             tabPage3.Controls.Add(textBox5);
             tabPage3.Controls.Add(comboBox2);
             tabPage3.Controls.Add(label8);
-            tabPage3.Location = new Point(4, 39);
+            tabPage3.Location = new Point(4, 5);
             tabPage3.Name = "tabPage3";
-            tabPage3.Size = new Size(1087, 835);
+            tabPage3.Size = new Size(1087, 869);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "tabPage3";
             // 
@@ -721,7 +727,6 @@ namespace GUI
             comboBox2.Name = "comboBox2";
             comboBox2.Size = new Size(268, 38);
             comboBox2.TabIndex = 1;
-            comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
             // 
             // label8
             // 
@@ -738,12 +743,11 @@ namespace GUI
             tabPage4.BackColor = Color.FromArgb(34, 34, 34);
             tabPage4.Controls.Add(label11);
             tabPage4.Controls.Add(dataGridView1);
-            tabPage4.Location = new Point(4, 39);
+            tabPage4.Location = new Point(4, 5);
             tabPage4.Name = "tabPage4";
-            tabPage4.Size = new Size(1087, 835);
+            tabPage4.Size = new Size(1087, 869);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "tabPage4";
-            tabPage4.Click += tabPage4_Click;
             // 
             // label11
             // 
@@ -754,7 +758,6 @@ namespace GUI
             label11.Size = new Size(345, 56);
             label11.TabIndex = 1;
             label11.Text = "Danh sách xe";
-            label11.Click += label11_Click;
             // 
             // dataGridView1
             // 
@@ -817,7 +820,6 @@ namespace GUI
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.Size = new Size(1087, 678);
             dataGridView1.TabIndex = 0;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // tabPage5
             // 
@@ -831,12 +833,11 @@ namespace GUI
             tabPage5.Controls.Add(textBox6);
             tabPage5.Controls.Add(label12);
             tabPage5.ForeColor = SystemColors.ControlText;
-            tabPage5.Location = new Point(4, 39);
+            tabPage5.Location = new Point(4, 5);
             tabPage5.Name = "tabPage5";
-            tabPage5.Size = new Size(1087, 835);
+            tabPage5.Size = new Size(1087, 869);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "tabPage5";
-            tabPage5.Click += tabPage5_Click;
             // 
             // dataGridView2
             // 
@@ -851,7 +852,6 @@ namespace GUI
             dataGridView2.RowTemplate.Height = 37;
             dataGridView2.Size = new Size(945, 210);
             dataGridView2.TabIndex = 20;
-            dataGridView2.CellContentClick += dataGridView2_CellContentClick;
             // 
             // Column1
             // 
@@ -984,12 +984,11 @@ namespace GUI
             tabPage6.Controls.Add(textBox9);
             tabPage6.Controls.Add(textBox10);
             tabPage6.Controls.Add(label15);
-            tabPage6.Location = new Point(4, 39);
+            tabPage6.Location = new Point(4, 5);
             tabPage6.Name = "tabPage6";
-            tabPage6.Size = new Size(1087, 835);
+            tabPage6.Size = new Size(1087, 869);
             tabPage6.TabIndex = 5;
             tabPage6.Text = "tabPage6";
-            tabPage6.Click += tabPage6_Click;
             // 
             // button6
             // 
@@ -1039,7 +1038,6 @@ namespace GUI
             label16.Size = new Size(117, 30);
             label16.TabIndex = 25;
             label16.Text = "Số tiền thu";
-            label16.Click += label16_Click;
             // 
             // label17
             // 
@@ -1095,7 +1093,6 @@ namespace GUI
             label21.Size = new Size(146, 30);
             label21.TabIndex = 20;
             label21.Text = "Họ tên chủ xe";
-            label21.Click += label21_Click;
             // 
             // textBox7
             // 
@@ -1145,9 +1142,9 @@ namespace GUI
             tabPage7.Controls.Add(label23);
             tabPage7.Controls.Add(textBox12);
             tabPage7.Controls.Add(label24);
-            tabPage7.Location = new Point(4, 39);
+            tabPage7.Location = new Point(4, 5);
             tabPage7.Name = "tabPage7";
-            tabPage7.Size = new Size(1087, 835);
+            tabPage7.Size = new Size(1087, 869);
             tabPage7.TabIndex = 6;
             tabPage7.Text = "tabPage7";
             // 
@@ -1228,9 +1225,9 @@ namespace GUI
             tabPage8.Controls.Add(dataGridView3);
             tabPage8.Controls.Add(button9);
             tabPage8.Controls.Add(label25);
-            tabPage8.Location = new Point(4, 39);
+            tabPage8.Location = new Point(4, 5);
             tabPage8.Name = "tabPage8";
-            tabPage8.Size = new Size(1087, 835);
+            tabPage8.Size = new Size(1087, 869);
             tabPage8.TabIndex = 7;
             tabPage8.Text = "tabPage8";
             // 
@@ -1331,12 +1328,11 @@ namespace GUI
             tabPage9.Controls.Add(label26);
             tabPage9.Controls.Add(label27);
             tabPage9.Controls.Add(label28);
-            tabPage9.Location = new Point(4, 39);
+            tabPage9.Location = new Point(4, 5);
             tabPage9.Name = "tabPage9";
-            tabPage9.Size = new Size(1087, 835);
+            tabPage9.Size = new Size(1087, 869);
             tabPage9.TabIndex = 8;
             tabPage9.Text = "tabPage9";
-            tabPage9.Click += tabPage9_Click;
             // 
             // label46
             // 
@@ -1479,7 +1475,6 @@ namespace GUI
             label27.Size = new Size(79, 30);
             label27.TabIndex = 25;
             label27.Text = "Tháng ";
-            label27.Click += label27_Click;
             // 
             // label28
             // 
@@ -1502,9 +1497,9 @@ namespace GUI
             tabPage10.Controls.Add(label29);
             tabPage10.Controls.Add(label30);
             tabPage10.Controls.Add(label31);
-            tabPage10.Location = new Point(4, 39);
+            tabPage10.Location = new Point(4, 5);
             tabPage10.Name = "tabPage10";
-            tabPage10.Size = new Size(1087, 835);
+            tabPage10.Size = new Size(1087, 869);
             tabPage10.TabIndex = 9;
             tabPage10.Text = "tabPage10";
             // 
@@ -1653,14 +1648,14 @@ namespace GUI
             // tabPage11
             // 
             tabPage11.BackColor = Color.FromArgb(34, 34, 34);
-            tabPage11.Controls.Add(textBox25);
-            tabPage11.Controls.Add(textBox24);
-            tabPage11.Controls.Add(textBox23);
-            tabPage11.Controls.Add(textBox22);
-            tabPage11.Controls.Add(textBox21);
-            tabPage11.Controls.Add(textBox20);
-            tabPage11.Controls.Add(textBox19);
-            tabPage11.Controls.Add(textBox18);
+            tabPage11.Controls.Add(label59);
+            tabPage11.Controls.Add(label58);
+            tabPage11.Controls.Add(label57);
+            tabPage11.Controls.Add(label56);
+            tabPage11.Controls.Add(label55);
+            tabPage11.Controls.Add(label54);
+            tabPage11.Controls.Add(label53);
+            tabPage11.Controls.Add(label47);
             tabPage11.Controls.Add(label42);
             tabPage11.Controls.Add(label41);
             tabPage11.Controls.Add(label40);
@@ -1672,67 +1667,91 @@ namespace GUI
             tabPage11.Controls.Add(label34);
             tabPage11.Controls.Add(label33);
             tabPage11.Controls.Add(label32);
-            tabPage11.Location = new Point(4, 39);
+            tabPage11.Location = new Point(4, 5);
             tabPage11.Name = "tabPage11";
-            tabPage11.Size = new Size(1087, 835);
+            tabPage11.Size = new Size(1087, 869);
             tabPage11.TabIndex = 10;
             tabPage11.Text = "tabPage11";
             // 
-            // textBox25
+            // label59
             // 
-            textBox25.Location = new Point(199, 223);
-            textBox25.Name = "textBox25";
-            textBox25.Size = new Size(268, 35);
-            textBox25.TabIndex = 51;
+            label59.AutoSize = true;
+            label59.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label59.ForeColor = Color.White;
+            label59.Location = new Point(683, 521);
+            label59.Name = "label59";
+            label59.Size = new Size(0, 30);
+            label59.TabIndex = 58;
             // 
-            // textBox24
+            // label58
             // 
-            textBox24.Location = new Point(236, 615);
-            textBox24.Name = "textBox24";
-            textBox24.Size = new Size(268, 35);
-            textBox24.TabIndex = 50;
+            label58.AutoSize = true;
+            label58.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label58.ForeColor = Color.White;
+            label58.Location = new Point(236, 620);
+            label58.Name = "label58";
+            label58.Size = new Size(0, 30);
+            label58.TabIndex = 57;
             // 
-            // textBox23
+            // label57
             // 
-            textBox23.Location = new Point(683, 518);
-            textBox23.Name = "textBox23";
-            textBox23.Size = new Size(268, 35);
-            textBox23.TabIndex = 49;
+            label57.AutoSize = true;
+            label57.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label57.ForeColor = Color.White;
+            label57.Location = new Point(236, 521);
+            label57.Name = "label57";
+            label57.Size = new Size(0, 30);
+            label57.TabIndex = 56;
             // 
-            // textBox22
+            // label56
             // 
-            textBox22.Location = new Point(199, 299);
-            textBox22.Name = "textBox22";
-            textBox22.Size = new Size(268, 35);
-            textBox22.TabIndex = 48;
+            label56.AutoSize = true;
+            label56.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label56.ForeColor = Color.White;
+            label56.Location = new Point(683, 302);
+            label56.Name = "label56";
+            label56.Size = new Size(0, 30);
+            label56.TabIndex = 55;
             // 
-            // textBox21
+            // label55
             // 
-            textBox21.Location = new Point(683, 223);
-            textBox21.Name = "textBox21";
-            textBox21.Size = new Size(268, 35);
-            textBox21.TabIndex = 47;
+            label55.AutoSize = true;
+            label55.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label55.ForeColor = Color.White;
+            label55.Location = new Point(683, 223);
+            label55.Name = "label55";
+            label55.Size = new Size(0, 30);
+            label55.TabIndex = 54;
             // 
-            // textBox20
+            // label54
             // 
-            textBox20.Location = new Point(199, 378);
-            textBox20.Name = "textBox20";
-            textBox20.Size = new Size(268, 35);
-            textBox20.TabIndex = 46;
+            label54.AutoSize = true;
+            label54.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label54.ForeColor = Color.White;
+            label54.Location = new Point(182, 383);
+            label54.Name = "label54";
+            label54.Size = new Size(0, 30);
+            label54.TabIndex = 53;
             // 
-            // textBox19
+            // label53
             // 
-            textBox19.Location = new Point(683, 302);
-            textBox19.Name = "textBox19";
-            textBox19.Size = new Size(268, 35);
-            textBox19.TabIndex = 45;
+            label53.AutoSize = true;
+            label53.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label53.ForeColor = Color.White;
+            label53.Location = new Point(182, 302);
+            label53.Name = "label53";
+            label53.Size = new Size(0, 30);
+            label53.TabIndex = 52;
             // 
-            // textBox18
+            // label47
             // 
-            textBox18.Location = new Point(236, 518);
-            textBox18.Name = "textBox18";
-            textBox18.Size = new Size(268, 35);
-            textBox18.TabIndex = 44;
+            label47.AutoSize = true;
+            label47.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label47.ForeColor = Color.White;
+            label47.Location = new Point(182, 223);
+            label47.Name = "label47";
+            label47.Size = new Size(0, 30);
+            label47.TabIndex = 51;
             // 
             // label42
             // 
@@ -1863,12 +1882,11 @@ namespace GUI
             tabPage12.Controls.Add(label44);
             tabPage12.Controls.Add(label45);
             tabPage12.Controls.Add(label43);
-            tabPage12.Location = new Point(4, 39);
+            tabPage12.Location = new Point(4, 5);
             tabPage12.Name = "tabPage12";
-            tabPage12.Size = new Size(1087, 835);
+            tabPage12.Size = new Size(1087, 869);
             tabPage12.TabIndex = 11;
             tabPage12.Text = "tabPage12";
-            tabPage12.Click += tabPage12_Click;
             // 
             // textBox13
             // 
@@ -1895,6 +1913,7 @@ namespace GUI
             button15.TabIndex = 36;
             button15.Text = "Xác nhận";
             button15.UseVisualStyleBackColor = false;
+            button15.Click += button15_Click;
             // 
             // label44
             // 
@@ -1931,71 +1950,178 @@ namespace GUI
             // tabPage13
             // 
             tabPage13.BackColor = Color.FromArgb(34, 34, 34);
+            tabPage13.Controls.Add(button18);
+            tabPage13.Controls.Add(dateTimePicker3);
+            tabPage13.Controls.Add(textBox20);
+            tabPage13.Controls.Add(textBox19);
+            tabPage13.Controls.Add(textBox17);
+            tabPage13.Controls.Add(label64);
+            tabPage13.Controls.Add(label63);
+            tabPage13.Controls.Add(label62);
+            tabPage13.Controls.Add(label61);
+            tabPage13.Controls.Add(label60);
+            tabPage13.Controls.Add(label48);
+            tabPage13.Controls.Add(comboBox10);
             tabPage13.Controls.Add(textBox15);
             tabPage13.Controls.Add(textBox16);
-            tabPage13.Controls.Add(label48);
             tabPage13.Controls.Add(label49);
-            tabPage13.Controls.Add(comboBox10);
             tabPage13.Controls.Add(comboBox11);
             tabPage13.Controls.Add(button14);
             tabPage13.Controls.Add(label50);
             tabPage13.Controls.Add(label51);
             tabPage13.Controls.Add(label52);
-            tabPage13.Location = new Point(4, 39);
+            tabPage13.Location = new Point(4, 5);
             tabPage13.Name = "tabPage13";
-            tabPage13.Size = new Size(1087, 835);
+            tabPage13.Size = new Size(1087, 869);
             tabPage13.TabIndex = 12;
             tabPage13.Text = "tabPage13";
-            tabPage13.Click += tabPage13_Click;
             // 
-            // textBox15
+            // button18
             // 
-            textBox15.Location = new Point(598, 180);
-            textBox15.Name = "textBox15";
-            textBox15.Size = new Size(268, 35);
-            textBox15.TabIndex = 53;
+            button18.BackColor = Color.FromArgb(250, 136, 40);
+            button18.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            button18.ForeColor = Color.White;
+            button18.Location = new Point(313, 668);
+            button18.Name = "button18";
+            button18.Size = new Size(131, 40);
+            button18.TabIndex = 70;
+            button18.Text = "Làm mới";
+            button18.UseVisualStyleBackColor = false;
+            button18.Click += button18_Click;
             // 
-            // textBox16
+            // dateTimePicker3
             // 
-            textBox16.Location = new Point(73, 180);
-            textBox16.Name = "textBox16";
-            textBox16.Size = new Size(268, 35);
-            textBox16.TabIndex = 52;
+            dateTimePicker3.Format = DateTimePickerFormat.Short;
+            dateTimePicker3.Location = new Point(73, 419);
+            dateTimePicker3.Name = "dateTimePicker3";
+            dateTimePicker3.Size = new Size(268, 35);
+            dateTimePicker3.TabIndex = 69;
+            // 
+            // textBox20
+            // 
+            textBox20.Location = new Point(598, 543);
+            textBox20.Name = "textBox20";
+            textBox20.Size = new Size(268, 35);
+            textBox20.TabIndex = 68;
+            // 
+            // textBox19
+            // 
+            textBox19.Location = new Point(73, 543);
+            textBox19.Name = "textBox19";
+            textBox19.Size = new Size(268, 35);
+            textBox19.TabIndex = 67;
+            // 
+            // textBox17
+            // 
+            textBox17.Location = new Point(600, 300);
+            textBox17.Name = "textBox17";
+            textBox17.Size = new Size(268, 35);
+            textBox17.TabIndex = 65;
+            // 
+            // label64
+            // 
+            label64.AutoSize = true;
+            label64.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label64.ForeColor = Color.White;
+            label64.Location = new Point(595, 387);
+            label64.Name = "label64";
+            label64.Size = new Size(94, 30);
+            label64.TabIndex = 64;
+            label64.Text = "Giới tính";
+            // 
+            // label63
+            // 
+            label63.AutoSize = true;
+            label63.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label63.ForeColor = Color.White;
+            label63.Location = new Point(600, 507);
+            label63.Name = "label63";
+            label63.Size = new Size(77, 30);
+            label63.TabIndex = 63;
+            label63.Text = "Địa chỉ";
+            // 
+            // label62
+            // 
+            label62.AutoSize = true;
+            label62.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label62.ForeColor = Color.White;
+            label62.Location = new Point(73, 507);
+            label62.Name = "label62";
+            label62.Size = new Size(139, 30);
+            label62.TabIndex = 60;
+            label62.Text = "Số điện thoại";
+            // 
+            // label61
+            // 
+            label61.AutoSize = true;
+            label61.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label61.ForeColor = Color.White;
+            label61.Location = new Point(598, 387);
+            label61.Name = "label61";
+            label61.Size = new Size(0, 30);
+            label61.TabIndex = 59;
+            // 
+            // label60
+            // 
+            label60.AutoSize = true;
+            label60.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label60.ForeColor = Color.White;
+            label60.Location = new Point(73, 387);
+            label60.Name = "label60";
+            label60.Size = new Size(108, 30);
+            label60.TabIndex = 58;
+            label60.Text = "Ngày sinh";
             // 
             // label48
             // 
             label48.AutoSize = true;
             label48.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label48.ForeColor = Color.White;
-            label48.Location = new Point(598, 280);
+            label48.Location = new Point(600, 267);
             label48.Name = "label48";
-            label48.Size = new Size(129, 30);
-            label48.TabIndex = 51;
-            label48.Text = "Người dùng";
+            label48.Size = new Size(106, 30);
+            label48.TabIndex = 57;
+            label48.Text = "Họ và tên";
+            // 
+            // comboBox10
+            // 
+            comboBox10.FormattingEnabled = true;
+            comboBox10.Items.AddRange(new object[] { "Nam", "Nữ" });
+            comboBox10.Location = new Point(598, 420);
+            comboBox10.Name = "comboBox10";
+            comboBox10.Size = new Size(268, 38);
+            comboBox10.TabIndex = 56;
+            // 
+            // textBox15
+            // 
+            textBox15.Location = new Point(600, 180);
+            textBox15.Name = "textBox15";
+            textBox15.Size = new Size(268, 35);
+            textBox15.TabIndex = 53;
+            // 
+            // textBox16
+            // 
+            textBox16.Location = new Point(70, 180);
+            textBox16.Name = "textBox16";
+            textBox16.Size = new Size(268, 35);
+            textBox16.TabIndex = 52;
             // 
             // label49
             // 
             label49.AutoSize = true;
             label49.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label49.ForeColor = Color.White;
-            label49.Location = new Point(73, 280);
+            label49.Location = new Point(73, 267);
             label49.Name = "label49";
             label49.Size = new Size(116, 30);
             label49.TabIndex = 50;
             label49.Text = "Quyền hạn";
             // 
-            // comboBox10
-            // 
-            comboBox10.FormattingEnabled = true;
-            comboBox10.Location = new Point(598, 313);
-            comboBox10.Name = "comboBox10";
-            comboBox10.Size = new Size(268, 38);
-            comboBox10.TabIndex = 49;
-            // 
             // comboBox11
             // 
             comboBox11.FormattingEnabled = true;
-            comboBox11.Location = new Point(73, 313);
+            comboBox11.Items.AddRange(new object[] { "Nhân viên", "Quản lý" });
+            comboBox11.Location = new Point(73, 300);
             comboBox11.Name = "comboBox11";
             comboBox11.Size = new Size(268, 38);
             comboBox11.TabIndex = 48;
@@ -2005,19 +2131,20 @@ namespace GUI
             button14.BackColor = Color.FromArgb(250, 136, 40);
             button14.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             button14.ForeColor = Color.White;
-            button14.Location = new Point(73, 432);
+            button14.Location = new Point(73, 668);
             button14.Name = "button14";
             button14.Size = new Size(131, 40);
             button14.TabIndex = 47;
             button14.Text = "Xác nhận";
             button14.UseVisualStyleBackColor = false;
+            button14.Click += button14_Click;
             // 
             // label50
             // 
             label50.AutoSize = true;
             label50.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label50.ForeColor = Color.White;
-            label50.Location = new Point(598, 147);
+            label50.Location = new Point(600, 147);
             label50.Name = "label50";
             label50.Size = new Size(103, 30);
             label50.TabIndex = 46;
@@ -2028,7 +2155,7 @@ namespace GUI
             label51.AutoSize = true;
             label51.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label51.ForeColor = Color.White;
-            label51.Location = new Point(73, 150);
+            label51.Location = new Point(70, 147);
             label51.Name = "label51";
             label51.Size = new Size(155, 30);
             label51.TabIndex = 45;
@@ -2059,7 +2186,7 @@ namespace GUI
             MinimumSize = new Size(1400, 900);
             Name = "FormMain";
             StartPosition = FormStartPosition.CenterScreen;
-            FormClosed += FormMain_FormClosed;
+            FormClosing += FormMain_FormClosing;
             Load += FormMain_Load;
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
@@ -2204,22 +2331,12 @@ namespace GUI
         private Label label43;
         private TextBox textBox15;
         private TextBox textBox16;
-        private Label label48;
         private Label label49;
-        private ComboBox comboBox10;
         private ComboBox comboBox11;
         private Button button14;
         private Label label50;
         private Label label51;
         private Label label52;
-        private TextBox textBox24;
-        private TextBox textBox23;
-        private TextBox textBox22;
-        private TextBox textBox21;
-        private TextBox textBox20;
-        private TextBox textBox19;
-        private TextBox textBox18;
-        private TextBox textBox25;
         private TabPage tabPage4;
         private DataGridView dataGridView1;
         private Button button16;
@@ -2231,5 +2348,25 @@ namespace GUI
         private Label label46;
         private DataGridView dataGridView5;
         private DataGridView dataGridView6;
+        private Label label56;
+        private Label label55;
+        private Label label54;
+        private Label label53;
+        private Label label47;
+        private Label label59;
+        private Label label58;
+        private Label label57;
+        private Button button18;
+        private DateTimePicker dateTimePicker3;
+        private TextBox textBox20;
+        private TextBox textBox19;
+        private TextBox textBox17;
+        private Label label64;
+        private Label label63;
+        private Label label62;
+        private Label label61;
+        private Label label60;
+        private Label label48;
+        private ComboBox comboBox10;
     }
 }
