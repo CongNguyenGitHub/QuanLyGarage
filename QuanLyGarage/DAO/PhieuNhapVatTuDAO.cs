@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,11 @@ namespace DAO
         {
             string query = "ThemPhieuNhapVatTu @TenVatTu , @SoLuong , @ThoiDiem";
             return DataProvider.Instance.ExecuteNonQuery(query, new object[] { ten, soluong, now });
+        }
+        public DataTable TinhTienVatTu(string ten, int soluong)
+        {
+            string query = "TinhTienVatTu @TenVatTu , @SoLuong";
+            return DataProvider.Instance.ExecuteQuery(query, new object[] { ten, soluong});
         }
 
     }

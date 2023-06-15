@@ -40,5 +40,15 @@ namespace BUS
             DataTable dt = QuyDinhDAO.Instance.LaySoXeSuaToiDa();
             return int.Parse(dt.Rows[0][0].ToString());
         }
+        public int LaySoLoaiVatTuHienTai()
+        {
+            DataTable dt = QuyDinhDAO.Instance.LaySoLoaiVatTuHienTai();
+            return int.Parse(dt.Rows[0][0].ToString());
+        }
+        public int LaySoLoaiTienCongHienTai()
+        {
+            DataTable dt = QuyDinhDAO.Instance.LaySoLoaiTienCongHienTai();
+            return int.Parse(dt.Rows[0][0].ToString());
+        }
     }
 }

@@ -41,6 +41,15 @@ namespace DAO
             string query = "SELECT GiaTri FROM THAMSO WHERE MaThamSo = '3'";
             return DataProvider.Instance.ExecuteQuery(query);
         }
-        
+        public DataTable LaySoLoaiVatTuHienTai()
+        {
+            string query = "LaySoLoaiVatTuHienTai";
+            return DataProvider.Instance.ExecuteQuery(query);
+        }
+        public DataTable LaySoLoaiTienCongHienTai()
+        {
+            string query = "LaySoLoaiTienCongHienTai";
+            return DataProvider.Instance.ExecuteQuery(query);
+        }
     }
 }
