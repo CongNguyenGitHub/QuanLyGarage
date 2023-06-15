@@ -22,6 +22,8 @@ namespace GUI
         }
         private void FormMain_Load(object sender, EventArgs e)
         {
+            comboBox2.SelectedIndex = 0;
+            comboBox1.SelectedIndex = 0;
             comboBox3.SelectedIndex = comboBox3.Items.IndexOf(DateTime.Now.Month.ToString());
             comboBox5.SelectedIndex = comboBox5.Items.IndexOf(DateTime.Now.Year.ToString());
             comboBox7.SelectedIndex = comboBox7.Items.IndexOf(DateTime.Now.Month.ToString());
@@ -55,11 +57,6 @@ namespace GUI
                     tabControl1.SelectedIndex = 6;
                     break;
                 case "Thay đổi quy định":
-                    if (TaiKhoanBUS.Instance.LayQuyenHan(taiKhoan, matKhau) == "False")
-                    {
-                        MessageBox.Show("Chỉ có quản lý mới được xem quy định", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
                     dataGridView3.DataSource = QuyDinhBUS.Instance.LayTatCaQuyDinh();
                     tabControl1.SelectedIndex = 7;
                     break;
@@ -109,7 +106,10 @@ namespace GUI
                     if (result == DialogResult.OK)
                     {
                         this.DialogResult = DialogResult.OK;
-                        this.Close();
+                    }
+                    else
+                    {
+                        this.Show();
                     }
                     break;
             }
@@ -130,12 +130,12 @@ namespace GUI
             {
                 MessageBox.Show("Vượt quá số xe trong ngày", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            textBox1.Clear();
-            textBox2.Clear();
-            textBox3.Clear();
-            textBox4.Clear();
-            comboBox1.SelectedIndex = -1;
-            dateTimePicker1.Value = DateTime.Now;
+            textBox1.ReadOnly = true;
+            textBox2.ReadOnly = true;
+            textBox3.ReadOnly = true;
+            textBox4.ReadOnly = true;
+            comboBox1.Enabled = false;
+            dateTimePicker1.Enabled = false;
 
         }
 
@@ -169,24 +169,35 @@ namespace GUI
 
         private void button16_Click(object sender, EventArgs e)
         {
+            textBox1.ReadOnly = false;
+            textBox2.ReadOnly = false;
+            textBox3.ReadOnly = false;
+            textBox4.ReadOnly = false;
+            comboBox1.Enabled = true;
+            dateTimePicker1.Enabled = true;
+            comboBox1.SelectedIndex = 0;
+            dateTimePicker1.Value = DateTime.Now;
             textBox1.Clear();
             textBox2.Clear();
             textBox3.Clear();
             textBox4.Clear();
-            comboBox1.SelectedIndex = -1;
-            dateTimePicker1.Value = DateTime.Now;
         }
         private void button17_Click(object sender, EventArgs e)
         {
             textBox5.ReadOnly = false;
             comboBox2.Enabled = true;
             textBox5.Clear();
-            comboBox2.SelectedIndex = -1;
+            comboBox2.SelectedIndex = 0;
             dataGridView4.DataSource = null;
             button2.Enabled = true;
         }
         private void button9_Click(object sender, EventArgs e)
         {
+            if (TaiKhoanBUS.Instance.LayQuyenHan(taiKhoan, matKhau) == "False")
+            {
+                MessageBox.Show("Chỉ có quản lý mới được thay đổi quy định", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             DataGridViewSelectedRowCollection rows = dataGridView3.SelectedRows;
             string? MaThamSo = rows[0].Cells["STT"].Value.ToString();
             string? NoiDung = rows[0].Cells["Nội dung"].Value.ToString();
@@ -358,6 +369,58 @@ namespace GUI
             {
                 System.Windows.Forms.Application.Exit();
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            int soTienThu;
+            string bienSo;
+            DateTime ngayThuTien;
+            if (textBox7.Text == "" || textBox11.Text == "")
+            {
+                MessageBox.Show("Nhập thiếu thông tin", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            bienSo = textBox7.Text;
+            ngayThuTien = dateTimePicker4.Value;
+            DataTable dt = PhieuThuTienBUS.Instance.LayThongTinKhachHang(bienSo);
+            if (dt.Rows.Count == 0)
+            {
+                MessageBox.Show("Xe chưa được tiếp nhận", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (!Int32.TryParse(textBox11.Text, out soTienThu) || soTienThu <= 0 || soTienThu > PhieuThuTienBUS.Instance.LayTienNoKH(bienSo))
+            {
+                MessageBox.Show("Số tiền thu không hợp lê", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            string? Hoten = dt.Rows[0][0].ToString();
+            string? SDT = dt.Rows[0][1].ToString();
+            string? DiaChi = dt.Rows[0][2].ToString();
+            label65.Text = "Họ tên: " + Hoten;
+            label20.Text = "Số điện thoại: " + SDT;
+            label17.Text = "Địa chỉ: " + DiaChi;
+            PhieuThuTienBUS.Instance.ThemPhieuThuTien(bienSo, soTienThu.ToString(), ngayThuTien);
+            textBox7.ReadOnly = true;
+            textBox11.ReadOnly = true;
+            dateTimePicker4.Enabled = false;
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            dateTimePicker4.Enabled = true;
+            textBox7.ReadOnly = false;
+            textBox11.ReadOnly = false;
+            textBox7.Clear();
+            textBox11.Clear();
+            dateTimePicker4.Value = DateTime.Now;
+            label65.Text = label20.Text = label17.Text = "";
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            PhieuNhapVatTuBUS.Instance.ThemPhieuNhapVatTu()
         }
     }
 }
