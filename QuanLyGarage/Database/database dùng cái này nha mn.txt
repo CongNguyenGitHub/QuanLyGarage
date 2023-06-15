@@ -844,6 +844,50 @@ BEGIN
 END
 GO
 
+/****** Procedure TinhTienVatTu ******/
+/****** EXEC TinhTienVatTu @TenVatTuPhuTung = N'Bánh xe', @SoLuong = 2 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[TinhTienVatTu]
+	@TenVatTuPhuTung nvarchar(50),
+	@SoLuong int
+AS
+BEGIN
+	SELECT @SoLuong * DonGia
+	FROM KHO
+	WHERE @TenVatTuPhuTung = TenVatTuPhuTung
+END
+GO
+
+/****** Procedure LaySoLoaiVatTuHienTai /
+/****** EXEC LaySoLoaiVatTuHienTai ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[LaySoLoaiVatTuHienTai]
+AS
+BEGIN
+	SELECT COUNT(DISTINCT MaPhuTung)
+	FROM KHO
+END
+GO
+
+/****** Procedure LaySoLoaiTienCongHienTai /
+/ EXEC LaySoLoaiTienCongHienTai ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[LaySoLoaiTienCongHienTai]
+AS
+BEGIN
+	SELECT COUNT(DISTINCT MaTC) 
+	FROM TIENCONG
+END
+GO
 
 INSERT [dbo].[NGUOIDUNG]([TenND], [GioiTinh], [DiaChi], [NgaySinh], [DienThoai]) VALUES ( N'Nguyễn Quan Thịnh',0, N'23 Hai Bà Trưng', N'04/04/2000', N'0987887709')
 INSERT [dbo].[TAIKHOAN]([MaNguoiDung], [TenDangNhap], [MatKhau], [QuyenHan]) VALUES ( 1, N'quanly01', N'quanly01', 1)
@@ -887,15 +931,10 @@ EXEC ThemXe @BienSo = '008008', @HieuXe = 'Kia'
 EXEC ThemKhachHang @TenKH = N'Hứa Hoàng Linh', @DienThoai = '0834723109', @DiaChi = N'123A đường Hưng Long', @TienNo = 0 
 EXEC ThemXe @BienSo = '009009', @HieuXe = 'Kia'
 
-INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Số lượng quy định', 8)
 INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Số lượng hiệu xe', 10)
 INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Số xe sửa chữa tối đa trong ngày', 30)
 INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Số lượng loại phụ tùng', 200)
 INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Số lượng loại tiền công', 100)
-INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Số lượng tài khoản/1 người ', 1)
-INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Số lượng hồ sơ/1 xe', 1)
-INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Số quy định quản lý có thể thay đổi', 5)
-
 
 SET DATEFORMAT dmy;
 
@@ -930,24 +969,24 @@ INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (7, 950000,
 INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (8, 600000, '28/05/2023 14:30:00')
 INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (9, 550000, '29/05/2023 18:15:00')
 
-INSERT [dbo].[KHO] ([TenVatTuPhuTung], [SoLuong], [DonGia]) VALUES (N'Bánh xe', 100, 200000)
-INSERT [dbo].[KHO] ([TenVatTuPhuTung], [SoLuong], [DonGia]) VALUES (N'Lọc dầu', 200, 300000)
-INSERT [dbo].[KHO] ([TenVatTuPhuTung], [SoLuong], [DonGia]) VALUES (N'Lọc gió', 300, 400000)
+INSERT [dbo].[KHO] ([TenVatTuPhuTung], [SoLuong], [DonGia]) VALUES (N'Bánh xe', 100, 500000)
+INSERT [dbo].[KHO] ([TenVatTuPhuTung], [SoLuong], [DonGia]) VALUES (N'Lọc dầu', 200, 100000)
+INSERT [dbo].[KHO] ([TenVatTuPhuTung], [SoLuong], [DonGia]) VALUES (N'Lọc gió', 300, 80000)
 INSERT [dbo].[KHO] ([TenVatTuPhuTung], [SoLuong], [DonGia]) VALUES (N'Ống xả', 150, 250000)
-INSERT [dbo].[KHO] ([TenVatTuPhuTung], [SoLuong], [DonGia]) VALUES (N'Lọc nhiên liệu', 120, 180000)
-INSERT [dbo].[KHO] ([TenVatTuPhuTung], [SoLuong], [DonGia]) VALUES (N'Bình dầu', 80, 500000)
+INSERT [dbo].[KHO] ([TenVatTuPhuTung], [SoLuong], [DonGia]) VALUES (N'Lọc nhiên liệu', 120, 60000)
+INSERT [dbo].[KHO] ([TenVatTuPhuTung], [SoLuong], [DonGia]) VALUES (N'Bình dầu', 80, 200000)
 INSERT [dbo].[KHO] ([TenVatTuPhuTung], [SoLuong], [DonGia]) VALUES (N'Giảm sóc', 250, 350000)
 INSERT [dbo].[KHO] ([TenVatTuPhuTung], [SoLuong], [DonGia]) VALUES (N'Công tắc đèn', 200, 50000)
 INSERT [dbo].[KHO] ([TenVatTuPhuTung], [SoLuong], [DonGia]) VALUES (N'Dây curoa', 180, 120000)
 INSERT [dbo].[KHO] ([TenVatTuPhuTung], [SoLuong], [DonGia]) VALUES (N'Vành đúc', 120, 350000)
 INSERT [dbo].[KHO] ([TenVatTuPhuTung], [SoLuong], [DonGia]) VALUES (N'Máy nổ', 10, 1500000)
 INSERT [dbo].[KHO] ([TenVatTuPhuTung], [SoLuong], [DonGia]) VALUES (N'Ly hợp', 30, 800000)
-INSERT [dbo].[KHO] ([TenVatTuPhuTung], [SoLuong], [DonGia]) VALUES (N'Bộ phanh', 50, 600000)
+INSERT [dbo].[KHO] ([TenVatTuPhuTung], [SoLuong], [DonGia]) VALUES (N'Bộ phanh', 50, 200000)
 INSERT [dbo].[KHO] ([TenVatTuPhuTung], [SoLuong], [DonGia]) VALUES (N'Đèn pha', 80, 100000)
-INSERT [dbo].[KHO] ([TenVatTuPhuTung], [SoLuong], [DonGia]) VALUES (N'Cụm điều khiển', 25, 500000)
-INSERT [dbo].[KHO] ([TenVatTuPhuTung], [SoLuong], [DonGia]) VALUES (N'Ốp lưng ghế', 60, 200000)
-INSERT [dbo].[KHO] ([TenVatTuPhuTung], [SoLuong], [DonGia]) VALUES (N'Cảm biến áp suất lốp', 15, 400000)
-INSERT [dbo].[KHO] ([TenVatTuPhuTung], [SoLuong], [DonGia]) VALUES (N'Dây điện', 100, 150000)
+INSERT [dbo].[KHO] ([TenVatTuPhuTung], [SoLuong], [DonGia]) VALUES (N'Cụm điều khiển', 25, 150000)
+INSERT [dbo].[KHO] ([TenVatTuPhuTung], [SoLuong], [DonGia]) VALUES (N'Ốp lưng ghế', 60, 50000)
+INSERT [dbo].[KHO] ([TenVatTuPhuTung], [SoLuong], [DonGia]) VALUES (N'Cảm biến áp suất lốp', 15, 200000)
+INSERT [dbo].[KHO] ([TenVatTuPhuTung], [SoLuong], [DonGia]) VALUES (N'Dây điện', 100, 30000)
 INSERT [dbo].[KHO] ([TenVatTuPhuTung], [SoLuong], [DonGia]) VALUES (N'Máy phát điện', 5, 2000000)
 
 EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Bánh xe', @TonDau = 100, @PhatSinh = 60, @TonCuoi = 20
@@ -1008,6 +1047,54 @@ INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuo
 INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (3,2,200,0,200)
 INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (3,3,300,0,300)
 
+INSERT [dbo].[TienCong]([TenTienCong], [ChiPhi]) 
+VALUES (N'Thay nhớt', 100),
+       (N'Vệ sinh nội thất', 150),
+       (N'Kiểm tra động cơ', 200),
+       (N'Thay bộ lọc gió', 80),
+       (N'Thay dầu phanh', 120),
+       (N'Bảo dưỡng hệ thống phanh', 180),
+       (N'Thay bình ắc quy', 100),
+       (N'Kiểm tra hệ thống treo', 160),
+       (N'Thay bóng đèn', 50),
+       (N'Vệ sinh hệ thống làm mát', 130),
+       (N'Kiểm tra hệ thống điện', 90),
+       (N'Thay côn trống', 140),
+       (N'Vệ sinh buồng đốt', 110),
+       (N'Thay dây đai truyền động', 170),
+       (N'Kiểm tra hệ thống làm nhiên liệu', 150),
+       (N'Thay cầu chì', 70),
+       (N'Vệ sinh hệ thống điều hòa', 160),
+       (N'Kiểm tra hệ thống làm phanh', 180),
+       (N'Thay bujít', 60),
+       (N'Vệ sinh bộ lọc không khí', 100),
+       (N'Kiểm tra hệ thống treo', 160),
+       (N'Thay cổ pô', 130),
+       (N'Vệ sinh hệ thống phanh', 180),
+       (N'Kiểm tra hệ thống điều khiển', 120),
+       (N'Thay ống xả', 150),
+       (N'Vệ sinh hệ thống làm mát', 130),
+       (N'Kiểm tra hệ thống nạp nhiên liệu', 140),
+       (N'Thay bộ điều khiển động cơ', 200),
+       (N'Vệ sinh hệ thống điện', 90),
+       (N'Kiểm tra hệ thống điều hòa', 160),
+       (N'Thay bơm xăng', 120),
+       (N'Vệ sinh hệ thống phun xăng', 140),
+       (N'Kiểm tra hệ thống làm nhiên liệu', 150),
+       (N'Thay cầu chì', 70),
+       (N'Vệ sinh bộ lọc không khí', 100),
+       (N'Kiểm tra hệ thống treo', 160),
+       (N'Thay cổ pô', 130),
+       (N'Vệ sinh hệ thống phanh', 180),
+       (N'Kiểm tra hệ thống điều khiển', 120),
+       (N'Thay ống xả', 150),
+       (N'Vệ sinh hệ thống làm mát', 130),
+       (N'Kiểm tra hệ thống nạp nhiên liệu', 140),
+       (N'Thay bộ điều khiển động cơ', 200),
+       (N'Vệ sinh hệ thống điện', 90),
+       (N'Kiểm tra hệ thống điều hòa', 160),
+       (N'Thay bơm xăng', 120),
+       (N'Vệ sinh hệ thống phun xăng', 140)
 
 USE [master]
 GO
