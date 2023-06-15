@@ -861,7 +861,7 @@ BEGIN
 END
 GO
 
-/****** Procedure LaySoLoaiVatTuHienTai /
+/****** Procedure LaySoLoaiVatTuHienTai ******/
 /****** EXEC LaySoLoaiVatTuHienTai ******/
 SET ANSI_NULLS ON
 GO
@@ -875,8 +875,8 @@ BEGIN
 END
 GO
 
-/****** Procedure LaySoLoaiTienCongHienTai /
-/ EXEC LaySoLoaiTienCongHienTai ******/
+/****** Procedure LaySoLoaiTienCongHienTai ****** /
+/ ******EXEC LaySoLoaiTienCongHienTai ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -931,6 +931,35 @@ EXEC ThemXe @BienSo = '008008', @HieuXe = 'Kia'
 EXEC ThemKhachHang @TenKH = N'Hứa Hoàng Linh', @DienThoai = '0834723109', @DiaChi = N'123A đường Hưng Long', @TienNo = 0 
 EXEC ThemXe @BienSo = '009009', @HieuXe = 'Kia'
 
+--- Khách hàng tháng 4 năm 2023
+EXEC ThemKhachHang @TenKH = N'Nguyễn Tấn Phong', @DienThoai = '0789343400', @DiaChi = N'63A đường Hồng Linh',  @TienNo = 0 
+EXEC ThemXe @BienSo = '010010', @HieuXe = 'Honda'
+
+EXEC ThemKhachHang @TenKH = N'Đặng Đức Hoàng', @DienThoai = '0830998601', @DiaChi = N'9C đường Thành Long', @TienNo = 0
+EXEC ThemXe @BienSo = '011011', @HieuXe = 'Lexus'
+
+EXEC ThemKhachHang @TenKH = N'Nguyễn Văn Tân', @DienThoai = '0983409901', @DiaChi = N'16/5 B đường Châu Văn Liêm',  @TienNo = 0 
+EXEC ThemXe @BienSo = '012012', @HieuXe = 'Porsche'
+
+EXEC ThemKhachHang @TenKH = N'Trần Cúc', @DienThoai = '0990776534', @DiaChi = N'57A đường Văn Minh',  @TienNo = 0 
+EXEC ThemXe @BienSo = '013013', @HieuXe = 'Ford'
+
+--- Khách hàng tháng 5 năm 2023
+EXEC ThemKhachHang @TenKH = N'Nguyễn Mỹ Linh', @DienThoai = '0824123786', @DiaChi = N'56A đường Nguyễn Văn Thiệt', @TienNo = 0
+EXEC ThemXe @BienSo = '014014', @HieuXe = 'Chevrolet'
+
+EXEC ThemKhachHang @TenKH = N'Trần Minh Tú', @DienThoai = '0945647609', @DiaChi = N'133A đường Võ Văn Ngân', @TienNo = 0 
+EXEC ThemXe @BienSo = '015015', @HieuXe = 'Honda'
+
+EXEC ThemKhachHang @TenKH = N'Lê Vũ', @DienThoai = '0787398898', @DiaChi = N'3A đường Nguyễn Thị Minh Khai', @TienNo = 0 
+EXEC ThemXe @BienSo = '016016', @HieuXe = 'Audi'
+
+EXEC ThemKhachHang @TenKH = N'Lê Minh Thy', @DienThoai = '0995666823', @DiaChi = N'74B đường Võ Tấn Phát', @TienNo = 0
+EXEC ThemXe @BienSo = '017017', @HieuXe = 'BMW'
+
+EXEC ThemKhachHang @TenKH = N'Võ Linh Chi', @DienThoai = '0998723109', @DiaChi = N'15A đường Mộc Hóa', @TienNo = 0 
+EXEC ThemXe @BienSo = '018018', @HieuXe = 'BMW'
+
 INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Số lượng hiệu xe', 10)
 INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Số xe sửa chữa tối đa trong ngày', 30)
 INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Số lượng loại phụ tùng', 200)
@@ -938,36 +967,91 @@ INSERT [dbo].[THAMSO]([TenThamSo], [GiaTri]) VALUES ( N'Số lượng loại ti�
 
 SET DATEFORMAT dmy;
 
-INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'001001', '01-04-2023', 1, 0, 0, 0)
-INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'002002', '02-04-2023', 2, 0, 0, 0)
-INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'003003', '03-04-2023', 3, 0, 0, 0)
-INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'004004', '04-05-2023', 4, 0, 0, 0) 
-INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'005005', '05-05-2023', 5, 0, 0, 0)
-INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'006006', '06-05-2023', 6, 0, 0, 0)
-INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'007007', '07-06-2023', 7, 0, 0, 0)
-INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'008008', '08-06-2023', 8, 0, 0, 0)
-INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'009009', '09-06-2023', 9, 0, 0, 0)
+
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'001001', '01-04-2023', 1, 0, 0, 200000)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'002002', '02-04-2023', 2, 0, 0, 200000)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'003003', '02-04-2023', 3, 0, 0, 400000)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'004004', '03-04-2023', 4, 0, 0, 600000) 
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'005005', '05-04-2023', 5, 0, 0, 900000)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'006006', '06-04-2023', 6, 0, 0, 700000)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'007007', '13-04-2023', 7, 0, 0,1500000)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'008008', '17-04-2023', 8, 0, 0, 850000)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'009009', '19-04-2023', 9, 0, 0, 300000)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'010010', '05-04-2023', 10, 0, 0, 900000)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'011011', '06-04-2023', 11, 0, 0, 700000)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'012012', '13-04-2023', 12, 0, 0,2000000)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'013013', '17-04-2023', 13, 0, 0, 850000)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'014014', '19-04-2023', 14, 0, 0, 400000)
+
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (1,  200000, '06/04/2023 09:00:00')
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (2,  200000, '06/04/2023 14:30:00')
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (3,  400000, '06/04/2023 18:15:00')
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (4,  600000, '15/04/2023 09:00:00')
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (5,  900000, '15/04/2023 14:30:00')
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (6,  700000, '16/04/2023 18:15:00')
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (7, 1500000, '17/04/2023 09:00:00')
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (8,  850000, '19/04/2023 14:30:00')
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (9,  300000, '25/04/2023 18:15:00')
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (10,  900000, '15/04/2023 14:30:00')
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (11,  700000, '16/04/2023 18:15:00')
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (12, 2000000, '17/04/2023 09:00:00')
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (13,  850000, '19/04/2023 14:30:00')
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (14,  400000, '25/04/2023 18:15:00')
 
 
-INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (1, 100000, '01/04/2023 09:00:00')
-INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (2, 200000, '02/04/2023 14:30:00')
-INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (3, 400000, '03/04/2023 18:15:00')
-INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (4, 600000, '15/04/2023 09:00:00')
-INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (5, 900000, '15/04/2023 14:30:00')
-INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (6, 700000, '16/04/2023 18:15:00')
-INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (7, 150000, '17/04/2023 09:00:00')
-INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (8, 850000, '18/04/2023 14:30:00')
-INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (9, 300000, '25/04/2023 18:15:00')
 
-INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (1, 500000, '02/05/2023 09:00:00')
-INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (2, 700000, '04/05/2023 14:30:00')
-INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (3, 500000, '09/05/2023 18:15:00')
-INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (4, 800000, '15/05/2023 09:00:00')
-INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (5, 250000, '16/05/2023 14:30:00')
-INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (6, 650000, '24/05/2023 18:15:00')
-INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (7, 950000, '25/05/2023 09:00:00')
-INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (8, 600000, '28/05/2023 14:30:00')
-INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (9, 550000, '29/05/2023 18:15:00')
+
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'001001', '01-05-2023', 1, 0, 0, 500000)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'002002', '02-05-2023', 2, 0, 0, 700000)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'003003', '02-05-2023', 3, 0, 0, 500000)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'004004', '04-05-2023', 4, 0, 0, 800000) 
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'005005', '06-05-2023', 5, 0, 0, 250000)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'006006', '09-05-2023', 6, 0, 0, 650000)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'007007', '14-05-2023', 7, 0, 0, 950000)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'008008', '17-05-2023', 8, 0, 0, 600000)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'009009', '17-05-2023', 9, 0, 0, 550000)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'010010', '17-05-2023', 10, 0, 0, 250000)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'015015', '28-05-2023', 15, 0, 0, 650000)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'016016', '19-05-2023', 16, 0, 0, 950000)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'017017', '24-05-2023', 17, 0, 0, 600000)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'018018', '25-05-2023', 18, 0, 0, 550000)
+
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (1, 500000, '06/05/2023 09:00:00')
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (2, 700000, '06/05/2023 14:30:00')
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (3, 500000, '09/05/2023 18:15:00')
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (4, 800000, '15/05/2023 09:00:00')
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (5, 250000, '16/05/2023 14:30:00')
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (6, 650000, '24/05/2023 18:15:00')
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (7, 950000, '25/05/2023 09:00:00')
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (8, 600000, '25/05/2023 14:30:00')
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (9, 550000, '25/05/2023 18:15:00')
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (10, 250000, '26/05/2023 14:30:00')
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (15, 650000, '26/05/2023 18:15:00')
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (16, 950000, '25/05/2023 09:00:00')
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (17, 600000, '28/05/2023 14:30:00')
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (18, 550000, '29/05/2023 18:15:00')
+
+
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'001001', '01-06-2023', 1, 0, 0, 1000000)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'002002', '01-06-2023', 2, 0, 0, 350000)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'003003', '02-06-2023', 3, 0, 0, 600000)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'004004', '09-06-2023', 4, 0, 0, 700000) 
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'008008', '14-06-2023', 8, 0, 0, 900000)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'009009', '16-06-2023', 9, 0, 0, 450000)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'010010', '17-06-2023', 10, 0, 0, 900000)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'013013', '17-06-2023', 13, 0, 0, 450000)
+INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH], [TienCong], [TienPhuTung], [TongTien]) VALUES (N'014014', '19-06-2023', 14, 0, 0, 500000)
+
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (1,  1000000, '06/06/2023 09:00:00')
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (2,  350000, '06/06/2023 14:30:00')
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (3,  600000, '06/06/2023 18:15:00')
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (4,  700000, '15/06/2023 09:00:00')
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (8,  900000, '19/06/2023 14:30:00')
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (9,  450000, '20/06/2023 18:15:00')
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (10,  900000, '20/06/2023 14:30:00')
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (13,  450000, '21/06/2023 14:30:00')
+							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (14,  500000, '21/06/2023 18:15:00')
+
 
 INSERT [dbo].[KHO] ([TenVatTuPhuTung], [SoLuong], [DonGia]) VALUES (N'Bánh xe', 100, 500000)
 INSERT [dbo].[KHO] ([TenVatTuPhuTung], [SoLuong], [DonGia]) VALUES (N'Lọc dầu', 200, 100000)
@@ -1031,21 +1115,54 @@ EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Máy ph�
 
 
 
-INSERT [dbo].[BAOCAOTON] ([ThoiDiemBaoCao]) VALUES ('01/06/2023 09:00:00')
+--INSERT [dbo].[BAOCAOTON] ([ThoiDiemBaoCao]) VALUES ('01/06/2023 09:00:00')
 INSERT [dbo].[BAOCAOTON] ([ThoiDiemBaoCao]) VALUES ('01/05/2023 09:00:00')
 INSERT [dbo].[BAOCAOTON] ([ThoiDiemBaoCao]) VALUES ('01/04/2023 09:00:00')
 
-INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (1,1,100,0,100)
-INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (1,2,200,0,200)
-INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (1,3,300,0,300)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (1,1,100,0,90)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (1,2,200,0,160)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (1,3,300,0,250)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (1,4,150,0,140)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (1,5,120,0,110)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (1,6,80,0,50)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (1,7,250,0,200)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (1,8,200,0,150)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (1,9,180,0,190)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (1,10,120,0,130)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (1,11,10,0,8)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (1,12,30,0,25)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (1,13,50,0,35)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (1,14,80,0,70)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (1,15,25,0,35)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (1,16,60,0,55)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (1,17,15,0,20)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (1,18,100,0,90)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (1,19,5,0,7)
 
-INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (2,1,100,0,100)
-INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (2,2,200,0,200)
-INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (2,3,300,0,300)
 
-INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (3,1,100,0,100)
-INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (3,2,200,0,200)
-INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (3,3,300,0,300)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (2,1,90,0,100)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (2,2,160,0,160)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (2,3,250,0,240)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (2,4,140,0,100)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (2,5,110,0,100)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (2,6,50,0,65)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (2,7,200,0,190)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (2,8,150,0,160)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (2,9,190,0,180)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (2,10,130,0,120)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (2,11,8,0,15)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (2,12,25,0,25)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (2,13,35,0,45)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (2,14,70,0,90)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (2,15,35,0,30)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (2,16,55,0,45)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (2,17,20,0,15)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (2,18,90,0,95)
+INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (2,19,7,0,15)
+
+--INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (3,1,100,0,100)
+--INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (3,2,200,0,200)
+--INSERT [dbo].[CT_BAOCAOTON] ([MaBCT], [MaPhuTung], [TonDau], [PhatSinh], [TonCuoi]) VALUES (3,3,300,0,300)
 
 INSERT [dbo].[TienCong]([TenTienCong], [ChiPhi]) 
 VALUES (N'Thay nhớt', 100),
