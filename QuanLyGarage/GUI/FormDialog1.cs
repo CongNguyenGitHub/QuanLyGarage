@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace GUI
 {
-    public partial class FromDiaglog : Form
+    public partial class FormDialog1 : Form
     {
-        public FromDiaglog()
+        public FormDialog1()
         {
             InitializeComponent();
         }

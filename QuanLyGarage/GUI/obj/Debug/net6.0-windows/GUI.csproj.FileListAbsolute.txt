@@ -172,7 +172,6 @@ C:\Users\NguyenNguyen\SE104\QuanLyGarage\QuanLyGarage\GUI\bin\Debug\net6.0-windo
 C:\Users\NguyenNguyen\SE104\QuanLyGarage\QuanLyGarage\GUI\obj\Debug\net6.0-windows\GUI.csproj.AssemblyReference.cache
 C:\Users\NguyenNguyen\SE104\QuanLyGarage\QuanLyGarage\GUI\obj\Debug\net6.0-windows\GUI.FormDangNhap.resources
 C:\Users\NguyenNguyen\SE104\QuanLyGarage\QuanLyGarage\GUI\obj\Debug\net6.0-windows\GUI.FormMain.resources
-C:\Users\NguyenNguyen\SE104\QuanLyGarage\QuanLyGarage\GUI\obj\Debug\net6.0-windows\GUI.FromDiaglog.resources
 C:\Users\NguyenNguyen\SE104\QuanLyGarage\QuanLyGarage\GUI\obj\Debug\net6.0-windows\GUI.Properties.Resources.resources
 C:\Users\NguyenNguyen\SE104\QuanLyGarage\QuanLyGarage\GUI\obj\Debug\net6.0-windows\GUI.csproj.GenerateResource.cache
 C:\Users\NguyenNguyen\SE104\QuanLyGarage\QuanLyGarage\GUI\obj\Debug\net6.0-windows\GUI.GeneratedMSBuildEditorConfig.editorconfig
@@ -186,3 +185,6 @@ C:\Users\NguyenNguyen\SE104\QuanLyGarage\QuanLyGarage\GUI\obj\Debug\net6.0-windo
 C:\Users\NguyenNguyen\SE104\QuanLyGarage\QuanLyGarage\GUI\obj\Debug\net6.0-windows\GUI.genruntimeconfig.cache
 C:\Users\NguyenNguyen\SE104\QuanLyGarage\QuanLyGarage\GUI\obj\Debug\net6.0-windows\ref\GUI.dll
 C:\github\QuanLyGarage\QuanLyGarage\GUI\obj\Debug\net6.0-windows\GUI.FromDiaglog.resources
+C:\Users\NguyenNguyen\SE104\QuanLyGarage\QuanLyGarage\GUI\obj\Debug\net6.0-windows\GUI.FormDialog2.resources
+C:\Users\NguyenNguyen\SE104\QuanLyGarage\QuanLyGarage\GUI\obj\Debug\net6.0-windows\GUI.FormDialog1.resources
+C:\Users\NguyenNguyen\SE104\QuanLyGarage\QuanLyGarage\GUI\obj\Debug\net6.0-windows\GUI.FormDialog3.resources

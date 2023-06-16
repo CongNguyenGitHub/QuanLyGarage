@@ -22,6 +22,7 @@ namespace GUI
         }
         private void FormMain_Load(object sender, EventArgs e)
         {
+            comboBox4.SelectedIndex = 0;
             comboBox2.SelectedIndex = 0;
             comboBox1.SelectedIndex = 0;
             comboBox3.SelectedIndex = comboBox3.Items.IndexOf(DateTime.Now.Month.ToString());
@@ -101,15 +102,13 @@ namespace GUI
                     tabControl1.SelectedIndex = 12;
                     break;
                 case "Đăng xuất":
-                    DialogResult result = MessageBox.Show("Bạn có muốn đăng xuất không", "Đăng xuất", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2
-                    , MessageBoxOptions.ServiceNotification);
-                    if (result == DialogResult.OK)
-                    {
-                        this.DialogResult = DialogResult.OK;
-                    }
-                    else
-                    {
-                        this.Show();
+                    using (FormDialog3 frmDialog = new FormDialog3())
+                    { 
+                        if (frmDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            this.DialogResult = DialogResult.OK;
+                            this.Close();
+                        }
                     }
                     break;
             }
@@ -130,6 +129,7 @@ namespace GUI
             {
                 MessageBox.Show("Vượt quá số xe trong ngày", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            button1.Enabled = false;
             textBox1.ReadOnly = true;
             textBox2.ReadOnly = true;
             textBox3.ReadOnly = true;
@@ -169,6 +169,7 @@ namespace GUI
 
         private void button16_Click(object sender, EventArgs e)
         {
+            button1.Enabled = true;
             textBox1.ReadOnly = false;
             textBox2.ReadOnly = false;
             textBox3.ReadOnly = false;
@@ -202,7 +203,7 @@ namespace GUI
             string? MaThamSo = rows[0].Cells["STT"].Value.ToString();
             string? NoiDung = rows[0].Cells["Nội dung"].Value.ToString();
             if (NoiDung == null || MaThamSo == null) return;
-            using (FromDiaglog frmDialog = new FromDiaglog())
+            using (FormDialog1 frmDialog = new FormDialog1())
             {
                 frmDialog.Label1.Text = "Nhập " + NoiDung.ToLower() + " mới";
                 if (frmDialog.ShowDialog() == DialogResult.OK)
@@ -267,6 +268,7 @@ namespace GUI
             comboBox6.Enabled = false;
             comboBox7.Enabled = false;
             button13.Enabled = false;
+
 
         }
 
@@ -337,10 +339,12 @@ namespace GUI
             comboBox10.Enabled = false;
             textBox19.ReadOnly = true;
             textBox20.ReadOnly = true;
+            button14.Enabled = false;
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
+            button14.Enabled = true;
             textBox16.ReadOnly = false;
             textBox15.ReadOnly = false;
             comboBox11.Enabled = true;
@@ -358,14 +362,9 @@ namespace GUI
             textBox19.Clear();
             textBox20.Clear();
         }
-        private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
-        }
-
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (this.DialogResult != DialogResult.OK)
+            if(this.DialogResult!=DialogResult.OK)
             {
                 System.Windows.Forms.Application.Exit();
             }
@@ -401,6 +400,7 @@ namespace GUI
             label20.Text = "Số điện thoại: " + SDT;
             label17.Text = "Địa chỉ: " + DiaChi;
             PhieuThuTienBUS.Instance.ThemPhieuThuTien(bienSo, soTienThu.ToString(), ngayThuTien);
+            button3.Enabled = false;
             textBox7.ReadOnly = true;
             textBox11.ReadOnly = true;
             dateTimePicker4.Enabled = false;
@@ -409,6 +409,7 @@ namespace GUI
 
         private void button6_Click(object sender, EventArgs e)
         {
+            button3.Enabled = true;
             dateTimePicker4.Enabled = true;
             textBox7.ReadOnly = false;
             textBox11.ReadOnly = false;
@@ -420,7 +421,49 @@ namespace GUI
 
         private void button7_Click(object sender, EventArgs e)
         {
-           // PhieuNhapVatTuBUS.Instance.ThemPhieuNhapVatTu()
+            if (comboBox4.SelectedIndex == -1 || textBox12.Text == "")
+            {
+                MessageBox.Show("Nhập thiếu thông tin", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            string? VTPT = comboBox4.SelectedItem.ToString();
+            int soLuong = 0;
+            DateTime ngayNhap = dateTimePicker5.Value;
+            if (!Int32.TryParse(textBox12.Text, out soLuong) || soLuong <= 0)
+            {
+                MessageBox.Show("Số lượng không hợp lệ", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            int tongTien = PhieuNhapVatTuBUS.Instance.TinhTienVatTu(VTPT, soLuong.ToString());
+            string prompt = "Tổng tiền cần thanh toán là: " + tongTien.ToString();
+            using (FormDialog2 frmDialog = new FormDialog2())
+            {
+                frmDialog.Label1.Text = prompt;
+                if (frmDialog.ShowDialog() == DialogResult.OK)
+                {
+                    MessageBox.Show("Lập phiếu thành công", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    PhieuNhapVatTuBUS.Instance.ThemPhieuNhapVatTu(VTPT, soLuong.ToString(), ngayNhap);
+                    label67.Text = "Tổng tiền: " + tongTien.ToString();
+                    comboBox4.Enabled = false;
+                    textBox12.ReadOnly = true;
+                    dateTimePicker5.Enabled = false;
+                    button7.Enabled = false;
+
+                }
+            }
+
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            label67.Text = "";
+            comboBox4.Enabled = true;
+            textBox12.ReadOnly = false;
+            dateTimePicker5.Enabled = true;
+            button7.Enabled = true;
+            comboBox4.SelectedIndex = 0;
+            textBox12.Clear();
+            dateTimePicker5.Value = DateTime.Now;
         }
     }
 }

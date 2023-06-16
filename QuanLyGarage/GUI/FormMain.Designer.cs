@@ -1177,6 +1177,7 @@ namespace GUI
             button8.TabIndex = 22;
             button8.Text = "Phiếu mới";
             button8.UseVisualStyleBackColor = false;
+            button8.Click += button8_Click;
             // 
             // comboBox4
             // 
