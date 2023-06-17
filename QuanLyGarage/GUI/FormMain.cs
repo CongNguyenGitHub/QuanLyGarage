@@ -22,6 +22,7 @@ namespace GUI
         }
         private void FormMain_Load(object sender, EventArgs e)
         {
+            dataGridView2.Rows.Add();
             comboBox4.SelectedIndex = 0;
             comboBox2.SelectedIndex = 0;
             comboBox1.SelectedIndex = 0;
@@ -103,7 +104,7 @@ namespace GUI
                     break;
                 case "Đăng xuất":
                     using (FormDialog3 frmDialog = new FormDialog3())
-                    { 
+                    {
                         if (frmDialog.ShowDialog() == DialogResult.OK)
                         {
                             this.DialogResult = DialogResult.OK;
@@ -364,7 +365,7 @@ namespace GUI
         }
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(this.DialogResult!=DialogResult.OK)
+            if (this.DialogResult != DialogResult.OK)
             {
                 System.Windows.Forms.Application.Exit();
             }
@@ -465,5 +466,149 @@ namespace GUI
             textBox12.Clear();
             dateTimePicker5.Value = DateTime.Now;
         }
+
+        private void dataGridView2_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            int newRowInd = dataGridView2.Rows.Count - 1;
+            dataGridView2[0, newRowInd].Value = newRowInd + 1;
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            dataGridView2.Rows.Add();
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            if (dataGridView2.Rows.Count > 0)
+            {
+                dataGridView2.Rows.RemoveAt(dataGridView2.Rows.Count - 1);
+            }
+
+        }
+
+
+        private void dataGridView2_EndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            int cRow, cCol, soLuongNhap, soLuongTon;
+            cRow = e.RowIndex;
+            cCol = e.ColumnIndex;
+            if (cCol == 2 && dataGridView2[2, cRow].Value != null)
+            {
+                string? ten = dataGridView2[2, cRow].Value.ToString();
+                DataTable dt = PhieuSuaChuaBUS.Instance.LayDonGiaAndSoLuongVatTu(ten);
+                dataGridView2[4, cRow].Value = dt.Rows[0][0];
+            }
+            if (cCol == 3 && dataGridView2[3, cRow].Value != null)
+            {
+                if (dataGridView2[2, cRow].Value == null)
+                {
+                    MessageBox.Show("Chưa nhập tên VTPT", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    dataGridView2[3, cRow].Value = "";
+                    return;
+                }
+                if (!Int32.TryParse(dataGridView2[3, cRow].Value.ToString(), out soLuongNhap) || soLuongNhap < 0)
+                {
+                    MessageBox.Show("Số lượng không hợp lệ", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    dataGridView2[3, cRow].Value = "";
+                    return;
+                }
+                string? ten = dataGridView2[2, cRow].Value.ToString();
+                DataTable dt = PhieuSuaChuaBUS.Instance.LayDonGiaAndSoLuongVatTu(ten);
+                Int32.TryParse(dt.Rows[0][1].ToString(), out soLuongTon);
+                if (soLuongTon < soLuongNhap)
+                {
+                    MessageBox.Show("Số lượng tồn của vật tư phụ tùng không đủ", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    dataGridView2[3, cRow].Value = "";
+                    return;
+                }
+
+            }
+
+            if (dataGridView2[2, cRow].Value != null && dataGridView2[3, cRow].Value != null &&
+                dataGridView2[5, cRow].Value != null)
+            {
+                int soLuong, donGia, tienCong;
+                string? tenTienCong = dataGridView2[5, cRow].Value.ToString();
+                Int32.TryParse(dataGridView2[3, cRow].Value.ToString(), out soLuong);
+                Int32.TryParse(dataGridView2[4, cRow].Value.ToString(), out donGia);
+                tienCong = PhieuSuaChuaBUS.Instance.LayTienCong(tenTienCong);
+                dataGridView2[6, cRow].Value = tienCong + soLuong * donGia;
+            }
+            else
+            {
+                dataGridView2[6, cRow].Value = null;
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            int tongTien = 0;
+            DateTime ngaySua = dateTimePicker2.Value;
+            string? bienSo, tenVT, tenTienCong;
+            bienSo = textBox6.Text;
+            int thanhTien, soLuong;
+            if (bienSo == "")
+            {
+                MessageBox.Show("Nhập thiếu thông tin", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (PhieuSuaChuaBUS.Instance.(bienSo).Rows.Count == 0)
+            {
+                MessageBox.Show("Xe chưa được tiếp nhận", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else
+            {
+
+            }
+            foreach (DataGridViewRow row in dataGridView2.Rows)
+            {
+                if (row.Cells[6].Value != null)
+                {
+                    Int32.TryParse(row.Cells[6].Value.ToString(), out thanhTien);
+                    tongTien += thanhTien;
+                }
+                else
+                {
+                    MessageBox.Show("Nhập thiếu thông tin", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+            PhieuSuaChuaBUS.Instance.ThemPhieuSuaChua(bienSo, ngaySua, tongTien);
+            foreach (DataGridViewRow row in dataGridView2.Rows)
+            {
+                tenVT = row.Cells[2].Value.ToString();
+                tenTienCong = row.Cells[5].Value.ToString();
+                Int32.TryParse(row.Cells[3].Value.ToString(), out soLuong);
+                PhieuSuaChuaBUS.Instance.ThemCT_ThemPhieuSuaChua(tenVT, tenTienCong, soLuong);
+
+            }
+            button19.Enabled = false;
+            button20.Enabled = false;
+            button4.Enabled = false;
+            dataGridView2.Enabled = false;
+            textBox6.ReadOnly = true;
+            dateTimePicker2.Enabled = false;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            button19.Enabled = true;
+            button20.Enabled = true;
+            button4.Enabled = true;
+            dataGridView2.Enabled = true;
+            textBox6.ReadOnly = false;
+            dateTimePicker2.Enabled = true;
+            textBox6.Clear();
+            dateTimePicker2.Value = DateTime.Now;
+            for (int i = dataGridView2.Rows.Count - 1; i >= 0; i--)
+            {
+                dataGridView2.Rows.RemoveAt(i);
+            }
+            dataGridView2.Rows.Add();
+
+        }
     }
 }
+

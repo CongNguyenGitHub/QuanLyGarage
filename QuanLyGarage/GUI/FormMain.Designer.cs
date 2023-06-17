@@ -72,6 +72,8 @@ namespace GUI
             DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle19 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle20 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle21 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle22 = new DataGridViewCellStyle();
             imageList1 = new ImageList(components);
             treeView1 = new TreeView();
             tabControl1 = new TabControl();
@@ -106,6 +108,8 @@ namespace GUI
             label11 = new Label();
             dataGridView1 = new DataGridView();
             tabPage5 = new TabPage();
+            button20 = new Button();
+            button19 = new Button();
             dataGridView2 = new DataGridView();
             Column1 = new DataGridViewTextBoxColumn();
             Column2 = new DataGridViewTextBoxColumn();
@@ -370,9 +374,6 @@ namespace GUI
             // 
             // tabControl1
             // 
-            tabControl1.Appearance = TabAppearance.FlatButtons;
-            tabControl1.ItemSize = new Size(0, 1);
-            tabControl1.SizeMode = TabSizeMode.Fixed;
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Controls.Add(tabPage3);
@@ -826,6 +827,8 @@ namespace GUI
             // tabPage5
             // 
             tabPage5.BackColor = Color.FromArgb(34, 34, 34);
+            tabPage5.Controls.Add(button20);
+            tabPage5.Controls.Add(button19);
             tabPage5.Controls.Add(dataGridView2);
             tabPage5.Controls.Add(button5);
             tabPage5.Controls.Add(button4);
@@ -841,92 +844,174 @@ namespace GUI
             tabPage5.TabIndex = 4;
             tabPage5.Text = "tabPage5";
             // 
+            // button20
+            // 
+            button20.BackColor = Color.FromArgb(250, 136, 40);
+            button20.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            button20.ForeColor = Color.White;
+            button20.Image = Properties.Resources.image13;
+            button20.Location = new Point(134, 604);
+            button20.Name = "button20";
+            button20.Size = new Size(35, 35);
+            button20.TabIndex = 22;
+            button20.UseVisualStyleBackColor = false;
+            button20.Click += button20_Click;
+            // 
+            // button19
+            // 
+            button19.BackColor = Color.White;
+            button19.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            button19.ForeColor = Color.Transparent;
+            button19.Image = Properties.Resources.image12;
+            button19.Location = new Point(39, 604);
+            button19.Name = "button19";
+            button19.Size = new Size(35, 35);
+            button19.TabIndex = 21;
+            button19.UseVisualStyleBackColor = false;
+            button19.Click += button19_Click;
+            // 
             // dataGridView2
             // 
             dataGridView2.AllowDrop = true;
+            dataGridView2.AllowUserToAddRows = false;
+            dataGridView2.AllowUserToDeleteRows = false;
+            dataGridView2.AllowUserToResizeColumns = false;
+            dataGridView2.AllowUserToResizeRows = false;
             dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView2.BackgroundColor = Color.FromArgb(34, 34, 34);
+            dataGridView2.BorderStyle = BorderStyle.None;
+            dataGridView2.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = SystemColors.Control;
+            dataGridViewCellStyle9.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle9.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
+            dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             dataGridView2.ColumnHeadersHeight = 40;
+            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridView2.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, Column6, Column7 });
-            dataGridView2.Location = new Point(75, 267);
+            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.BackColor = SystemColors.Window;
+            dataGridViewCellStyle10.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle10.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle10.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.False;
+            dataGridView2.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridView2.GridColor = Color.FromArgb(224, 224, 224);
+            dataGridView2.Location = new Point(39, 267);
+            dataGridView2.Margin = new Padding(0);
+            dataGridView2.MultiSelect = false;
             dataGridView2.Name = "dataGridView2";
+            dataGridView2.RowHeadersVisible = false;
             dataGridView2.RowHeadersWidth = 72;
             dataGridView2.RowTemplate.Height = 37;
-            dataGridView2.Size = new Size(945, 210);
+            dataGridView2.Size = new Size(1007, 299);
             dataGridView2.TabIndex = 20;
+            dataGridView2.CellEndEdit += dataGridView2_EndEdit;
+            dataGridView2.RowsAdded += dataGridView2_RowsAdded;
             // 
             // Column1
             // 
+            Column1.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Column1.FillWeight = 50F;
             Column1.HeaderText = "STT";
-            Column1.MinimumWidth = 9;
+            Column1.MinimumWidth = 50;
             Column1.Name = "Column1";
+            Column1.ReadOnly = true;
+            Column1.Width = 50;
             // 
             // Column2
             // 
+            Column2.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Column2.FillWeight = 99.36082F;
             Column2.HeaderText = "Nội dung";
             Column2.MinimumWidth = 9;
             Column2.Name = "Column2";
+            Column2.Width = 155;
             // 
             // Column3
             // 
+            Column3.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Column3.FillWeight = 150F;
             Column3.HeaderText = "Vật tư";
-            Column3.MinimumWidth = 9;
+            Column3.Items.AddRange(new object[] { "Bánh xe", "Lọc dầu", "Lọc gió", "Ống xả", "Lọc nhiên liệu", "Bình dầu", "Giảm sóc", "Công tắc đèn", "Dây curoa", "Vành đúc", "Máy nổ", "Ly hợp", "Bộ phanh", "Đèn pha", "Cụm điều khiển", "Ốp lưng ghế", "Cảm biến áp suất lốp", "Dây điện", "Máy phát điện" });
+            Column3.MinimumWidth = 150;
             Column3.Name = "Column3";
+            Column3.Width = 150;
             // 
             // Column4
             // 
+            Column4.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Column4.FillWeight = 120F;
             Column4.HeaderText = "Số lượng";
-            Column4.MinimumWidth = 9;
+            Column4.MinimumWidth = 120;
             Column4.Name = "Column4";
+            Column4.Width = 120;
             // 
             // Column5
             // 
+            Column5.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             Column5.HeaderText = "Đơn giá";
-            Column5.MinimumWidth = 9;
+            Column5.MinimumWidth = 100;
             Column5.Name = "Column5";
+            Column5.ReadOnly = true;
+            Column5.Width = 175;
             // 
             // Column6
             // 
+            Column6.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Column6.FillWeight = 200F;
             Column6.HeaderText = "Tiền công";
-            Column6.MinimumWidth = 9;
+            Column6.Items.AddRange(new object[] { "Thay nhớt", "Vệ sinh nội thất", "Kiểm tra động cơ", "Thay bộ lọc gió", "Thay dầu phanh", "Bảo dưỡng hệ thống phanh", "Thay bình ắc quy", "Kiểm tra hệ thống treo", "Thay bóng đèn", "Vệ sinh hệ thống làm mát", "Kiểm tra hệ thống điện", "Thay côn trống", "Vệ sinh buồng đốt", "Thay dây đai truyền động", "Kiểm tra hệ thống làm nhiên liệu", "Thay cầu chì", "Vệ sinh hệ thống điều hòa", "Kiểm tra hệ thống làm phanh", "Thay bujít", "Vệ sinh bộ lọc không khí", "Kiểm tra hệ thống treo", "Thay cổ pô", "Vệ sinh hệ thống phanh", "Kiểm tra hệ thống điều khiển", "Thay ống xả", "Vệ sinh hệ thống làm mát", "Kiểm tra hệ thống nạp nhiên liệu", "Thay bộ điều khiển động cơ", "Vệ sinh hệ thống điện", "Kiểm tra hệ thống điều hòa", "Thay bơm xăng", "Vệ sinh hệ thống phun xăng", "Kiểm tra hệ thống làm nhiên liệu", "Thay cầu chì", "Vệ sinh bộ lọc không khí", "Kiểm tra hệ thống treo", "Thay cổ pô", "Vệ sinh hệ thống phanh", "Kiểm tra hệ thống điều khiển", "Thay ống xả", "Vệ sinh hệ thống làm mát", "Kiểm tra hệ thống nạp nhiên liệu", "Thay bộ điều khiển động cơ", "Vệ sinh hệ thống điện", "Kiểm tra hệ thống điều hòa", "Thay bơm xăng", "Vệ sinh hệ thống phun xăng" });
+            Column6.MinimumWidth = 200;
             Column6.Name = "Column6";
+            Column6.Width = 200;
             // 
             // Column7
             // 
+            Column7.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Column7.FillWeight = 99.36082F;
             Column7.HeaderText = "Thành tiền";
             Column7.MinimumWidth = 9;
             Column7.Name = "Column7";
+            Column7.ReadOnly = true;
+            Column7.Width = 154;
             // 
             // button5
             // 
             button5.BackColor = Color.FromArgb(250, 136, 40);
             button5.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             button5.ForeColor = Color.White;
-            button5.Location = new Point(342, 589);
+            button5.Location = new Point(248, 681);
             button5.Name = "button5";
             button5.Size = new Size(135, 40);
             button5.TabIndex = 18;
             button5.Text = "Phiếu mới";
             button5.UseVisualStyleBackColor = false;
+            button5.Click += button5_Click;
             // 
             // button4
             // 
             button4.BackColor = Color.FromArgb(250, 136, 40);
             button4.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             button4.ForeColor = Color.White;
-            button4.Location = new Point(75, 589);
+            button4.Location = new Point(39, 681);
             button4.Name = "button4";
             button4.Size = new Size(130, 40);
             button4.TabIndex = 17;
             button4.Text = "Xác nhận";
             button4.UseVisualStyleBackColor = false;
+            button4.Click += button4_Click;
             // 
             // label14
             // 
             label14.AutoSize = true;
             label14.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label14.ForeColor = Color.White;
-            label14.Location = new Point(602, 141);
+            label14.Location = new Point(583, 142);
             label14.Name = "label14";
             label14.Size = new Size(158, 30);
             label14.TabIndex = 14;
@@ -934,10 +1019,11 @@ namespace GUI
             // 
             // dateTimePicker2
             // 
-            dateTimePicker2.Location = new Point(602, 172);
+            dateTimePicker2.Format = DateTimePickerFormat.Short;
+            dateTimePicker2.Location = new Point(583, 174);
             dateTimePicker2.MinDate = new DateTime(2003, 12, 3, 0, 0, 0, 0);
             dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(333, 35);
+            dateTimePicker2.Size = new Size(268, 35);
             dateTimePicker2.TabIndex = 13;
             // 
             // label13
@@ -945,7 +1031,7 @@ namespace GUI
             label13.AutoSize = true;
             label13.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label13.ForeColor = Color.White;
-            label13.Location = new Point(75, 141);
+            label13.Location = new Point(39, 142);
             label13.Name = "label13";
             label13.Size = new Size(82, 30);
             label13.TabIndex = 5;
@@ -953,7 +1039,7 @@ namespace GUI
             // 
             // textBox6
             // 
-            textBox6.Location = new Point(75, 174);
+            textBox6.Location = new Point(39, 175);
             textBox6.Name = "textBox6";
             textBox6.Size = new Size(268, 35);
             textBox6.TabIndex = 4;
@@ -962,7 +1048,7 @@ namespace GUI
             // 
             label12.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
             label12.ForeColor = Color.White;
-            label12.Location = new Point(75, 42);
+            label12.Location = new Point(39, 33);
             label12.Name = "label12";
             label12.Size = new Size(475, 56);
             label12.TabIndex = 2;
@@ -1261,35 +1347,35 @@ namespace GUI
             dataGridView3.AllowUserToDeleteRows = false;
             dataGridView3.AllowUserToResizeColumns = false;
             dataGridView3.AllowUserToResizeRows = false;
-            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle9.BackColor = Color.FromArgb(34, 34, 34);
-            dataGridViewCellStyle9.ForeColor = Color.White;
-            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
-            dataGridView3.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle11.ForeColor = Color.White;
+            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
+            dataGridView3.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
             dataGridView3.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView3.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView3.BackgroundColor = Color.FromArgb(34, 34, 34);
             dataGridView3.BorderStyle = BorderStyle.None;
             dataGridView3.CellBorderStyle = DataGridViewCellBorderStyle.RaisedHorizontal;
             dataGridView3.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle10.BackColor = Color.FromArgb(34, 34, 34);
-            dataGridViewCellStyle10.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle10.ForeColor = Color.White;
-            dataGridViewCellStyle10.SelectionBackColor = Color.FromArgb(34, 34, 34);
-            dataGridViewCellStyle10.SelectionForeColor = Color.White;
-            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.True;
-            dataGridView3.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle12.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle12.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle12.ForeColor = Color.White;
+            dataGridViewCellStyle12.SelectionBackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle12.SelectionForeColor = Color.White;
+            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.True;
+            dataGridView3.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
             dataGridView3.ColumnHeadersHeight = 54;
             dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle11.BackColor = Color.FromArgb(34, 34, 34);
-            dataGridViewCellStyle11.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle11.ForeColor = Color.White;
-            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
-            dataGridView3.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle13.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle13.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle13.ForeColor = Color.White;
+            dataGridViewCellStyle13.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.True;
+            dataGridView3.DefaultCellStyle = dataGridViewCellStyle13;
             dataGridView3.EnableHeadersVisualStyles = false;
             dataGridView3.GridColor = Color.White;
             dataGridView3.Location = new Point(43, 132);
@@ -1298,13 +1384,13 @@ namespace GUI
             dataGridView3.Name = "dataGridView3";
             dataGridView3.ReadOnly = true;
             dataGridView3.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle12.BackColor = Color.FromArgb(34, 34, 34);
-            dataGridViewCellStyle12.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle12.ForeColor = Color.White;
-            dataGridViewCellStyle12.SelectionBackColor = Color.FromArgb(34, 34, 34);
-            dataGridViewCellStyle12.SelectionForeColor = Color.White;
-            dataGridView3.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle14.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle14.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle14.ForeColor = Color.White;
+            dataGridViewCellStyle14.SelectionBackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle14.SelectionForeColor = Color.White;
+            dataGridView3.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
             dataGridView3.RowHeadersVisible = false;
             dataGridView3.RowHeadersWidth = 50;
             dataGridView3.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
@@ -1374,35 +1460,35 @@ namespace GUI
             dataGridView5.AllowUserToDeleteRows = false;
             dataGridView5.AllowUserToResizeColumns = false;
             dataGridView5.AllowUserToResizeRows = false;
-            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle13.BackColor = Color.FromArgb(34, 34, 34);
-            dataGridViewCellStyle13.ForeColor = Color.White;
-            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.True;
-            dataGridView5.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle15.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle15.ForeColor = Color.White;
+            dataGridViewCellStyle15.WrapMode = DataGridViewTriState.True;
+            dataGridView5.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle15;
             dataGridView5.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView5.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView5.BackgroundColor = Color.FromArgb(34, 34, 34);
             dataGridView5.BorderStyle = BorderStyle.None;
             dataGridView5.CellBorderStyle = DataGridViewCellBorderStyle.RaisedHorizontal;
             dataGridView5.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle14.BackColor = Color.FromArgb(34, 34, 34);
-            dataGridViewCellStyle14.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle14.ForeColor = Color.White;
-            dataGridViewCellStyle14.SelectionBackColor = Color.FromArgb(34, 34, 34);
-            dataGridViewCellStyle14.SelectionForeColor = Color.White;
-            dataGridViewCellStyle14.WrapMode = DataGridViewTriState.True;
-            dataGridView5.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle16.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle16.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle16.ForeColor = Color.White;
+            dataGridViewCellStyle16.SelectionBackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle16.SelectionForeColor = Color.White;
+            dataGridViewCellStyle16.WrapMode = DataGridViewTriState.True;
+            dataGridView5.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
             dataGridView5.ColumnHeadersHeight = 54;
             dataGridView5.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle15.BackColor = Color.FromArgb(34, 34, 34);
-            dataGridViewCellStyle15.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle15.ForeColor = Color.White;
-            dataGridViewCellStyle15.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = DataGridViewTriState.True;
-            dataGridView5.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle17.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle17.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle17.ForeColor = Color.White;
+            dataGridViewCellStyle17.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = DataGridViewTriState.True;
+            dataGridView5.DefaultCellStyle = dataGridViewCellStyle17;
             dataGridView5.EnableHeadersVisualStyles = false;
             dataGridView5.GridColor = Color.White;
             dataGridView5.Location = new Point(0, 407);
@@ -1411,13 +1497,13 @@ namespace GUI
             dataGridView5.Name = "dataGridView5";
             dataGridView5.ReadOnly = true;
             dataGridView5.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle16.BackColor = Color.FromArgb(34, 34, 34);
-            dataGridViewCellStyle16.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle16.ForeColor = Color.White;
-            dataGridViewCellStyle16.SelectionBackColor = Color.FromArgb(34, 34, 34);
-            dataGridViewCellStyle16.SelectionForeColor = Color.White;
-            dataGridView5.RowHeadersDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle18.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle18.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle18.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle18.ForeColor = Color.White;
+            dataGridViewCellStyle18.SelectionBackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle18.SelectionForeColor = Color.White;
+            dataGridView5.RowHeadersDefaultCellStyle = dataGridViewCellStyle18;
             dataGridView5.RowHeadersVisible = false;
             dataGridView5.RowHeadersWidth = 50;
             dataGridView5.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
@@ -1531,35 +1617,35 @@ namespace GUI
             dataGridView6.AllowUserToDeleteRows = false;
             dataGridView6.AllowUserToResizeColumns = false;
             dataGridView6.AllowUserToResizeRows = false;
-            dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle17.BackColor = Color.FromArgb(34, 34, 34);
-            dataGridViewCellStyle17.ForeColor = Color.White;
-            dataGridViewCellStyle17.WrapMode = DataGridViewTriState.True;
-            dataGridView6.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle19.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle19.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle19.ForeColor = Color.White;
+            dataGridViewCellStyle19.WrapMode = DataGridViewTriState.True;
+            dataGridView6.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle19;
             dataGridView6.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView6.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView6.BackgroundColor = Color.FromArgb(34, 34, 34);
             dataGridView6.BorderStyle = BorderStyle.None;
             dataGridView6.CellBorderStyle = DataGridViewCellBorderStyle.RaisedHorizontal;
             dataGridView6.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle18.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle18.BackColor = Color.FromArgb(34, 34, 34);
-            dataGridViewCellStyle18.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle18.ForeColor = Color.White;
-            dataGridViewCellStyle18.SelectionBackColor = Color.FromArgb(34, 34, 34);
-            dataGridViewCellStyle18.SelectionForeColor = Color.White;
-            dataGridViewCellStyle18.WrapMode = DataGridViewTriState.True;
-            dataGridView6.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle20.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle20.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle20.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle20.ForeColor = Color.White;
+            dataGridViewCellStyle20.SelectionBackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle20.SelectionForeColor = Color.White;
+            dataGridViewCellStyle20.WrapMode = DataGridViewTriState.True;
+            dataGridView6.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle20;
             dataGridView6.ColumnHeadersHeight = 54;
             dataGridView6.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle19.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle19.BackColor = Color.FromArgb(34, 34, 34);
-            dataGridViewCellStyle19.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle19.ForeColor = Color.White;
-            dataGridViewCellStyle19.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle19.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle19.WrapMode = DataGridViewTriState.True;
-            dataGridView6.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle21.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle21.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle21.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle21.ForeColor = Color.White;
+            dataGridViewCellStyle21.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle21.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle21.WrapMode = DataGridViewTriState.True;
+            dataGridView6.DefaultCellStyle = dataGridViewCellStyle21;
             dataGridView6.EnableHeadersVisualStyles = false;
             dataGridView6.GridColor = Color.White;
             dataGridView6.Location = new Point(-4, 340);
@@ -1568,13 +1654,13 @@ namespace GUI
             dataGridView6.Name = "dataGridView6";
             dataGridView6.ReadOnly = true;
             dataGridView6.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle20.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle20.BackColor = Color.FromArgb(34, 34, 34);
-            dataGridViewCellStyle20.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle20.ForeColor = Color.White;
-            dataGridViewCellStyle20.SelectionBackColor = Color.FromArgb(34, 34, 34);
-            dataGridViewCellStyle20.SelectionForeColor = Color.White;
-            dataGridView6.RowHeadersDefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle22.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle22.BackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle22.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle22.ForeColor = Color.White;
+            dataGridViewCellStyle22.SelectionBackColor = Color.FromArgb(34, 34, 34);
+            dataGridViewCellStyle22.SelectionForeColor = Color.White;
+            dataGridView6.RowHeadersDefaultCellStyle = dataGridViewCellStyle22;
             dataGridView6.RowHeadersVisible = false;
             dataGridView6.RowHeadersWidth = 50;
             dataGridView6.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
@@ -2287,13 +2373,6 @@ namespace GUI
         private Button button5;
         private Button button4;
         private DataGridView dataGridView2;
-        private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewComboBoxColumn Column3;
-        private DataGridViewTextBoxColumn Column4;
-        private DataGridViewTextBoxColumn Column5;
-        private DataGridViewComboBoxColumn Column6;
-        private DataGridViewTextBoxColumn Column7;
         private Button button3;
         private Label label16;
         private Label label17;
@@ -2389,5 +2468,14 @@ namespace GUI
         private Label label67;
         private Label label66;
         private DateTimePicker dateTimePicker5;
+        private Button button20;
+        private Button button19;
+        private DataGridViewTextBoxColumn Column1;
+        private DataGridViewTextBoxColumn Column2;
+        private DataGridViewComboBoxColumn Column3;
+        private DataGridViewTextBoxColumn Column4;
+        private DataGridViewTextBoxColumn Column5;
+        private DataGridViewComboBoxColumn Column6;
+        private DataGridViewTextBoxColumn Column7;
     }
 }

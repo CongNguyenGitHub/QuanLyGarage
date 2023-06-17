@@ -42,7 +42,7 @@ namespace DAO
         }
         public int ThemCT_ThemPhieuSuaChua(string TenVatTu, string TenTienCong, int SoLuong)
         {
-            string query = "ThemCT_ThemPhieuSuaChua @TenVatTu , @TenTienCong , @SoLuong";
+            string query = "ThemCT_PhieuSuaChua @TenVatTu , @TenTienCong , @SoLuong";
             return DataProvider.Instance.ExecuteNonQuery(query, new object[] { TenVatTu, TenTienCong, SoLuong });
         }
     }
