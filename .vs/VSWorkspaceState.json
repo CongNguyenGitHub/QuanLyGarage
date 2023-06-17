@@ -4,8 +4,9 @@
     "\\QuanLyGarage",
     "\\QuanLyGarage\\BUS",
     "\\QuanLyGarage\\DAO",
-    "\\QuanLyGarage\\GUI"
+    "\\QuanLyGarage\\GUI",
+    "\\QuanLyGarage\\packages"
   ],
-  "SelectedNode": "\\QuanLyGarage\\DAO\\PhieuNhapVatTuDAO.cs",
+  "SelectedNode": "\\QuanLyGarage\\DAO\\PhieuSuaChuaDAO.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -30,6 +31,12 @@ namespace DAO
             string query = "LayDonGiaAndSoLuongVatTu @TenVatTu";
             return DataProvider.Instance.ExecuteQuery(query, new object[] { ten });
         }
+        public DataTable KiemTraXeDaDuocTiepNhan(string bienso)
+        {
+            string query = "KiemTraXeDaDuocTiepNhan @BienSo";
+            return DataProvider.Instance.ExecuteQuery(query, new object[] { bienso });
+        }
+
         public DataTable LayTienCong(string ten)
         {
             string query = "LayTienCong @TenTienCong";
@@ -45,5 +52,6 @@ namespace DAO
             string query = "ThemCT_ThemPhieuSuaChua @TenVatTu , @TenTienCong , @SoLuong";
             return DataProvider.Instance.ExecuteNonQuery(query, new object[] { TenVatTu, TenTienCong, SoLuong });
         }
+
     }
 }
