@@ -974,6 +974,23 @@ BEGIN
 END
 GO
 
+/****** Procedure KiemTraXeDaDuocTiepNhan ******/
+/****** EXEC KiemTraXeDaDuocTiepNhan @BienSo = '001001' ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE	PROCEDURE [dbo].[KiemTraXeDaDuocTiepNhan]
+	@BienSo varchar(10)
+AS
+BEGIN
+	SELECT *
+	FROM XE x
+	WHERE x.BienSo = @BienSo
+END
+GO
+
+
 INSERT [dbo].[NGUOIDUNG]([TenND], [GioiTinh], [DiaChi], [NgaySinh], [DienThoai]) VALUES ( N'Nguyễn Quan Thịnh',0, N'23 Hai Bà Trưng', N'04/04/2000', N'0987887709')
 INSERT [dbo].[TAIKHOAN]([MaNguoiDung], [TenDangNhap], [MatKhau], [QuyenHan]) VALUES ( 1, N'quanly01', N'quanly01', 1)
 
