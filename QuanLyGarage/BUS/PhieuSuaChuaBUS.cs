@@ -31,6 +31,11 @@ namespace BUS
             // dt.Rows[0][0] la don gia
             // dt.Rows[0][1] la sl hien tai trong kho
         }
+        public DataTable KiemTraXeDaDuocTiepNhan(string bienso)
+        {
+            return PhieuSuaChuaDAO.Instance.KiemTraXeDaDuocTiepNhan(bienso);
+        }
+     
         public int LayTienCong(string ten)
         {
             DataTable dt = PhieuSuaChuaDAO.Instance.LayTienCong(ten);

@@ -553,7 +553,7 @@ namespace GUI
                 MessageBox.Show("Nhập thiếu thông tin", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (PhieuSuaChuaBUS.Instance.(bienSo).Rows.Count == 0)
+            if (PhieuSuaChuaBUS.Instance.KiemTraXeDaDuocTiepNhan(bienSo).Rows.Count == 0)
             {
                 MessageBox.Show("Xe chưa được tiếp nhận", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -576,6 +576,7 @@ namespace GUI
                 }
             }
             PhieuSuaChuaBUS.Instance.ThemPhieuSuaChua(bienSo, ngaySua, tongTien);
+            MessageBox.Show("Thêm phiếu sửa chữa thành công","",MessageBoxButtons.OK, MessageBoxIcon.Information);
             foreach (DataGridViewRow row in dataGridView2.Rows)
             {
                 tenVT = row.Cells[2].Value.ToString();
