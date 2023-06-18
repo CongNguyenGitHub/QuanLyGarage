@@ -25,6 +25,10 @@ namespace BUS
             }
         }
         private PhieuSuaChuaBUS() { }
+        public DataTable LayBienSoDaTiepNhan()
+        {
+            return PhieuSuaChuaDAO.Instance.LayBienSoDaTiepNhan();
+        }
         public DataTable LayDonGiaAndSoLuongVatTu(string ten)
         {
             return PhieuSuaChuaDAO.Instance.LayDonGiaAndSoLuongVatTu(ten);

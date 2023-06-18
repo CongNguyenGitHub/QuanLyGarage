@@ -64,7 +64,7 @@
             // 
             label1.Font = new Font("Segoe UI", 9.857143F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.Black;
-            label1.Location = new Point(95, 82);
+            label1.Location = new Point(95, 61);
             label1.Name = "label1";
             label1.Size = new Size(307, 106);
             label1.TabIndex = 31;

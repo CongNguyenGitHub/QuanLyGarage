@@ -23,6 +23,18 @@ namespace GUI
         private void FormMain_Load(object sender, EventArgs e)
         {
             dataGridView2.Rows.Add();
+            List<string> bienSo = new List<string>();
+            DataTable dt = PhieuSuaChuaBUS.Instance.LayBienSoDaTiepNhan();
+            foreach (DataRow row in dt.Rows)
+            {
+#pragma warning disable CS8604 // Possible null reference argument.
+                bienSo.Add(row[0].ToString());
+#pragma warning restore CS8604 // Possible null reference argument.
+            }
+            comboBox8.DataSource = bienSo;
+            comboBox8.SelectedIndex = 0;
+            comboBox9.DataSource = bienSo;
+            comboBox9.SelectedIndex = 0;
             comboBox4.SelectedIndex = 0;
             comboBox2.SelectedIndex = 0;
             comboBox1.SelectedIndex = 0;
@@ -59,8 +71,8 @@ namespace GUI
                     tabControl1.SelectedIndex = 6;
                     break;
                 case "Thay đổi quy định":
-                    dataGridView3.DataSource = QuyDinhBUS.Instance.LayTatCaQuyDinh();
                     tabControl1.SelectedIndex = 7;
+                    dataGridView3.DataSource = QuyDinhBUS.Instance.LayTatCaQuyDinh();
                     break;
                 case "Doanh thu":
                     if (TaiKhoanBUS.Instance.LayQuyenHan(taiKhoan, matKhau) == "False")
@@ -111,6 +123,10 @@ namespace GUI
                             this.Close();
                         }
                     }
+                    break;
+                case "Xem danh sách vật tư":
+                    tabControl1.SelectedIndex = 13;
+                    dataGridView7.DataSource = PhieuNhapVatTuBUS.Instance.LaySoLuongVatTuHienTai();
                     break;
             }
         }
@@ -374,21 +390,16 @@ namespace GUI
         private void button3_Click(object sender, EventArgs e)
         {
             int soTienThu;
-            string bienSo;
+            string? bienSo;
             DateTime ngayThuTien;
-            if (textBox7.Text == "" || textBox11.Text == "")
+            if (comboBox9.SelectedIndex == -1 || textBox11.Text == "")
             {
                 MessageBox.Show("Nhập thiếu thông tin", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            bienSo = textBox7.Text;
+            bienSo = comboBox9.SelectedValue.ToString();
             ngayThuTien = dateTimePicker4.Value;
             DataTable dt = PhieuThuTienBUS.Instance.LayThongTinKhachHang(bienSo);
-            if (dt.Rows.Count == 0)
-            {
-                MessageBox.Show("Xe chưa được tiếp nhận", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
             if (!Int32.TryParse(textBox11.Text, out soTienThu) || soTienThu <= 0 || soTienThu > PhieuThuTienBUS.Instance.LayTienNoKH(bienSo))
             {
                 MessageBox.Show("Số tiền thu không hợp lê", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -402,7 +413,7 @@ namespace GUI
             label17.Text = "Địa chỉ: " + DiaChi;
             PhieuThuTienBUS.Instance.ThemPhieuThuTien(bienSo, soTienThu.ToString(), ngayThuTien);
             button3.Enabled = false;
-            textBox7.ReadOnly = true;
+            comboBox9.Enabled = false;
             textBox11.ReadOnly = true;
             dateTimePicker4.Enabled = false;
 
@@ -412,9 +423,9 @@ namespace GUI
         {
             button3.Enabled = true;
             dateTimePicker4.Enabled = true;
-            textBox7.ReadOnly = false;
+            comboBox9.Enabled = true;
             textBox11.ReadOnly = false;
-            textBox7.Clear();
+            comboBox9.SelectedIndex = 0;
             textBox11.Clear();
             dateTimePicker4.Value = DateTime.Now;
             label65.Text = label20.Text = label17.Text = "";
@@ -436,7 +447,7 @@ namespace GUI
                 return;
             }
             int tongTien = PhieuNhapVatTuBUS.Instance.TinhTienVatTu(VTPT, soLuong.ToString());
-            string prompt = "Tổng tiền cần thanh toán là: " + tongTien.ToString();
+            string prompt = "Tổng tiền: " + tongTien.ToString();
             using (FormDialog2 frmDialog = new FormDialog2())
             {
                 frmDialog.Label1.Text = prompt;
@@ -444,7 +455,6 @@ namespace GUI
                 {
                     MessageBox.Show("Lập phiếu thành công", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     PhieuNhapVatTuBUS.Instance.ThemPhieuNhapVatTu(VTPT, soLuong.ToString(), ngayNhap);
-                    label67.Text = "Tổng tiền: " + tongTien.ToString();
                     comboBox4.Enabled = false;
                     textBox12.ReadOnly = true;
                     dateTimePicker5.Enabled = false;
@@ -457,7 +467,6 @@ namespace GUI
 
         private void button8_Click(object sender, EventArgs e)
         {
-            label67.Text = "";
             comboBox4.Enabled = true;
             textBox12.ReadOnly = false;
             dateTimePicker5.Enabled = true;
@@ -544,23 +553,13 @@ namespace GUI
         private void button4_Click(object sender, EventArgs e)
         {
             int tongTien = 0;
-            DateTime ngaySua = dateTimePicker2.Value;
+            DateTime ngaySua;
             string? bienSo, tenVT, tenTienCong;
-            bienSo = textBox6.Text;
             int thanhTien, soLuong;
-            if (bienSo == "")
+            if (comboBox8.SelectedIndex == -1)
             {
                 MessageBox.Show("Nhập thiếu thông tin", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
-            }
-            if (PhieuSuaChuaBUS.Instance.KiemTraXeDaDuocTiepNhan(bienSo).Rows.Count == 0)
-            {
-                MessageBox.Show("Xe chưa được tiếp nhận", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            else
-            {
-
             }
             foreach (DataGridViewRow row in dataGridView2.Rows)
             {
@@ -575,22 +574,33 @@ namespace GUI
                     return;
                 }
             }
-            PhieuSuaChuaBUS.Instance.ThemPhieuSuaChua(bienSo, ngaySua, tongTien);
-            MessageBox.Show("Thêm phiếu sửa chữa thành công", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            foreach (DataGridViewRow row in dataGridView2.Rows)
+            bienSo = comboBox8.SelectedValue.ToString();
+            ngaySua = dateTimePicker2.Value;
+            string prompt = "Tổng tiền: " + tongTien.ToString();
+            using (FormDialog2 frmDialog = new FormDialog2())
             {
-                tenVT = row.Cells[2].Value.ToString();
-                tenTienCong = row.Cells[5].Value.ToString();
-                Int32.TryParse(row.Cells[3].Value.ToString(), out soLuong);
-                PhieuSuaChuaBUS.Instance.ThemCT_ThemPhieuSuaChua(tenVT, tenTienCong, soLuong);
+                frmDialog.Label1.Text = prompt;
+                if (frmDialog.ShowDialog() == DialogResult.OK)
+                {
+                    PhieuSuaChuaBUS.Instance.ThemPhieuSuaChua(bienSo, ngaySua, tongTien);
+                    MessageBox.Show("Thêm phiếu sửa chữa thành công", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    foreach (DataGridViewRow row in dataGridView2.Rows)
+                    {
+                        tenVT = row.Cells[2].Value.ToString();
+                        tenTienCong = row.Cells[5].Value.ToString();
+                        Int32.TryParse(row.Cells[3].Value.ToString(), out soLuong);
+                        PhieuSuaChuaBUS.Instance.ThemCT_ThemPhieuSuaChua(tenVT, tenTienCong, soLuong);
 
+                    }
+                    button19.Enabled = false;
+                    button20.Enabled = false;
+                    button4.Enabled = false;
+                    dataGridView2.Enabled = false;
+                    comboBox8.Enabled = false;
+                    dateTimePicker2.Enabled = false;
+
+                }
             }
-            button19.Enabled = false;
-            button20.Enabled = false;
-            button4.Enabled = false;
-            dataGridView2.Enabled = false;
-            textBox6.ReadOnly = true;
-            dateTimePicker2.Enabled = false;
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -599,9 +609,9 @@ namespace GUI
             button20.Enabled = true;
             button4.Enabled = true;
             dataGridView2.Enabled = true;
-            textBox6.ReadOnly = false;
+            comboBox8.Enabled = true;
             dateTimePicker2.Enabled = true;
-            textBox6.Clear();
+            comboBox8.SelectedIndex = 0;
             dateTimePicker2.Value = DateTime.Now;
             for (int i = dataGridView2.Rows.Count - 1; i >= 0; i--)
             {
