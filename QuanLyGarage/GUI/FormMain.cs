@@ -576,7 +576,7 @@ namespace GUI
                 }
             }
             PhieuSuaChuaBUS.Instance.ThemPhieuSuaChua(bienSo, ngaySua, tongTien);
-            MessageBox.Show("Thêm phiếu sửa chữa thành công","",MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Thêm phiếu sửa chữa thành công", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             foreach (DataGridViewRow row in dataGridView2.Rows)
             {
                 tenVT = row.Cells[2].Value.ToString();

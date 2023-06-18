@@ -369,14 +369,11 @@ namespace GUI
             treeView1.ShowPlusMinus = false;
             treeView1.ShowRootLines = false;
             treeView1.Size = new Size(289, 841);
-            treeView1.TabIndex = 1;
+            treeView1.TabIndex = 0;
             treeView1.AfterSelect += treeView1_AfterSelect;
             // 
             // tabControl1
             // 
-            tabControl1.Appearance = TabAppearance.FlatButtons;
-            tabControl1.ItemSize = new Size(0, 1);
-            tabControl1.SizeMode = TabSizeMode.Fixed;
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Controls.Add(tabPage3);
@@ -452,7 +449,7 @@ namespace GUI
             button16.Location = new Point(341, 629);
             button16.Name = "button16";
             button16.Size = new Size(131, 40);
-            button16.TabIndex = 14;
+            button16.TabIndex = 8;
             button16.Text = "Làm mới";
             button16.UseVisualStyleBackColor = false;
             button16.Click += button16_Click;
@@ -465,7 +462,7 @@ namespace GUI
             button1.Location = new Point(78, 629);
             button1.Name = "button1";
             button1.Size = new Size(131, 40);
-            button1.TabIndex = 13;
+            button1.TabIndex = 7;
             button1.Text = "Xác nhận";
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
@@ -558,21 +555,21 @@ namespace GUI
             textBox4.Location = new Point(75, 507);
             textBox4.Name = "textBox4";
             textBox4.Size = new Size(268, 35);
-            textBox4.TabIndex = 4;
+            textBox4.TabIndex = 3;
             // 
             // textBox3
             // 
             textBox3.Location = new Point(78, 347);
             textBox3.Name = "textBox3";
             textBox3.Size = new Size(266, 35);
-            textBox3.TabIndex = 3;
+            textBox3.TabIndex = 2;
             // 
             // textBox2
             // 
             textBox2.Location = new Point(605, 175);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(268, 35);
-            textBox2.TabIndex = 2;
+            textBox2.TabIndex = 4;
             // 
             // textBox1
             // 
@@ -616,7 +613,7 @@ namespace GUI
             button17.Location = new Point(311, 259);
             button17.Name = "button17";
             button17.Size = new Size(131, 40);
-            button17.TabIndex = 16;
+            button17.TabIndex = 4;
             button17.Text = "Làm mới";
             button17.UseVisualStyleBackColor = false;
             button17.Click += button17_Click;
@@ -691,7 +688,7 @@ namespace GUI
             button2.Location = new Point(75, 259);
             button2.Name = "button2";
             button2.Size = new Size(131, 40);
-            button2.TabIndex = 14;
+            button2.TabIndex = 3;
             button2.Text = "Xác nhận";
             button2.UseVisualStyleBackColor = false;
             button2.Click += button2_Click;
@@ -723,7 +720,7 @@ namespace GUI
             textBox5.Location = new Point(75, 175);
             textBox5.Name = "textBox5";
             textBox5.Size = new Size(268, 35);
-            textBox5.TabIndex = 2;
+            textBox5.TabIndex = 1;
             // 
             // comboBox2
             // 
@@ -732,7 +729,7 @@ namespace GUI
             comboBox2.Location = new Point(602, 172);
             comboBox2.Name = "comboBox2";
             comboBox2.Size = new Size(268, 38);
-            comboBox2.TabIndex = 1;
+            comboBox2.TabIndex = 2;
             // 
             // label8
             // 
@@ -856,7 +853,7 @@ namespace GUI
             button20.Location = new Point(134, 604);
             button20.Name = "button20";
             button20.Size = new Size(35, 35);
-            button20.TabIndex = 22;
+            button20.TabIndex = 5;
             button20.UseVisualStyleBackColor = false;
             button20.Click += button20_Click;
             // 
@@ -869,7 +866,7 @@ namespace GUI
             button19.Location = new Point(39, 604);
             button19.Name = "button19";
             button19.Size = new Size(35, 35);
-            button19.TabIndex = 21;
+            button19.TabIndex = 4;
             button19.UseVisualStyleBackColor = false;
             button19.Click += button19_Click;
             // 
@@ -912,7 +909,7 @@ namespace GUI
             dataGridView2.RowHeadersWidth = 72;
             dataGridView2.RowTemplate.Height = 37;
             dataGridView2.Size = new Size(1007, 299);
-            dataGridView2.TabIndex = 20;
+            dataGridView2.TabIndex = 3;
             dataGridView2.CellEndEdit += dataGridView2_EndEdit;
             dataGridView2.RowsAdded += dataGridView2_RowsAdded;
             // 
@@ -991,7 +988,7 @@ namespace GUI
             button5.Location = new Point(248, 681);
             button5.Name = "button5";
             button5.Size = new Size(135, 40);
-            button5.TabIndex = 18;
+            button5.TabIndex = 7;
             button5.Text = "Phiếu mới";
             button5.UseVisualStyleBackColor = false;
             button5.Click += button5_Click;
@@ -1004,7 +1001,7 @@ namespace GUI
             button4.Location = new Point(39, 681);
             button4.Name = "button4";
             button4.Size = new Size(130, 40);
-            button4.TabIndex = 17;
+            button4.TabIndex = 6;
             button4.Text = "Xác nhận";
             button4.UseVisualStyleBackColor = false;
             button4.Click += button4_Click;
@@ -1027,7 +1024,7 @@ namespace GUI
             dateTimePicker2.MinDate = new DateTime(2003, 12, 3, 0, 0, 0, 0);
             dateTimePicker2.Name = "dateTimePicker2";
             dateTimePicker2.Size = new Size(268, 35);
-            dateTimePicker2.TabIndex = 13;
+            dateTimePicker2.TabIndex = 2;
             // 
             // label13
             // 
@@ -1045,7 +1042,7 @@ namespace GUI
             textBox6.Location = new Point(39, 175);
             textBox6.Name = "textBox6";
             textBox6.Size = new Size(268, 35);
-            textBox6.TabIndex = 4;
+            textBox6.TabIndex = 1;
             // 
             // label12
             // 
@@ -1106,7 +1103,7 @@ namespace GUI
             button6.Location = new Point(315, 622);
             button6.Name = "button6";
             button6.Size = new Size(131, 40);
-            button6.TabIndex = 29;
+            button6.TabIndex = 5;
             button6.Text = "Phiếu mới";
             button6.UseVisualStyleBackColor = false;
             button6.Click += button6_Click;
@@ -1116,7 +1113,7 @@ namespace GUI
             textBox11.Location = new Point(75, 463);
             textBox11.Name = "textBox11";
             textBox11.Size = new Size(266, 35);
-            textBox11.TabIndex = 28;
+            textBox11.TabIndex = 3;
             // 
             // dateTimePicker4
             // 
@@ -1124,7 +1121,7 @@ namespace GUI
             dateTimePicker4.Location = new Point(75, 307);
             dateTimePicker4.Name = "dateTimePicker4";
             dateTimePicker4.Size = new Size(268, 35);
-            dateTimePicker4.TabIndex = 27;
+            dateTimePicker4.TabIndex = 2;
             // 
             // button3
             // 
@@ -1134,7 +1131,7 @@ namespace GUI
             button3.Location = new Point(78, 622);
             button3.Name = "button3";
             button3.Size = new Size(131, 40);
-            button3.TabIndex = 26;
+            button3.TabIndex = 4;
             button3.Text = "Xác nhận";
             button3.UseVisualStyleBackColor = false;
             button3.Click += button3_Click;
@@ -1195,7 +1192,7 @@ namespace GUI
             textBox7.Location = new Point(78, 172);
             textBox7.Name = "textBox7";
             textBox7.Size = new Size(268, 35);
-            textBox7.TabIndex = 17;
+            textBox7.TabIndex = 1;
             // 
             // label15
             // 
@@ -1256,7 +1253,7 @@ namespace GUI
             dateTimePicker5.MinDate = new DateTime(2023, 1, 1, 0, 0, 0, 0);
             dateTimePicker5.Name = "dateTimePicker5";
             dateTimePicker5.Size = new Size(268, 35);
-            dateTimePicker5.TabIndex = 28;
+            dateTimePicker5.TabIndex = 2;
             // 
             // button8
             // 
@@ -1266,7 +1263,7 @@ namespace GUI
             button8.Location = new Point(292, 513);
             button8.Name = "button8";
             button8.Size = new Size(131, 40);
-            button8.TabIndex = 22;
+            button8.TabIndex = 5;
             button8.Text = "Phiếu mới";
             button8.UseVisualStyleBackColor = false;
             button8.Click += button8_Click;
@@ -1278,7 +1275,7 @@ namespace GUI
             comboBox4.Location = new Point(77, 173);
             comboBox4.Name = "comboBox4";
             comboBox4.Size = new Size(268, 38);
-            comboBox4.TabIndex = 21;
+            comboBox4.TabIndex = 1;
             // 
             // button7
             // 
@@ -1288,7 +1285,7 @@ namespace GUI
             button7.Location = new Point(70, 513);
             button7.Name = "button7";
             button7.Size = new Size(131, 40);
-            button7.TabIndex = 20;
+            button7.TabIndex = 4;
             button7.Text = "Xác nhận";
             button7.UseVisualStyleBackColor = false;
             button7.Click += button7_Click;
@@ -1320,7 +1317,7 @@ namespace GUI
             textBox12.Location = new Point(604, 176);
             textBox12.Name = "textBox12";
             textBox12.Size = new Size(268, 35);
-            textBox12.TabIndex = 17;
+            textBox12.TabIndex = 3;
             // 
             // label24
             // 
@@ -1414,7 +1411,7 @@ namespace GUI
             button9.Location = new Point(74, 580);
             button9.Name = "button9";
             button9.Size = new Size(131, 40);
-            button9.TabIndex = 21;
+            button9.TabIndex = 1;
             button9.Text = "Thay đổi";
             button9.UseVisualStyleBackColor = false;
             button9.Click += button9_Click;
@@ -1527,7 +1524,7 @@ namespace GUI
             comboBox5.Location = new Point(603, 180);
             comboBox5.Name = "comboBox5";
             comboBox5.Size = new Size(268, 38);
-            comboBox5.TabIndex = 30;
+            comboBox5.TabIndex = 2;
             // 
             // button10
             // 
@@ -1537,7 +1534,7 @@ namespace GUI
             button10.Location = new Point(289, 264);
             button10.Name = "button10";
             button10.Size = new Size(131, 40);
-            button10.TabIndex = 29;
+            button10.TabIndex = 4;
             button10.Text = "Phiếu mới";
             button10.UseVisualStyleBackColor = false;
             button10.Click += button10_Click;
@@ -1550,7 +1547,7 @@ namespace GUI
             comboBox3.Location = new Point(76, 177);
             comboBox3.Name = "comboBox3";
             comboBox3.Size = new Size(268, 38);
-            comboBox3.TabIndex = 28;
+            comboBox3.TabIndex = 1;
             // 
             // button11
             // 
@@ -1560,7 +1557,7 @@ namespace GUI
             button11.Location = new Point(76, 264);
             button11.Name = "button11";
             button11.Size = new Size(131, 40);
-            button11.TabIndex = 27;
+            button11.TabIndex = 3;
             button11.Text = "Xác nhận";
             button11.UseVisualStyleBackColor = false;
             button11.Click += button11_Click;
@@ -1684,7 +1681,7 @@ namespace GUI
             comboBox6.Location = new Point(600, 179);
             comboBox6.Name = "comboBox6";
             comboBox6.Size = new Size(268, 38);
-            comboBox6.TabIndex = 37;
+            comboBox6.TabIndex = 2;
             // 
             // button12
             // 
@@ -1694,7 +1691,7 @@ namespace GUI
             button12.Location = new Point(286, 263);
             button12.Name = "button12";
             button12.Size = new Size(131, 40);
-            button12.TabIndex = 36;
+            button12.TabIndex = 4;
             button12.Text = "Phiếu mới";
             button12.UseVisualStyleBackColor = false;
             button12.Click += button12_Click;
@@ -1707,7 +1704,7 @@ namespace GUI
             comboBox7.Location = new Point(73, 176);
             comboBox7.Name = "comboBox7";
             comboBox7.Size = new Size(268, 38);
-            comboBox7.TabIndex = 35;
+            comboBox7.TabIndex = 1;
             // 
             // button13
             // 
@@ -1717,7 +1714,7 @@ namespace GUI
             button13.Location = new Point(73, 263);
             button13.Name = "button13";
             button13.Size = new Size(131, 40);
-            button13.TabIndex = 34;
+            button13.TabIndex = 3;
             button13.Text = "Xác nhận";
             button13.UseVisualStyleBackColor = false;
             button13.Click += button13_Click;
@@ -2002,14 +1999,14 @@ namespace GUI
             textBox13.Location = new Point(604, 178);
             textBox13.Name = "textBox13";
             textBox13.Size = new Size(268, 35);
-            textBox13.TabIndex = 43;
+            textBox13.TabIndex = 2;
             // 
             // textBox14
             // 
             textBox14.Location = new Point(73, 178);
             textBox14.Name = "textBox14";
             textBox14.Size = new Size(268, 35);
-            textBox14.TabIndex = 42;
+            textBox14.TabIndex = 1;
             // 
             // button15
             // 
@@ -2019,7 +2016,7 @@ namespace GUI
             button15.Location = new Point(73, 293);
             button15.Name = "button15";
             button15.Size = new Size(131, 40);
-            button15.TabIndex = 36;
+            button15.TabIndex = 3;
             button15.Text = "Xác nhận";
             button15.UseVisualStyleBackColor = false;
             button15.Click += button15_Click;
@@ -2093,7 +2090,7 @@ namespace GUI
             button18.Location = new Point(313, 668);
             button18.Name = "button18";
             button18.Size = new Size(131, 40);
-            button18.TabIndex = 70;
+            button18.TabIndex = 10;
             button18.Text = "Làm mới";
             button18.UseVisualStyleBackColor = false;
             button18.Click += button18_Click;
@@ -2104,28 +2101,28 @@ namespace GUI
             dateTimePicker3.Location = new Point(73, 419);
             dateTimePicker3.Name = "dateTimePicker3";
             dateTimePicker3.Size = new Size(268, 35);
-            dateTimePicker3.TabIndex = 69;
+            dateTimePicker3.TabIndex = 3;
             // 
             // textBox20
             // 
             textBox20.Location = new Point(598, 543);
             textBox20.Name = "textBox20";
             textBox20.Size = new Size(268, 35);
-            textBox20.TabIndex = 68;
+            textBox20.TabIndex = 8;
             // 
             // textBox19
             // 
             textBox19.Location = new Point(73, 543);
             textBox19.Name = "textBox19";
             textBox19.Size = new Size(268, 35);
-            textBox19.TabIndex = 67;
+            textBox19.TabIndex = 4;
             // 
             // textBox17
             // 
             textBox17.Location = new Point(600, 300);
             textBox17.Name = "textBox17";
             textBox17.Size = new Size(268, 35);
-            textBox17.TabIndex = 65;
+            textBox17.TabIndex = 6;
             // 
             // label64
             // 
@@ -2199,21 +2196,21 @@ namespace GUI
             comboBox10.Location = new Point(598, 420);
             comboBox10.Name = "comboBox10";
             comboBox10.Size = new Size(268, 38);
-            comboBox10.TabIndex = 56;
+            comboBox10.TabIndex = 7;
             // 
             // textBox15
             // 
             textBox15.Location = new Point(600, 180);
             textBox15.Name = "textBox15";
             textBox15.Size = new Size(268, 35);
-            textBox15.TabIndex = 53;
+            textBox15.TabIndex = 5;
             // 
             // textBox16
             // 
             textBox16.Location = new Point(70, 180);
             textBox16.Name = "textBox16";
             textBox16.Size = new Size(268, 35);
-            textBox16.TabIndex = 52;
+            textBox16.TabIndex = 1;
             // 
             // label49
             // 
@@ -2233,7 +2230,7 @@ namespace GUI
             comboBox11.Location = new Point(73, 300);
             comboBox11.Name = "comboBox11";
             comboBox11.Size = new Size(268, 38);
-            comboBox11.TabIndex = 48;
+            comboBox11.TabIndex = 2;
             // 
             // button14
             // 
@@ -2243,7 +2240,7 @@ namespace GUI
             button14.Location = new Point(73, 668);
             button14.Name = "button14";
             button14.Size = new Size(131, 40);
-            button14.TabIndex = 47;
+            button14.TabIndex = 9;
             button14.Text = "Xác nhận";
             button14.UseVisualStyleBackColor = false;
             button14.Click += button14_Click;

@@ -49,21 +49,19 @@ namespace GUI
             // 
             // textBox1
             // 
-            textBox1.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox1.Location = new Point(861, 312);
-            textBox1.Multiline = true;
+            textBox1.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            textBox1.Location = new Point(861, 314);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(293, 44);
+            textBox1.Size = new Size(293, 42);
             textBox1.TabIndex = 1;
             // 
             // textBox2
             // 
-            textBox2.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox2.Location = new Point(861, 436);
-            textBox2.Multiline = true;
+            textBox2.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            textBox2.Location = new Point(861, 438);
             textBox2.Name = "textBox2";
             textBox2.PasswordChar = '*';
-            textBox2.Size = new Size(293, 44);
+            textBox2.Size = new Size(293, 42);
             textBox2.TabIndex = 2;
             // 
             // button1
