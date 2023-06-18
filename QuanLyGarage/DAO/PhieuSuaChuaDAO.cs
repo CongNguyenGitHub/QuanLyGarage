@@ -26,6 +26,11 @@ namespace DAO
             }
         }
         private PhieuSuaChuaDAO() { }
+        public DataTable LayBienSoDaTiepNhan()
+        {
+            string query = "LayBienSoDaTiepNhan";
+            return DataProvider.Instance.ExecuteQuery(query);
+        }
         public DataTable LayDonGiaAndSoLuongVatTu(string ten)
         {
             string query = "LayDonGiaAndSoLuongVatTu @TenVatTu";

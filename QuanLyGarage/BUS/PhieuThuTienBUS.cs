@@ -25,6 +25,10 @@ namespace BUS
             }
         }
         private PhieuThuTienBUS() { }
+        public DataTable LayBienSoDaLapPhieuSuaChua()
+        {
+            return PhieuThuTienDAO.Instance.LayBienSoDaLapPhieuSuaChua();
+        }
         public int LayTienNoKH(string BienSo)  // so tien thu phai <= TienNo nhé nguyên
         {
             DataTable dt = PhieuThuTienDAO.Instance.LayTienNoKH(BienSo);
