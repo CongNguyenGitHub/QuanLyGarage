@@ -418,6 +418,22 @@ BEGIN
 END
 GO
 
+/******  PROCEDURE KiemTraBienSoDaTonTai   ******/
+/******  EXEC KiemTraBienSoDaTonTai  @BienSo = '004004' ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE	PROCEDURE [dbo].[KiemTraBienSoDaTonTai ]
+	@BienSo varchar(10)
+AS
+BEGIN
+	SELECT *
+	FROM XE
+	WHERE BienSo = @BienSo
+END
+GO
+
 /******  UC-3: PROCEDURE ThemXe  ******/
 /******  EXEC ThemXe @BienSo = '004004', @HieuXe = 'Hyundai' ******/
 SET ANSI_NULLS ON
@@ -672,12 +688,35 @@ CREATE PROCEDURE [dbo].[ThemNguoiDung]
 AS
 BEGIN
 	-- Chuyển đổi format ngày sinh
-	DECLARE @NgaySinhDate date
-	SET @NgaySinhDate = CONVERT(date, @NgaySinh, 103) -- 103: dd/mm/yyyy
+	--DECLARE @NgaySinhDate date
+	--SET @NgaySinhDate = CONVERT(date, @NgaySinh, 103) -- 103: dd/mm/yyyy
 
 	-- Thực hiện INSERT
 	INSERT INTO NGUOIDUNG ([TenND], [NgaySinh], [GioiTinh], [DienThoai], [DiaChi])
-	VALUES (@TenND, @NgaySinhDate, @GioiTinh, @DienThoai, @DiaChi)
+	VALUES (@TenND, @NgaySinh, @GioiTinh, @DienThoai, @DiaChi)
+END
+GO
+
+--EXEC [dbo].[KiemTraNguoiDungDaTonTai] @TenND =  N'Nguyễn Quan Thịnh', @GioiTinh = 0, @DiaChi = N'23 Hai Bà Trưng',@NgaySinh = N'04/04/2000', @DienThoai = N'0987887709'
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[KiemTraNguoiDungDaTonTai]
+	@TenND nvarchar(50),
+	@NgaySinh nvarchar(10),
+	@GioiTinh int = NULL,
+	@DienThoai varchar(20),
+	@DiaChi nvarchar(100)
+AS
+BEGIN
+	SELECT *
+	FROM NGUOIDUNG
+	WHERE TenND = @TenND
+	and NgaySinh = @NgaySinh
+	and GioiTinh = @GioiTinh
+	and DienThoai = @DienThoai
+	and DiaChi = @DiaChi
 END
 GO
 
@@ -1018,9 +1057,11 @@ GO
 CREATE	PROCEDURE [dbo].[LayBienSoDaLapPhieuSuaChua]
 AS
 BEGIN
-	SELECT BienSo
-	FROM PHIEUSUACHUA 
-	ORDER BY BienSo ASC
+	SELECT DISTINCT psc.BienSo
+	FROM PHIEUSUACHUA psc, KHACHHANG kh
+	WHERE psc.MaKH = kh.MaKH
+	and kh.TienNo > 0
+	ORDER BY psc.BienSo ASC
 END
 GO
 

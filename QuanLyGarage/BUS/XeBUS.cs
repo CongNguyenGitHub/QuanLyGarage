@@ -48,6 +48,12 @@ namespace BUS
         {
             return XeDAO.Instance.ThemXeDAO(BienSo, HieuXe, now);
         }
+        public bool KiemTraBienSoDaTonTai(string BienSo)
+        {
+            DataTable result = XeDAO.Instance.KiemTraBienSoDaTonTai(BienSo);
+            if (result.Rows.Count > 0) return false;
+            else return true;
+        }
         public bool TiepNhanXe(string HoTen, string BienSo, string DiaChi, string HieuXe, string SDT, DateTime NgayTiepNhan)
         {
             int SoXeTrongNgay = SoXeTiepNhanTrongNgay(NgayTiepNhan);
