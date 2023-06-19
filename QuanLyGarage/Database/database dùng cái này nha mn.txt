@@ -671,13 +671,9 @@ CREATE PROCEDURE [dbo].[ThemNguoiDung]
 	@DiaChi nvarchar(100)
 AS
 BEGIN
-	-- Chuyển đổi format ngày sinh
-	DECLARE @NgaySinhDate date
-	SET @NgaySinhDate = CONVERT(date, @NgaySinh, 103) -- 103: dd/mm/yyyy
-
 	-- Thực hiện INSERT
 	INSERT INTO NGUOIDUNG ([TenND], [NgaySinh], [GioiTinh], [DienThoai], [DiaChi])
-	VALUES (@TenND, @NgaySinhDate, @GioiTinh, @DienThoai, @DiaChi)
+	VALUES (@TenND, @NgaySinh, @GioiTinh, @DienThoai, @DiaChi)
 END
 GO
 
