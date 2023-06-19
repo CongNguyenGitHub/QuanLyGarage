@@ -46,6 +46,11 @@ namespace DAO
             string query = "SELECT COUNT(BienSo) FROM XE WHERE day(NgayTiepNhan) = " + now.Day + " and month(NgayTiepNhan) = " + now.Month + " and year(NgayTiepNhan) = " + now.Year;
             return DataProvider.Instance.ExecuteQuery(query);
         }
+        public DataTable KiemTraBienSoDaTonTai(string BienSo)
+        {
+            string query = "KiemTraBienSoDaTonTai @BienSo";
+            return DataProvider.Instance.ExecuteQuery(query, new object[] { BienSo});
+        }
         public int ThemXeDAO(string BienSo, string HieuXe, DateTime now) // now nguyên lấy thời gian của hiện tại nha
         {
             string query = "ThemXe @BienSo , @HieuXe , @NgayTiepNhan";

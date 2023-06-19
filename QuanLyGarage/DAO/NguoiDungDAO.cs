@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
@@ -24,7 +25,11 @@ namespace DAO
             }
         }
         private NguoiDungDAO() { }
-
+        public DataTable KiemTraNguoiDungDaTonTai(string ten, string ngaysinh, int gioitinh, string sdt, string diachi)
+        {
+            string query = "KiemTraNguoiDungDaTonTai @TenND , @NgaySinh , @GioiTinh , @DienThoai , @DiaChi";
+            return DataProvider.Instance.ExecuteQuery(query, new object[] { ten, ngaysinh, gioitinh, sdt, diachi });
+        }
         public int ThemNguoiDung(string ten, string ngaysinh, int gioitinh, string sdt, string diachi)
         {
             string query = "ThemNguoiDung @TenND , @NgaySinh , @GioiTinh , @DienThoai , @DiaChi";
