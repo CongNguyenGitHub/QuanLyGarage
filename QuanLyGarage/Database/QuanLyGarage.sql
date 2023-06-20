@@ -278,6 +278,25 @@ CREATE TABLE [dbo].[PHIEUTHUTIEN]
 ) ON [PRIMARY]
 GO
 
+/****** Object: Table [dbo].[PHIEUTHUTIEN_2]		Scripyt Date: 5/31/2023 34:4:4 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PHIEUTHUTIEN_2]
+(
+	[MaPhieuThuTien] [int] IDENTITY(1,1),
+	[MaKH] [int] NOT NULL,
+	[TienThu] [int] NOT NULL,
+	[NgayThuTien] [datetime] NOT NULL,
+	PRIMARY KEY CLUSTERED
+	(
+		[MaPhieuThuTien] ASC
+	)
+	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]	
+) ON [PRIMARY]
+GO
+
 /****** Object: Table [dbo].[PHIEUNHAPVTPT]		Scripyt Date: 5/31/2023 34:4:4 PM ******/
 SET ANSI_NULLS ON
 GO
@@ -418,6 +437,22 @@ BEGIN
 END
 GO
 
+/******  PROCEDURE KiemTraBienSoDaTonTai   ******/
+/******  EXEC KiemTraBienSoDaTonTai  @BienSo = '004004' ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE	PROCEDURE [dbo].[KiemTraBienSoDaTonTai ]
+	@BienSo varchar(10)
+AS
+BEGIN
+	SELECT *
+	FROM XE
+	WHERE BienSo = @BienSo
+END
+GO
+
 /******  UC-3: PROCEDURE ThemXe  ******/
 /******  EXEC ThemXe @BienSo = '004004', @HieuXe = 'Hyundai' ******/
 SET ANSI_NULLS ON
@@ -534,6 +569,7 @@ BEGIN
 END
 GO
 
+
 /****** Procedure BaoCaoDoanhThu ******/
 /****** EXEC BaoCaoDoanhThu @Thang = 6, @Nam = 2023 ******/
 SET ANSI_NULLS ON
@@ -549,17 +585,21 @@ BEGIN
 			x.HieuXe AS [Hiệu xe],
 			COUNT(psc.MaPhieuSuaChua) AS [Số lượt],
 			SUM(ptt.TienThu) AS [Thành tiền],
-			(	COUNT(psc.MaPhieuSuaChua) * 100 / (Select COUNT (*)
-												   FROM PHIEUTHUTIEN ptt, PHIEUSUACHUA psc
-												   WHERE ptt.MaKH = psc.MaKH
-												   and MONTH(ptt.NgayThuTien) = @Thang
-												   and YEAR(ptt.NgayThuTien) = @Nam)
-			) AS [Tỉ lệ %]
-	FROM XE x, PHIEUTHUTIEN ptt, PHIEUSUACHUA psc
+			ROUND(CAST(COUNT(psc.MaPhieuSuaChua) * 100.0 / NULLIF((
+			SELECT COUNT(*)
+			FROM PHIEUTHUTIEN_2 ptt, PHIEUSUACHUA psc
+			WHERE ptt.MaKH = psc.MaKH
+				AND MONTH(ptt.NgayThuTien) = @Thang
+				AND YEAR(ptt.NgayThuTien) = @Nam 
+				AND MONTH(psc.NgaySuaChua) = @Thang
+				AND YEAR(psc.NgaySuaChua) = @Nam), 0) AS decimal(5, 2)), 2) AS [Tỉ lệ %]
+	FROM XE x, PHIEUTHUTIEN_2 ptt, PHIEUSUACHUA psc
 	WHERE x.MaKH = ptt.MaKH 
 	and ptt.MaKH = psc.MaKH
-	and MONTH(NgayThuTien) = @Thang
-	and YEAR(NgayThuTien) = @Nam
+	and MONTH(ptt.NgayThuTien) = @Thang
+	and YEAR(ptt.NgayThuTien) = @Nam
+	and MONTH(psc.NgaySuaChua) = @Thang
+	and YEAR(psc.NgaySuaChua) = @Nam
 	GROUP BY x.HieuXe
 END
 GO
@@ -602,7 +642,7 @@ CREATE	PROCEDURE [dbo].[TongTienDoanhThu]
 AS
 BEGIN
 	SELECT SUM(TienThu)
-	FROM PHIEUTHUTIEN
+	FROM PHIEUTHUTIEN_2
 	WHERE MONTH(NgayThuTien) = @Thang
 	AND YEAR(NgayThuTien) = @Nam
 END
@@ -672,12 +712,35 @@ CREATE PROCEDURE [dbo].[ThemNguoiDung]
 AS
 BEGIN
 	-- Chuyển đổi format ngày sinh
-	DECLARE @NgaySinhDate date
-	SET @NgaySinhDate = CONVERT(date, @NgaySinh, 103) -- 103: dd/mm/yyyy
+	--DECLARE @NgaySinhDate date
+	--SET @NgaySinhDate = CONVERT(date, @NgaySinh, 103) -- 103: dd/mm/yyyy
 
 	-- Thực hiện INSERT
 	INSERT INTO NGUOIDUNG ([TenND], [NgaySinh], [GioiTinh], [DienThoai], [DiaChi])
-	VALUES (@TenND, @NgaySinhDate, @GioiTinh, @DienThoai, @DiaChi)
+	VALUES (@TenND, @NgaySinh, @GioiTinh, @DienThoai, @DiaChi)
+END
+GO
+
+--EXEC [dbo].[KiemTraNguoiDungDaTonTai] @TenND =  N'Nguyễn Quan Thịnh', @GioiTinh = 0, @DiaChi = N'23 Hai Bà Trưng',@NgaySinh = N'04/04/2000', @DienThoai = N'0987887709'
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[KiemTraNguoiDungDaTonTai]
+	@TenND nvarchar(50),
+	@NgaySinh nvarchar(10),
+	@GioiTinh int = NULL,
+	@DienThoai varchar(20),
+	@DiaChi nvarchar(100)
+AS
+BEGIN
+	SELECT *
+	FROM NGUOIDUNG
+	WHERE TenND = @TenND
+	and NgaySinh = @NgaySinh
+	and GioiTinh = @GioiTinh
+	and DienThoai = @DienThoai
+	and DiaChi = @DiaChi
 END
 GO
 
@@ -840,10 +903,28 @@ BEGIN
 	and x.BienSo = @BienSo
 
 	INSERT INTO PHIEUTHUTIEN([MaKH], [TienThu], [NgayThuTien]) VALUES (@MaKH, @SoTien, @NgayThu)
-
+	INSERT INTO PHIEUTHUTIEN_2([MaKH], [TienThu], [NgayThuTien]) VALUES (@MaKH, @SoTien, @NgayThu)
+	
 	UPDATE KHACHHANG
 	SET TienNo -= @SoTien
 	WHERE MaKH = @MaKH
+
+		IF (SELECT TienNo FROM KHACHHANG WHERE MaKH = @MaKH) = 0
+	BEGIN
+		DELETE FROM PHIEUSUACHUA
+		WHERE MaKH = @MaKH
+
+		DELETE FROM PHIEUTHUTIEN
+		WHERE MaKH = @MaKH
+
+		DELETE FROM XE
+		WHERE MaKH = @MaKH
+
+		DELETE FROM KHACHHANG
+		WHERE MaKH = @MaKH
+
+	END
+
 END
 GO
 
@@ -1139,20 +1220,20 @@ INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH],  [TongTien]) VALUES
 INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH],  [TongTien]) VALUES (N'013013', '17-04-2023', 13,  850000)
 INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH],  [TongTien]) VALUES (N'014014', '19-04-2023', 14,  400000)
 
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (1,  200000, '06/04/2023 09:00:00')
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (2,  200000, '06/04/2023 14:30:00')
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (3,  400000, '06/04/2023 18:15:00')
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (4,  600000, '15/04/2023 09:00:00')
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (5,  900000, '15/04/2023 14:30:00')
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (6,  700000, '16/04/2023 18:15:00')
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (7, 1500000, '17/04/2023 09:00:00')
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (8,  850000, '19/04/2023 14:30:00')
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (9,  300000, '25/04/2023 18:15:00')
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (10,  900000, '15/04/2023 14:30:00')
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (11,  700000, '16/04/2023 18:15:00')
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (12, 2000000, '17/04/2023 09:00:00')
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (13,  850000, '19/04/2023 14:30:00')
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (14,  400000, '25/04/2023 18:15:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (1,  200000, '06/04/2023 09:00:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (2,  200000, '06/04/2023 14:30:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (3,  400000, '06/04/2023 18:15:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (4,  600000, '15/04/2023 09:00:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (5,  900000, '15/04/2023 14:30:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (6,  700000, '16/04/2023 18:15:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (7, 1500000, '17/04/2023 09:00:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (8,  850000, '19/04/2023 14:30:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (9,  300000, '25/04/2023 18:15:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (10,  900000, '15/04/2023 14:30:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (11,  700000, '16/04/2023 18:15:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (12, 2000000, '17/04/2023 09:00:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (13,  850000, '19/04/2023 14:30:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (14,  400000, '25/04/2023 18:15:00')
 
 
 
@@ -1172,20 +1253,20 @@ INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH],  [TongTien]) VALUES
 INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH],  [TongTien]) VALUES (N'017017', '24-05-2023', 17, 600000)
 INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH],  [TongTien]) VALUES (N'018018', '25-05-2023', 18, 550000)
 
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (1, 500000, '06/05/2023 09:00:00')
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (2, 700000, '06/05/2023 14:30:00')
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (3, 500000, '09/05/2023 18:15:00')
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (4, 800000, '15/05/2023 09:00:00')
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (5, 250000, '16/05/2023 14:30:00')
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (6, 650000, '24/05/2023 18:15:00')
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (7, 950000, '25/05/2023 09:00:00')
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (8, 600000, '25/05/2023 14:30:00')
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (9, 550000, '25/05/2023 18:15:00')
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (10, 250000, '26/05/2023 14:30:00')
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (15, 650000, '26/05/2023 18:15:00')
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (16, 950000, '25/05/2023 09:00:00')
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (17, 600000, '28/05/2023 14:30:00')
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (18, 550000, '29/05/2023 18:15:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (1, 500000, '06/05/2023 09:00:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (2, 700000, '06/05/2023 14:30:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (3, 500000, '09/05/2023 18:15:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (4, 800000, '15/05/2023 09:00:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (5, 250000, '16/05/2023 14:30:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (6, 650000, '24/05/2023 18:15:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (7, 950000, '25/05/2023 09:00:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (8, 600000, '25/05/2023 14:30:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (9, 550000, '25/05/2023 18:15:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (10, 250000, '26/05/2023 14:30:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (15, 650000, '26/05/2023 18:15:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (16, 950000, '25/05/2023 09:00:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (17, 600000, '28/05/2023 14:30:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (18, 550000, '29/05/2023 18:15:00')
 
 
 INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH],  [TongTien]) VALUES (N'001001', '01-06-2023', 1, 1000000)
@@ -1198,15 +1279,15 @@ INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH],  [TongTien]) VALUES
 INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH],  [TongTien]) VALUES (N'013013', '17-06-2023', 13, 450000)
 INSERT [dbo].[PHIEUSUACHUA]([BienSo], [NgaySuaChua], [MaKH],  [TongTien]) VALUES (N'014014', '19-06-2023', 14, 500000)
 
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (1,  1000000, '06/06/2023 09:00:00')
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (2,  350000, '06/06/2023 14:30:00')
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (3,  600000, '06/06/2023 18:15:00')
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (4,  700000, '15/06/2023 09:00:00')
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (8,  900000, '19/06/2023 14:30:00')
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (9,  450000, '20/06/2023 18:15:00')
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (10,  900000, '20/06/2023 14:30:00')
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (13,  450000, '21/06/2023 14:30:00')
-							INSERT [dbo].[PHIEUTHUTIEN]([MaKH], [TienThu], [NgayThuTien]) VALUES (14,  500000, '21/06/2023 18:15:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (1,  1000000, '06/06/2023 09:00:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (2,  350000, '06/06/2023 14:30:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (3,  600000, '06/06/2023 18:15:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (4,  700000, '15/06/2023 09:00:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (8,  900000, '19/06/2023 14:30:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (9,  450000, '20/06/2023 18:15:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (10,  900000, '20/06/2023 14:30:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (13,  450000, '21/06/2023 14:30:00')
+							INSERT [dbo].[PHIEUTHUTIEN_2]([MaKH], [TienThu], [NgayThuTien]) VALUES (14,  500000, '21/06/2023 18:15:00')
 
 
 INSERT [dbo].[KHO] ([TenVatTuPhuTung], [SoLuong], [DonGia]) VALUES (N'Bánh xe', 100, 500000)
@@ -1239,45 +1320,66 @@ INSERT [dbo].[KHO] ([TenVatTuPhuTung], [SoLuong], [DonGia]) VALUES (N'Bơm xịt
 INSERT [dbo].[KHO] ([TenVatTuPhuTung], [SoLuong], [DonGia]) VALUES (N'Phanh tay', 40, 180000)
 
 
-EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Bánh xe', @TonDau = 100, @PhatSinh = 60, @TonCuoi = 20
-EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Lọc dầu', @TonDau = 120, @PhatSinh = 50, @TonCuoi = 60
-EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Lọc gió', @TonDau = 120, @PhatSinh = 100, @TonCuoi = 90
-EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Ống xả', @TonDau = 150, @PhatSinh = 80, @TonCuoi = 70
-EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Lọc nhiên liệu', @TonDau = 120, @PhatSinh = 40, @TonCuoi = 80
-EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Bình dầu', @TonDau = 80, @PhatSinh = 20, @TonCuoi = 60
-EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Giảm sóc', @TonDau = 250, @PhatSinh = 100, @TonCuoi = 150
-EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Công tắc đèn', @TonDau = 200, @PhatSinh = 80, @TonCuoi = 120
-EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Dây curoa', @TonDau = 180, @PhatSinh = 60, @TonCuoi = 120
-EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Vành đúc', @TonDau = 120, @PhatSinh = 40, @TonCuoi = 80
-EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Máy nổ', @TonDau = 10, @PhatSinh = 5, @TonCuoi = 15
-EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Ly hợp', @TonDau = 30, @PhatSinh = 10, @TonCuoi = 20
-EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Bộ phanh', @TonDau = 50, @PhatSinh = 20, @TonCuoi = 30
-EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Đèn pha', @TonDau = 80, @PhatSinh = 30, @TonCuoi = 50
-EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Cụm điều khiển', @TonDau = 25, @PhatSinh = 15, @TonCuoi = 10
-EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Ốp lưng ghế', @TonDau = 60, @PhatSinh = 25, @TonCuoi = 35
-EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Cảm biến áp suất lốp', @TonDau = 15, @PhatSinh = 10, @TonCuoi = 15
-EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Dây điện', @TonDau = 100, @PhatSinh = 50, @TonCuoi = 100
-EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Máy phát điện', @TonDau = 5, @PhatSinh = 3, @TonCuoi = 7
+-- @Thang = 4
+EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Bánh xe', @TonDau = 100, @PhatSinh = 60, @TonCuoi = 40
+EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Lọc dầu', @TonDau = 200, @PhatSinh = 100, @TonCuoi = 150
+EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Lọc gió', @TonDau = 300, @PhatSinh = 150, @TonCuoi = 250
+EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Ống xả', @TonDau = 150, @PhatSinh = 70, @TonCuoi = 100
+EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Lọc nhiên liệu', @TonDau = 120, @PhatSinh = 50, @TonCuoi = 100
+EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Bình dầu', @TonDau = 80, @PhatSinh = 30, @TonCuoi = 70
+EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Giảm sóc', @TonDau = 250, @PhatSinh = 100, @TonCuoi = 200
+EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Công tắc đèn', @TonDau = 200, @PhatSinh = 80, @TonCuoi = 180
+EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Dây curoa', @TonDau = 180, @PhatSinh = 70, @TonCuoi = 160
+EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Vành đúc', @TonDau = 120, @PhatSinh = 40, @TonCuoi = 100
+EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Máy nổ', @TonDau = 10, @PhatSinh = 5, @TonCuoi = 9
+EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Ly hợp', @TonDau = 30, @PhatSinh = 15, @TonCuoi = 25
+EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Bộ phanh', @TonDau = 50, @PhatSinh = 25, @TonCuoi = 40
+EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Đèn pha', @TonDau = 80, @PhatSinh = 30, @TonCuoi = 70
+EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Cụm điều khiển', @TonDau = 25, @PhatSinh = 10, @TonCuoi = 20
+EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Ốp lưng ghế', @TonDau = 60, @PhatSinh = 25, @TonCuoi = 50
+EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Cảm biến áp suất lốp', @TonDau = 15, @PhatSinh = 5, @TonCuoi = 12
+EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Dây điện', @TonDau = 100, @PhatSinh = 50, @TonCuoi = 95
+EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Máy phát điện', @TonDau = 5, @PhatSinh = 3, @TonCuoi = 4
+EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Ống nước', @TonDau = 90, @PhatSinh = 35, @TonCuoi = 80
+EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Đèn hậu', @TonDau = 120, @PhatSinh = 40, @TonCuoi = 110
+EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Gương chiếu hậu', @TonDau = 80, @PhatSinh = 30, @TonCuoi = 70
+EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Cần gạt nước', @TonDau = 200, @PhatSinh = 80, @TonCuoi = 180
+EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Đèn xi-nhan', @TonDau = 100, @PhatSinh = 40, @TonCuoi = 90
+EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Đèn trần', @TonDau = 80, @PhatSinh = 30, @TonCuoi = 70
+EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Vòi rửa xe', @TonDau = 50, @PhatSinh = 20, @TonCuoi = 40
+EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Bơm xịt nước', @TonDau = 70, @PhatSinh = 30, @TonCuoi = 60
+EXEC InsertBaoCaoTonKho45 @Thang = 4, @Nam = 2023, @TenVatTuPhuTung = N'Phanh tay', @TonDau = 40, @PhatSinh = 15, @TonCuoi = 35
 
-EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Kính chắn', @TonDau = 65, @PhatSinh = 75, @TonCuoi = 40
-EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Bánh xe', @TonDau = 80, @PhatSinh = 80, @TonCuoi = 50
-EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Cửa kính', @TonDau = 90, @PhatSinh = 180, @TonCuoi = 150
-EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Ống xả', @TonDau = 150, @PhatSinh = 80, @TonCuoi = 70
-EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Lọc nhiên liệu', @TonDau = 120, @PhatSinh = 60, @TonCuoi = 100
-EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Bình dầu', @TonDau = 80, @PhatSinh = 30, @TonCuoi = 80
-EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Giảm sóc', @TonDau = 250, @PhatSinh = 120, @TonCuoi = 230
-EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Công tắc đèn', @TonDau = 200, @PhatSinh = 80, @TonCuoi = 120
-EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Dây curoa', @TonDau = 180, @PhatSinh = 90, @TonCuoi = 100
-EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Vành đúc', @TonDau = 120, @PhatSinh = 40, @TonCuoi = 80
-EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Máy nổ', @TonDau = 10, @PhatSinh = 5, @TonCuoi = 15
-EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Ly hợp', @TonDau = 30, @PhatSinh = 10, @TonCuoi = 20
-EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Bộ phanh', @TonDau = 50, @PhatSinh = 20, @TonCuoi = 30
-EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Đèn pha', @TonDau = 80, @PhatSinh = 30, @TonCuoi = 50
-EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Cụm điều khiển', @TonDau = 25, @PhatSinh = 15, @TonCuoi = 20
-EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Ốp lưng ghế', @TonDau = 60, @PhatSinh = 25, @TonCuoi = 35
-EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Cảm biến áp suất lốp', @TonDau = 15, @PhatSinh = 10, @TonCuoi = 15
-EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Dây điện', @TonDau = 100, @PhatSinh = 50, @TonCuoi = 100
-EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Máy phát điện', @TonDau = 5, @PhatSinh = 3, @TonCuoi = 7
+-- @Thang = 5
+EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Bánh xe', @TonDau = 40, @PhatSinh = 60, @TonCuoi = 100
+EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Lọc dầu', @TonDau = 150, @PhatSinh = 100, @TonCuoi = 250
+EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Lọc gió', @TonDau = 250, @PhatSinh = 150, @TonCuoi = 400
+EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Ống xả', @TonDau = 100, @PhatSinh = 70, @TonCuoi = 170
+EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Lọc nhiên liệu', @TonDau = 100, @PhatSinh = 50, @TonCuoi = 150
+EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Bình dầu', @TonDau = 70, @PhatSinh = 30, @TonCuoi = 100
+EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Giảm sóc', @TonDau = 200, @PhatSinh = 100, @TonCuoi = 300
+EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Công tắc đèn', @TonDau = 180, @PhatSinh = 80, @TonCuoi = 260
+EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Dây curoa', @TonDau = 160, @PhatSinh = 70, @TonCuoi = 230
+EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Vành đúc', @TonDau = 100, @PhatSinh = 40, @TonCuoi = 140
+EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Máy nổ', @TonDau = 9, @PhatSinh = 5, @TonCuoi = 14
+EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Ly hợp', @TonDau = 25, @PhatSinh = 15, @TonCuoi = 40
+EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Bộ phanh', @TonDau = 40, @PhatSinh = 25, @TonCuoi = 65
+EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Đèn pha', @TonDau = 70, @PhatSinh = 30, @TonCuoi = 100
+EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Cụm điều khiển', @TonDau = 20, @PhatSinh = 10, @TonCuoi = 30
+EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Ốp lưng ghế', @TonDau = 50, @PhatSinh = 25, @TonCuoi = 75
+EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Cảm biến áp suất lốp', @TonDau = 12, @PhatSinh = 5, @TonCuoi = 17
+EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Dây điện', @TonDau = 95, @PhatSinh = 50, @TonCuoi = 145
+EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Máy phát điện', @TonDau = 4, @PhatSinh = 3, @TonCuoi = 7
+EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Ống nước', @TonDau = 80, @PhatSinh = 35, @TonCuoi = 115
+EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Đèn hậu', @TonDau = 110, @PhatSinh = 40, @TonCuoi = 150
+EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Gương chiếu hậu', @TonDau = 70, @PhatSinh = 30, @TonCuoi = 100
+EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Cần gạt nước', @TonDau = 180, @PhatSinh = 80, @TonCuoi = 260
+EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Đèn xi-nhan', @TonDau = 90, @PhatSinh = 40, @TonCuoi = 130
+EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Đèn trần', @TonDau = 70, @PhatSinh = 30, @TonCuoi = 100
+EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Vòi rửa xe', @TonDau = 40, @PhatSinh = 20, @TonCuoi = 60
+EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Bơm xịt nước', @TonDau = 60, @PhatSinh = 30, @TonCuoi = 90
+EXEC InsertBaoCaoTonKho45 @Thang = 5, @Nam = 2023, @TenVatTuPhuTung = N'Phanh tay', @TonDau = 35, @PhatSinh = 15, @TonCuoi = 50
+
 
 
 
