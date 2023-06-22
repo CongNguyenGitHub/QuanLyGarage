@@ -28,8 +28,8 @@ namespace BUS
         public bool KiemTraNguoiDungDaTonTai(string ten, string ngaysinh, int gioitinh, string sdt, string diachi) //true neu chua ton tai nguoi dung
         {
             DataTable result = NguoiDungDAO.Instance.KiemTraNguoiDungDaTonTai( ten, ngaysinh, gioitinh, sdt, diachi);
-            if (result.Rows.Count > 0) return false;
-            else return true;
+            if (result.Rows.Count > 0) return true;
+            else return false;
         }
         public int ThemNguoiDung(string ten,string ngaysinh, string gioitinh, string sdt, string diachi)  // tương tự như thêm xe, mình phải thêm người dùng trước rồi ms gọi thêm tài khoản, chú ý giới tính trong database la int  0 là con trai, 1 là con gái
         {

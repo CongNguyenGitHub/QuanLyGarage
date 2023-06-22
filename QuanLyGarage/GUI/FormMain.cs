@@ -138,6 +138,11 @@ namespace GUI
                 MessageBox.Show("Nhập thiếu thong tin", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            if (XeBUS.Instance.KiemTraBienSoDaTonTai(textBox2.Text)==true)
+            {
+                MessageBox.Show("Biển số xe đã tồn tại","Lỗi",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             if (XeBUS.Instance.TiepNhanXe(textBox1.Text, textBox2.Text, textBox3.Text, comboBox1.SelectedItem.ToString(), textBox4.Text, dateTimePicker1.Value))
             {
                 MessageBox.Show("Tiếp nhận xe thành công", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -146,13 +151,13 @@ namespace GUI
             {
                 MessageBox.Show("Vượt quá số xe trong ngày", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+           
             button1.Enabled = false;
             textBox1.ReadOnly = true;
             textBox2.ReadOnly = true;
             textBox3.ReadOnly = true;
             textBox4.ReadOnly = true;
             comboBox1.Enabled = false;
-            dateTimePicker1.Enabled = false;
 
         }
 
@@ -180,8 +185,6 @@ namespace GUI
             textBox5.ReadOnly = true;
             comboBox2.Enabled = false;
             dataGridView4.DataSource = dt;
-
-
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -192,7 +195,6 @@ namespace GUI
             textBox3.ReadOnly = false;
             textBox4.ReadOnly = false;
             comboBox1.Enabled = true;
-            dateTimePicker1.Enabled = true;
             comboBox1.SelectedIndex = 0;
             dateTimePicker1.Value = DateTime.Now;
             textBox1.Clear();
@@ -337,15 +339,21 @@ namespace GUI
             diaChi = textBox20.Text;
             if (tenDN == "" || MK == "" || quyenHan == "-1" || hoTen == "" || ngaySinh == "" || gioiTinh == "-1" || SDT == "" || diaChi == "")
             {
-                MessageBox.Show("Nhập thiếu thông tin", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Nhập thiếu thông tin", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             if (!TaiKhoanBUS.Instance.KiemTraTenDNTonTai(tenDN))
             {
-                MessageBox.Show("Tên đăng nhập tồn tại", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Tên đăng nhập tồn tại", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (NguoiDungBUS.Instance.KiemTraNguoiDungDaTonTai(hoTen, ngaySinh, (gioiTinh == "1") ? 1 : 0, SDT, diaChi)==true)
+            {
+                MessageBox.Show("Người dùng đã tồn tại", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             MessageBox.Show("Thêm người dùng thành công", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             NguoiDungBUS.Instance.ThemNguoiDung(hoTen, ngaySinh, gioiTinh, SDT, diaChi);
             TaiKhoanBUS.Instance.ThemTaiKhoan(tenDN, MK, quyenHan);
             textBox16.ReadOnly = true;

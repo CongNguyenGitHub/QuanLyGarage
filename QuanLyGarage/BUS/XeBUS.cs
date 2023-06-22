@@ -51,8 +51,8 @@ namespace BUS
         public bool KiemTraBienSoDaTonTai(string BienSo)
         {
             DataTable result = XeDAO.Instance.KiemTraBienSoDaTonTai(BienSo);
-            if (result.Rows.Count > 0) return false;
-            else return true;
+            if (result.Rows.Count > 0) return true;
+            else return false;
         }
         public bool TiepNhanXe(string HoTen, string BienSo, string DiaChi, string HieuXe, string SDT, DateTime NgayTiepNhan)
         {
