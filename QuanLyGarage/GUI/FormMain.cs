@@ -68,6 +68,11 @@ namespace GUI
                     tabControl1.SelectedIndex = 5;
                     break;
                 case "Nhập vật tư phụ tùng":
+                    if (TaiKhoanBUS.Instance.LayQuyenHan(taiKhoan, matKhau) == "False")
+                    {
+                        MessageBox.Show("Chỉ có quản lý mới được nhập vật tư phụ tùng", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
                     tabControl1.SelectedIndex = 6;
                     break;
                 case "Thay đổi quy định":
@@ -138,9 +143,9 @@ namespace GUI
                 MessageBox.Show("Nhập thiếu thong tin", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (XeBUS.Instance.KiemTraBienSoDaTonTai(textBox2.Text)==true)
+            if (XeBUS.Instance.KiemTraBienSoDaTonTai(textBox2.Text) == true)
             {
-                MessageBox.Show("Biển số xe đã tồn tại","Lỗi",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Biển số xe đã tồn tại", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             if (XeBUS.Instance.TiepNhanXe(textBox1.Text, textBox2.Text, textBox3.Text, comboBox1.SelectedItem.ToString(), textBox4.Text, dateTimePicker1.Value))
@@ -151,7 +156,7 @@ namespace GUI
             {
                 MessageBox.Show("Vượt quá số xe trong ngày", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-           
+
             button1.Enabled = false;
             textBox1.ReadOnly = true;
             textBox2.ReadOnly = true;
@@ -347,7 +352,7 @@ namespace GUI
                 MessageBox.Show("Tên đăng nhập tồn tại", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (NguoiDungBUS.Instance.KiemTraNguoiDungDaTonTai(hoTen, ngaySinh, (gioiTinh == "1") ? 1 : 0, SDT, diaChi)==true)
+            if (NguoiDungBUS.Instance.KiemTraNguoiDungDaTonTai(hoTen, ngaySinh, (gioiTinh == "1") ? 1 : 0, SDT, diaChi) == true)
             {
                 MessageBox.Show("Người dùng đã tồn tại", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -419,18 +424,16 @@ namespace GUI
             label65.Text = "Họ tên: " + Hoten;
             label20.Text = "Số điện thoại: " + SDT;
             label17.Text = "Địa chỉ: " + DiaChi;
+            MessageBox.Show("Lập phiếu thu tiền thành công","",MessageBoxButtons.OK, MessageBoxIcon.Information);
             PhieuThuTienBUS.Instance.ThemPhieuThuTien(bienSo, soTienThu.ToString(), ngayThuTien);
             button3.Enabled = false;
             comboBox9.Enabled = false;
             textBox11.ReadOnly = true;
-            dateTimePicker4.Enabled = false;
-
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             button3.Enabled = true;
-            dateTimePicker4.Enabled = true;
             comboBox9.Enabled = true;
             textBox11.ReadOnly = false;
             comboBox9.SelectedIndex = 0;
@@ -605,8 +608,6 @@ namespace GUI
                     button4.Enabled = false;
                     dataGridView2.Enabled = false;
                     comboBox8.Enabled = false;
-                    dateTimePicker2.Enabled = false;
-
                 }
             }
         }
@@ -618,7 +619,6 @@ namespace GUI
             button4.Enabled = true;
             dataGridView2.Enabled = true;
             comboBox8.Enabled = true;
-            dateTimePicker2.Enabled = true;
             comboBox8.SelectedIndex = 0;
             dateTimePicker2.Value = DateTime.Now;
             for (int i = dataGridView2.Rows.Count - 1; i >= 0; i--)
