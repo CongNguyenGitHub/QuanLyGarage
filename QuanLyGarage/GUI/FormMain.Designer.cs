@@ -1047,6 +1047,7 @@ namespace GUI
             // 
             // dateTimePicker2
             // 
+            dateTimePicker2.Enabled = false;
             dateTimePicker2.Format = DateTimePickerFormat.Short;
             dateTimePicker2.Location = new Point(583, 174);
             dateTimePicker2.MinDate = new DateTime(2003, 12, 3, 0, 0, 0, 0);
@@ -1147,6 +1148,7 @@ namespace GUI
             // 
             // dateTimePicker4
             // 
+            dateTimePicker4.Enabled = false;
             dateTimePicker4.Format = DateTimePickerFormat.Short;
             dateTimePicker4.Location = new Point(75, 307);
             dateTimePicker4.Name = "dateTimePicker4";
@@ -1258,6 +1260,7 @@ namespace GUI
             // 
             // dateTimePicker5
             // 
+            dateTimePicker5.Enabled = false;
             dateTimePicker5.Format = DateTimePickerFormat.Short;
             dateTimePicker5.Location = new Point(77, 323);
             dateTimePicker5.MaxDate = new DateTime(2040, 12, 31, 0, 0, 0, 0);

@@ -418,13 +418,14 @@ namespace GUI
                 MessageBox.Show("Số tiền thu không hợp lê", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
             string? Hoten = dt.Rows[0][0].ToString();
             string? SDT = dt.Rows[0][1].ToString();
             string? DiaChi = dt.Rows[0][2].ToString();
             label65.Text = "Họ tên: " + Hoten;
             label20.Text = "Số điện thoại: " + SDT;
             label17.Text = "Địa chỉ: " + DiaChi;
-            MessageBox.Show("Lập phiếu thu tiền thành công","",MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Lập phiếu thu tiền thành công", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             PhieuThuTienBUS.Instance.ThemPhieuThuTien(bienSo, soTienThu.ToString(), ngayThuTien);
             button3.Enabled = false;
             comboBox9.Enabled = false;
@@ -468,7 +469,6 @@ namespace GUI
                     PhieuNhapVatTuBUS.Instance.ThemPhieuNhapVatTu(VTPT, soLuong.ToString(), ngayNhap);
                     comboBox4.Enabled = false;
                     textBox12.ReadOnly = true;
-                    dateTimePicker5.Enabled = false;
                     button7.Enabled = false;
 
                 }
@@ -480,7 +480,6 @@ namespace GUI
         {
             comboBox4.Enabled = true;
             textBox12.ReadOnly = false;
-            dateTimePicker5.Enabled = true;
             button7.Enabled = true;
             comboBox4.SelectedIndex = 0;
             textBox12.Clear();
